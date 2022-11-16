@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:45 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/16 17:14:00 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/16 20:46:09 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 int main(int ac, char **av)
 {
     if (ac == 2){
-        checkspace(av);
+        check_floor_ceilling_color(av);
     }
 }

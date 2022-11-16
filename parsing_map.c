@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:07:25 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/16 18:58:21 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/16 21:05:35 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,4 +160,50 @@ void	checkspace(char **av)
 		}
 		i++;
 	}
+}
+
+int		countvergule(char *str, int i)
+{
+	int	count;
+
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+void	check_floor_ceilling_color(char **av)
+{
+	char	**map;
+	int		count;
+	int		i;
+
+	map = get_map(av);
+	count = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (!ft_strncmp(map[i], "F", 1))
+			count++;
+		else if (!ft_strncmp(map[i], "C", 1))
+			count++;
+		i++;
+	}
+	if (count != 2)
+		write (2, "Missing Floor or Ceilling\n", 27);
+	i = 0;
+	while (map[i])
+	{
+		if (!ft_strncmp(map[i], "F", 1))
+			countvergule(map[i], i);
+		else if (!ft_strncmp(map[i], "C", 1))
+			countvergule(map[i], i);
+		i++;
+	}
+	if (countvergule(map[i], i) != 4)
+		write(2, "Error in Ceilling and floor arguments\n", 38);
 }

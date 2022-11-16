@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/16 17:14:15 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/16 20:46:16 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int     ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 
 //PARSING
+void	check_floor_ceilling_color(char **av);
 void	checkduplicatepath(char **av);
 void	countpath(char **av);
 int		countline(char **av);
