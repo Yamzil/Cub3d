@@ -6,13 +6,15 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:07:25 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/17 17:16:31 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/17 19:00:13 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Get_Next_line/get_next_line.h"
 #include "cub3d.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/fcntl.h>
 #include <unistd.h>
 
 void    CheckExtension(int ac, char **av)
@@ -279,3 +281,76 @@ void	check_max_rgb(char **av)
 		i++;
 	}
 }
+
+void	check_map(char **av)
+{
+	char	**full_map;
+	char	**map;
+	int		i;
+	int		j;
+	int		fd;
+
+	full_map = get_map(av);
+	i = 0;
+	map = malloc(10000);
+	fd = open(av[1], O_RDONLY, 0777);
+	map[i] = get_next_line(fd);
+	while (full_map[i])
+	{
+		j = 0;
+		while (full_map[i][j])
+		{
+			if (full_map[i][j] == '1' || full_map[i][j] == '0' || full_map[i][j] == 'N' || full_map[i][j] == ' ')
+			{
+				map[i] = get_next_line(fd);
+			}
+			j++;
+		}
+		i++;
+	}
+	for (int k = 0; map[k]; k++)
+		printf("%s", map[k]);
+}
+
+void	get_data(s_data *lst, char **av)
+{
+	char	**map;
+	int		i;
+
+	map = get_map(av);
+	i = 0;
+	while (map[i])
+	{
+		if (!ft_strncmp(map[i], "NO", 2))
+			lst->north = map[i];
+		else if (!ft_strncmp(map[i], "SO", 2))
+			lst->south = map[i];
+		else if (!ft_strncmp(map[i], "WE", 2))
+			lst->west = map[i];
+		else if (!ft_strncmp(map[i], "EA", 2))
+			lst->east = map[i];
+		else if (!ft_strncmp(map[i], "F", 1))
+			lst->color_floor = map[i];
+		else if (!ft_strncmp(map[i], "C", 1))
+			lst->color_celleing = map[i];
+		i++;
+	}
+}
+/* 
+int	check_file(){
+	int i = 0;
+	if (check_path(....&i))
+	{
+		if (check_colors(.....&i))
+		{
+			if (check_map(....&i))
+			{
+				return 
+			}
+		}
+	}
+} */
+
+/*
+check path
+	*/
