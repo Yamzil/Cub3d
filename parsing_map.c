@@ -6,14 +6,14 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:07:25 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/16 21:05:35 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/17 17:16:31 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Get_Next_line/get_next_line.h"
 #include "cub3d.h"
-#include <stdbool.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void    CheckExtension(int ac, char **av)
 {
@@ -118,9 +118,8 @@ void	countpath(char **av)
 	i = 0;
 	while (map[i])
 	{
-		if (!ft_strncmp(map[i], "NO", 2)){
+		if (!ft_strncmp(map[i], "NO", 2))
 			count++;
-		}
 		else if (ft_strncmp(map[i], "SO", 2))
 			count++;
 		else if (ft_strncmp(map[i], "WE", 2))
@@ -162,29 +161,19 @@ void	checkspace(char **av)
 	}
 }
 
-int		countvergule(char *str, int i)
-{
-	int	count;
-
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == ',')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 void	check_floor_ceilling_color(char **av)
 {
 	char	**map;
 	int		count;
+	int		count_vergule;
 	int		i;
+	int		j;
 
 	map = get_map(av);
+	count_vergule = 0;
 	count = 0;
 	i = 0;
+	j = 0;
 	while (map[i])
 	{
 		if (!ft_strncmp(map[i], "F", 1))
@@ -199,11 +188,94 @@ void	check_floor_ceilling_color(char **av)
 	while (map[i])
 	{
 		if (!ft_strncmp(map[i], "F", 1))
-			countvergule(map[i], i);
+		{
+			j = 0;
+			while(map[i][j])
+			{
+				if (map[i][j] == ',')
+					count_vergule++;
+				j++;
+			}
+			if (count_vergule != 2)
+				write(2, "Error in floor arguments\n", 25);
+			count_vergule = 0;
+		}
 		else if (!ft_strncmp(map[i], "C", 1))
-			countvergule(map[i], i);
+		{
+			j = 0;
+			while(map[i][j])
+			{
+				if (map[i][j] == ',')
+					count_vergule++;
+				j++;
+			}
+			if (count_vergule != 2)
+				write(2, "Error in Ceilling arguments\n", 28);
+		}
 		i++;
 	}
-	if (countvergule(map[i], i) != 4)
-		write(2, "Error in Ceilling and floor arguments\n", 38);
+}
+
+char	**max_color_for_floor(char **av)
+{
+	char	**map;
+	char	**split;
+	int		i;
+	map = get_map(av);
+	i = 0;
+	while (map[i])
+	{
+		if (!ft_strncmp(map[i], "F", 1))
+		{
+			map[i] = ft_strtrim(map[i], "\n");
+			split = ft_split(map[i], ',');
+		}	
+		i++;
+	}
+	return split;
+}
+
+char	**max_color_for_ceilling(char **av)
+{
+	char	**map;
+	char	**split;
+	int		i;
+	map = get_map(av);
+	i = 0;
+	while (map[i])
+	{
+		if (!ft_strncmp(map[i], "C", 1))
+		{
+			map[i] = ft_strtrim(map[i], "\n");
+			split = ft_split(map[i], ',');
+		}	
+		i++;
+	}
+	return split;
+}
+
+void	check_max_rgb(char **av)
+{
+	char	**floor;
+	char	**ceilling;
+	int		i;
+
+	floor = max_color_for_floor(av);
+	ceilling = max_color_for_ceilling(av);
+	i = 0;
+	while (floor[i])
+	{	
+		floor[i] = ft_strtrim(floor[i], "F ");
+		if (ft_atoi(floor[i]) < 0 || ft_atoi(floor[i]) > 255)
+			write(2, "Rgb color out of bounds\n", 25);
+		i++;
+	}
+	i = 0;
+	while (ceilling[i])
+	{	
+		ceilling[i] = ft_strtrim(ceilling[i], "C ");
+		if (ft_atoi(ceilling[i]) < 0 || ft_atoi(ceilling[i]) > 255)
+			write(2, "Rgb color out of bounds\n", 25);
+		i++;
+	}
 }
