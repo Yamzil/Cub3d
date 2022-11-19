@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/18 19:33:49 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/19 20:36:50 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
-// #include "./libft/libft.h"
+#include <sys/fcntl.h>
 #include "./Get_Next_line/get_next_line.h"
 
 typedef struct s_data{
@@ -40,11 +40,15 @@ char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
 int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 
 //PARSING
+bool	check_char(char c);
+void	decimal_value_floor(s_data *lst);
 char	**get_rgb_for_ceilling(s_data *lst);
 char	**get_rgb_for_floor(s_data *lst);
-int		check_max_rgb(s_data *lst);
+int		check_max_rgb_floor(s_data *lst);
+int		check_max_rgb_ceilling(s_data *lst);
 void	check_extension(int ac, char **av);
 int		check_file(s_data *lst, char **av);
 char	**get_file(s_data *lst,char **av);
@@ -53,12 +57,14 @@ int		count_duplicate_path(s_data *lst);
 void	parsing_map(char **av);
 char	**get_map(s_data *lst);
 int		check_map(s_data *lst);
-int		get_data(s_data *lst);
+int		get_data(s_data *lst, int j);
 int		found_space(char c);
 int		check_dup(int i);
 int		check_floor(s_data *lst);
 int		check_ceilling(s_data *lst);
 int		valid_celling_floor(s_data *lst);
+void	check_ver(s_data *lst, int i);
+void    valid_rgb(char **str, int i);
 
 // GET NEXT LINE
 char    *get_next_line(int fd);

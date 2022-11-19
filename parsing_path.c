@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 09:06:50 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/18 18:12:34 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/19 13:59:43 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	count_duplicate_path(s_data *lst)
 	if (count != 4)
 	{
 		write(2, "Missing a path\n", 16);
-		return (1);
+		exit (1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/11/18 19:37:08 by yamzil           ###   ########.fr        #
+#    Updated: 2022/11/19 20:50:34 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC =	cub3d.c\
 		parsing_map.c\
 		parsing_path.c\
 		file_utils.c\
-		parsing_utils.c
+		parsing_utils.c\
+		parsing_utils1.c
 
 OBJ = $(SRC:.c=.o)
 
