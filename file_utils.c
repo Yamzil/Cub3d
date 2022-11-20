@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:40:10 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/19 18:19:32 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 09:59:33 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,11 @@ char	**get_file(s_data *lst,char **av)
 	return (lst->file);
 }
 
-char	**get_map(s_data *lst)
+char	**get_map(s_data *lst, int j)
 {	
 	int	i;
-	int	j;
 	int	l;
-	
-	j = 0;
-	j = get_data(lst, j) + 1;
+
 	l = j;
 	while(lst->file[l++]);
 	lst->map = malloc(sizeof(char *) * (l - j));
@@ -77,7 +74,6 @@ char	**get_map(s_data *lst)
 		j++;
 		i++;
 	}
-	// for (int i = 0; lst->map[i]; i++)
-	// 	printf("%s", lst->map[i]);
+	lst->map[i] = NULL;
 	return (lst->map);
 }
