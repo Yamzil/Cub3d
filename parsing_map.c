@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:07:25 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 10:58:17 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 17:05:02 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,42 +42,31 @@ void	valid_data(s_data *lst)
 
 int	check_map(s_data *lst)
 {
-	int	i;
-	int	j;
-	int player_nb;
-	
-	player_nb = 0;
-	i = 0;
-	while(lst->map[i])
+	if (check_valid(lst))
 	{
-		j = 0;
-		while(lst->map[i][j])
-		{
-			if (lst->map[i][j] == '0')
-			{
-				if(check_char(lst->map[i][j - 1]))
-					return 1;
-				else if (check_char(lst->map[i][j + 1]))
-					return 1;
-				else if (check_char(lst->map[i - 1][j]))
-					return 1;
-				else if (check_char(lst->map[i + 1][j - 1]))
-					return 1;
-			}
-			if (lst->map[i][j] == 'N' || lst->map[i][j] == 'S' || lst->map[i][j] == 'E'|| lst->map[i][j] == 'W')
-				player_nb++;
-			if (player_nb > 1)
-				return 1;
-			j++;
-		}
-		i++;
+		puts("1");
+		return 1;
+	}
+	else if (valid_map_elements(lst))
+	{
+		puts("2");
+		return (1);
+	}
+	else if (valid_player(lst))
+	{
+		puts("3");
+		return (1);
+	}
+	else if (valid_player_sourrnder(lst))
+	{
+		puts("4");
+		return (1);
 	}
 	return 0;
 }
 
-int	check_file(s_data *lst, char **av)
+int	check_file(s_data *lst)
 {
-	(void) av;
 	int	i;
 
 	i = 0;
@@ -88,7 +77,7 @@ int	check_file(s_data *lst, char **av)
 			valid_data(lst);
 			decimal_value_floor(lst);
 			decimal_value_ceilling(lst);
-			get_map(lst, i + 1);
+			get_map(lst, i + 2);
 			if (check_map(lst))
 			{
 				write(2, "Map Error\n", 11);

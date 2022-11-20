@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 09:52:08 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 14:48:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int		ft_isdigit(int c);
 
 //PARSING
 bool	check_char(char c);
+int	check_valid(s_data *lst);
+int	valid_map_elements(s_data *lst);
+int	valid_player_sourrnder(s_data *lst);
+int	valid_player(s_data *lst);
 void	decimal_value_floor(s_data *lst);
 void	decimal_value_ceilling(s_data *lst);
 char	**get_rgb_for_ceilling(s_data *lst);
@@ -53,7 +57,7 @@ char	**get_rgb_for_floor(s_data *lst);
 int		check_max_rgb_floor(s_data *lst);
 int		check_max_rgb_ceilling(s_data *lst);
 void	check_extension(int ac, char **av);
-int		check_file(s_data *lst, char **av);
+int		check_file(s_data *lst);
 char	**get_file(s_data *lst,char **av);
 int		checkspace(s_data *lst);
 int		count_duplicate_path(s_data *lst);

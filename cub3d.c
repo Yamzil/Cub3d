@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:45 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 09:44:09 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 13:23:11 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int main(int ac, char **av)
 	{
         check_extension(ac, av);
         get_file(lst, av);
-		check_file(lst, av);
+		check_file(lst);
     }
 }

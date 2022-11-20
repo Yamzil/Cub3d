@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:40:10 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 09:59:33 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 16:33:23 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,13 @@ char	**get_file(s_data *lst,char **av)
 	if (!lst->file)
 		return (NULL);
 	i = 0;
-	while (1) 
+	while (true) 
 	{
-		char	*tmp;
-		tmp = get_next_line(fd);
-		if (tmp)
-		{	
-			if (ft_strcmp(tmp, "\n"))
-				lst->file[i++] = tmp;
-		}
-			if (tmp == 0)
-				break ;	
+		char	*tmp = get_next_line(fd);
+		lst->file[i] = tmp;
+		if (lst->file[i] == '\0')
+			break ;
+		i++;
 	}
 	lst->file[i] = NULL;
 	return (lst->file);
