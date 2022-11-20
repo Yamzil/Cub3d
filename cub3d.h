@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 14:48:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 18:38:28 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,49 @@ char	*ft_strdup(const char *s1);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 
-//PARSING
-bool	check_char(char c);
-int	check_valid(s_data *lst);
-int	valid_map_elements(s_data *lst);
-int	valid_player_sourrnder(s_data *lst);
-int	valid_player(s_data *lst);
-void	decimal_value_floor(s_data *lst);
-void	decimal_value_ceilling(s_data *lst);
+// FILE UTILS
+char	**get_file(s_data *lst,char **av);
+char	**get_map(s_data *lst, int j);
+int		countline(char **av);
+
+// FLOOR CEILLING
+int		check_max_rgb_ceilling(s_data *lst);
+int		check_max_rgb_floor(s_data *lst);
+int		check_ceilling(s_data *lst);
+int		check_floor(s_data *lst);
+
+// FLOOR CEILLING UTILS
 char	**get_rgb_for_ceilling(s_data *lst);
 char	**get_rgb_for_floor(s_data *lst);
-int		check_max_rgb_floor(s_data *lst);
-int		check_max_rgb_ceilling(s_data *lst);
-void	check_extension(int ac, char **av);
-int		check_file(s_data *lst);
-char	**get_file(s_data *lst,char **av);
-int		checkspace(s_data *lst);
-int		count_duplicate_path(s_data *lst);
-void	parsing_map(char **av);
-char	**get_map(s_data *lst, int j);
-int		check_map(s_data *lst);
-int		get_data(s_data *lst, int *j);
-int		found_space(char c);
-int		check_dup(int i);
-int		check_floor(s_data *lst);
-int		check_ceilling(s_data *lst);
 int		valid_celling_floor(s_data *lst);
+
+// MAP UTILS
+int		valid_player_sourrnder(s_data *lst);
+int		valid_map_elements(s_data *lst);
+int		check_valid(s_data *lst);
+int		valid_player(s_data *lst);
+
+// PARSING MAP
+void	valid_data(s_data *lst);
+int		check_map(s_data *lst);
+int		check_file(s_data *lst);
+
+// PARSING PATH
+int		count_duplicate_path(s_data *lst);
+int		checkspace(s_data *lst);
+
+// PARSING UTILS
 void	check_ver(s_data *lst, int i);
 void    valid_rgb(char **str, int i);
+bool	check_char(char c);
+int		check_dup(int i);
+
+// PARSING UTILS 1
+void	decimal_value_ceilling(s_data *lst);
+void	decimal_value_floor(s_data *lst);
+int		get_data(s_data *lst, int *j);
+int		found_space(char c);
+int		mx(int *j, int i);
 
 // GET NEXT LINE
 char    *get_next_line(int fd);

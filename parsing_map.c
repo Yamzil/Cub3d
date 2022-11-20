@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:07:25 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 17:05:02 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 18:43:48 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_map(s_data *lst)
 		puts("3");
 		return (1);
 	}
-	else if (valid_player_sourrnder(lst))
+	else if (valid_player_sourrnder(lst)) // TODO
 	{
 		puts("4");
 		return (1);

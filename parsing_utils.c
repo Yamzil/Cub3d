@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:57:24 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 17:13:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 18:37:38 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int found_space(char c)
     return 0;
 }
 
-int check_dup(int i){
+int check_dup(int i)
+{
     static int flag[4] = {};
 
     if (flag[i])

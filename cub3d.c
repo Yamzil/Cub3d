@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:45 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 13:23:11 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/20 19:05:49 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,7 @@ int main(int ac, char **av)
 		check_file(lst);
     }
 }
+// TO DO FIX SEGFAULT when HAVING MULTIPLE FLOOR OR CEILLING
+// DELETE THE MAP
+// FIC PLAYER SOURRNDER
+// RAY CASTING ISSUE
