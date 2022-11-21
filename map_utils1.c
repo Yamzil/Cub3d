@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:34:27 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/21 18:37:21 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 22:34:46 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	no_map(char **av, s_data *lst, int count, int j)
 	count = countline(av);
 	if (j < count - 1)
 	{
-		if (!ft_strncmp(lst->file[j], "C", 1))
+		if (!ft_strncmp(lst->file[j], "C ", 2) || !ft_strncmp(lst->file[j], "F ", 2))
 			j++;
 	}
 	else 
@@ -25,7 +25,7 @@ int	no_map(char **av, s_data *lst, int count, int j)
 		write (2, "Error no map\n", 14);
 		exit (1);
 	}
-	return (j);
+	return j;
 }
 
 void    check_one(int j, int count)
@@ -35,6 +35,7 @@ void    check_one(int j, int count)
         write (2, "Error no map\n", 14);
 		exit (1);
     }
+	
 }
 
 void    check_two(s_data *lst, int j)

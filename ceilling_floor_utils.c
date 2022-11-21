@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 18:30:41 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/21 13:05:21 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 21:11:24 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	valid_floor(s_data *lst)
 	i = 0;
 	while(lst->file[i])
 	{
-		if (!ft_strncmp(lst->file[i], "F", 1))
+		if (!ft_strncmp(lst->file[i], "F ", 2))
 			count++;
 		i++;
 	}
@@ -42,8 +42,7 @@ int	valid_celling(s_data *lst)
 	i = 0;
 	while(lst->file[i])
 	{
-	
-		if (!ft_strncmp(lst->file[i], "C", 1))
+		if (!ft_strncmp(lst->file[i], "C ", 2))
 			count++;
 		i++;
 	}

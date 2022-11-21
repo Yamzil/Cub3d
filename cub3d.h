@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/21 18:37:31 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 22:34:55 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strtrim(char const *s1, char const *set);
 void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(char const *s, char c);
+void	ft_putendl_fd(char *s, int fd);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
 int		ft_atoi(const char *str);
@@ -63,13 +64,13 @@ int		valid_celling(s_data *lst);
 int		valid_floor(s_data *lst);
 
 // MAP UTILS
-int		valid_player_sourrnder(char **av, s_data *lst, int j);
-int		valid_map_elements(char **av, s_data *lst, int j);
-int		check_valid(char **av, s_data *lst, int j);
-int		valid_player(char **av, s_data *lst, int j);
+void	valid_player_sourrnder(char **av, s_data *lst, int j);
+void	valid_map_elements(char **av, s_data *lst, int j);
+void	check_valid(char **av, s_data *lst, int *j);
+void	valid_player(char **av, s_data *lst, int j);
 
 // PARSING MAP
-int		check_map(char **av, s_data *lst, int j);
+void	check_map(char **av, s_data *lst, int *j);
 int		check_file(char **av, s_data *lst);
 void	valid_data(s_data *lst);
 
@@ -91,10 +92,12 @@ int		found_space(char c);
 int		mx(int *j, int i);
 
 // MAP OUTILS 1
-
 int		no_map(char **av, s_data *lst, int count, int j);
 void    check_two(s_data *lst, int j);
 void    check_one(int j, int count);
+
+// MAIN
+void	error_msg(int i);
 
 // GET NEXT LINE
 char    *get_next_line(int fd);
