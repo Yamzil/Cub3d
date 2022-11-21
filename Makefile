@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/11/20 19:03:43 by yamzil           ###   ########.fr        #
+#    Updated: 2022/11/21 19:20:38 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,14 @@ SRC =	cub3d.c\
 		parsing_utils.c\
 		parsing_utils1.c\
 		map_utils.c\
-		ceilling_floor_utils.c
+		ceilling_floor_utils.c\
+		map_utils1.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 
 all : $(NAME)
 

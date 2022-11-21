@@ -6,114 +6,133 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:53:51 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 17:43:25 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 19:20:31 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Get_Next_line/get_next_line.h"
 #include "cub3d.h"
 
-int	check_valid(s_data *lst)
+int	check_valid(char **av, s_data *lst, int j)
 {
-    int i;
-    int j;
+    int k;
+	int	count;
 
-    i = 0;
-    while (lst->map[i])
+	count = countline(av);
+	j = no_map(av, lst, count, j);
+    while (j < count - 1  && lst->file[j])
     {
-        j = 0;
-        while (lst->map[i][j])
-        {
-            if (lst->map[i][j] == '0')
-            {
-				if (j < (int)ft_strlen(lst->map[i + 1]) || j < (int)ft_strlen(lst->map[i - 1]))
+		k = 0;
+		while (lst->file[j] && !ft_strncmp(lst->file[j], "\n", 2))
+			j++;
+		check_one(j, count);
+		while (lst->file[j] && lst->file[j][k])
+		{
+			if (lst->file[j][k] == '0')
+			{
+				if (k < (int)ft_strlen(lst->file[j + 1]) || k < (int)ft_strlen(lst->file[j - 1]))
 				{
-					if (check_char(lst->map[i][j - 1]))
+					if (check_char(lst->file[j][k - 1]))
 						return (1);
-					else if (check_char(lst->map[i][j + 1]))
+					else if (check_char(lst->file[j][k + 1]))
 						return (1);
-					else if (check_char(lst->map[i - 1][j]))
+					else if (check_char(lst->file[j - 1][k]))
 						return (1);
-					else if (check_char(lst->map[i + 1][j]))
+					else if (check_char(lst->file[j + 1][k]))
 						return (1);
 				}
 				else
 					return (1);
-            }
-            j++;
-        }
-        i++;
+			}
+			k++;
+		}
+        j++;
     }
+	check_two(lst, j);
     return (0);
 }
 
-int	valid_map_elements(s_data *lst)
+int	valid_map_elements(char **av, s_data *lst, int j)
 {
-	int	i;
-	int	j;
+	int	k;
+	int	count;
 
-	i = 0;
-	while (lst->map[i])
+	count = countline(av);
+	j = no_map(av, lst, count, j);
+	while (j < count - 1 && lst->file[j])
 	{
-		j = 0;
-		while (lst->map[i][j]) 
-		{
-			if (lst->map[i][j] != '0' && lst->map[i][j] != '1' 
-				&& lst->map[i][j] != 'N' && lst->map[i][j] != 'S' 
-				&& lst->map[i][j] != 'W' && lst->map[i][j] != 'E' 
-				&& lst->map[i][j] != ' ' && lst->map[i][j] != '\n')
-				return (1);
+		k = 0;
+		while (lst->file[j] && !ft_strncmp(lst->file[j], "\n", 2))
 			j++;
+		check_one(j, count);
+		while (lst->file[j] && lst->file[j][k]) 
+		{
+			if (lst->file[j][k] != '0' && lst->file[j][k] != '1' 
+				&& lst->file[j][k] != 'N' && lst->file[j][k] != 'S' 
+				&& lst->file[j][k] != 'W' && lst->file[j][k] != 'E' 
+				&& lst->file[j][k] != ' ' && lst->file[j][k] != '\n')
+				return (1);
+			k++;
 		}
-		i++;
+		j++;
 	}
+	check_two(lst, j);
 	return (0);
 }
 
-int	valid_player(s_data *lst)
+int	valid_player(char **av, s_data *lst, int j)
 {
 	int	player;
-	int	i;
-	int	j;
+	int	count;
+	int	k;
 
 	player = 0;
-	i = 0;
-	while (lst->map[i])
+	count = countline(av);
+	j = no_map(av, lst, count, j);
+	while (j < count - 1 && lst->file[j])
 	{
-		j = 0;
-		while (lst->map[i][j])
-		{
-			if (lst->map[i][j] == 'N' || lst->map[i][j] == 'S' 
-				|| lst->map[i][j] == 'W' || lst->map[i][j] == 'E')
-				player++;
+		k = 0;
+		while (lst->file[j] && !ft_strncmp(lst->file[j], "\n", 2))
 			j++;
+		check_one(j, count);
+		while (lst->file[j] && lst->file[j][k])
+		{
+			if (lst->file[j][k] == 'N' || lst->file[j][k] == 'S' 
+				|| lst->file[j][k] == 'W' || lst->file[j][k] == 'E')
+				player++;
+			k++;
 		}
-		i++;
+		j++;
 	}
+	check_two(lst, j);
 	if (player != 1)
 		return (1);
 	return (0);
 }
 
-int	valid_player_sourrnder(s_data *lst)
+int	valid_player_sourrnder(char **av, s_data *lst, int j)
 {
-	int	i;
-	int	j;
+	int	count;
+	int	k;
 
-	i = 0;
-	while (lst->map[i])
+	count = countline(av);
+	j = no_map(av, lst, count, j);
+	while (j < count - 1 && lst->file[j])
 	{
-		j = 0;
-		while (lst->map[i][j])
+		k = 0;
+		while(lst->file[j] && !ft_strncmp(lst->file[j], "\n", 2))
+			j++;
+		check_one(j, count);
+		while (lst->file[j] && lst->file[j][k])
 		{
-			if (lst->map[i][j] == 'N' || lst->map[i][j] == 'S' || lst->map[i][j] == 'W' || lst->map[i][j] == 'E')
+			if (lst->file[j][k] == 'N' || lst->file[j][k] == 'S' || lst->file[j][k] == 'W' || lst->file[j][k] == 'E')
 			{
-				if ((lst->map[i][j + 1] != '0' || lst->map[i][j - 1] != '0') && (lst->map[i][j + 1] != '1' || lst->map[i][j - 1] != '1') && (lst->map[i + 1][j] != '0' || lst->map[i - 1][j] != '0') && (lst->map[i - 1][j] != '1' || lst->map[i + 1][j] != '1'))
+				if ((lst->file[j][k + 1] != '0' || lst->file[j][k - 1] != '0') && (lst->file[j][k + 1] != '1' || lst->file[j][k - 1] != '1') && (lst->file[j + 1][k] != '0' || lst->file[j - 1][k] != '0') && (lst->file[j - 1][k] != '1' || lst->file[j + 1][k] != '1'))
 					return (1);
 			}
-			j++;
+			k++;
 		}
-		i++;
+		j++;
 	}
+	check_two(lst, j);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 18:26:52 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 19:02:26 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 12:59:14 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int check_floor(s_data *lst)
 	int	i;
 
 	i = 0;
-	if (!valid_celling_floor(lst))
+	if (!valid_floor(lst))
 	{
 		while(lst->file[i])
 		{
@@ -34,7 +34,7 @@ int check_ceilling(s_data *lst)
 	int	i;
 
 	i = 0;
-	if (!valid_celling_floor(lst))
+	if (!valid_celling(lst))
 	{
 		while(lst->file[i])
 		{

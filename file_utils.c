@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:40:10 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 16:33:23 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:51:44 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ char	**get_file(s_data *lst,char **av)
 
 	line = countline(av);
 	lst->file = malloc((line + 1) * sizeof(char *));
-	fd = open(av[1], O_RDONLY, 0777);
 	if (!lst->file)
 		return (NULL);
+	fd = open(av[1], O_RDONLY, 0777);
 	i = 0;
 	while (true) 
 	{
@@ -54,13 +54,16 @@ char	**get_file(s_data *lst,char **av)
 }
 
 char	**get_map(s_data *lst, int j)
-{	
+{
 	int	i;
-	int	l;
+	int	k;
 
-	l = j;
-	while(lst->file[l++]);
-	lst->map = malloc(sizeof(char *) * (l - j));
+	k = 0;
+	while (lst->file[k]){
+		k++;
+	}
+	if (k > j)
+		lst->map = malloc(sizeof(char *) * (k - j));
 	if (!lst->map)
 		return (NULL);
 	i = 0;

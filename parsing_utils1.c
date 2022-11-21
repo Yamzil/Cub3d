@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 18:24:07 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 19:04:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:41:01 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	decimal_value_floor(s_data *lst)
 	int		decimal;
 
 	rgb = get_rgb_for_floor(lst);
-	if (rgb != NULL)
+	if (rgb)
 	{
 		rgb[0] = ft_strtrim(rgb[0], "F ");
 		decimal = (ft_atoi(rgb[0]) * 256 * 256) + (ft_atoi(rgb[1]) * 256)
@@ -69,8 +69,7 @@ void	decimal_value_ceilling(s_data *lst)
 	int		decimal;
 
 	rgb = get_rgb_for_ceilling(lst);
-	puts("ffff");
-	if (rgb != NULL)
+	if (rgb)
 	{
 		rgb[0] = ft_strtrim(rgb[0], "C ");
 		decimal = (ft_atoi(rgb[0]) * 256 * 256) + (ft_atoi(rgb[1]) * 256)

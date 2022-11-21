@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/20 18:38:28 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/21 18:37:31 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_isdigit(int c);
 
 // FILE UTILS
 char	**get_file(s_data *lst,char **av);
-char	**get_map(s_data *lst, int j);
+char 	**get_map(s_data *lst, int j);
 int		countline(char **av);
 
 // FLOOR CEILLING
@@ -59,17 +59,19 @@ int		check_floor(s_data *lst);
 char	**get_rgb_for_ceilling(s_data *lst);
 char	**get_rgb_for_floor(s_data *lst);
 int		valid_celling_floor(s_data *lst);
+int		valid_celling(s_data *lst);
+int		valid_floor(s_data *lst);
 
 // MAP UTILS
-int		valid_player_sourrnder(s_data *lst);
-int		valid_map_elements(s_data *lst);
-int		check_valid(s_data *lst);
-int		valid_player(s_data *lst);
+int		valid_player_sourrnder(char **av, s_data *lst, int j);
+int		valid_map_elements(char **av, s_data *lst, int j);
+int		check_valid(char **av, s_data *lst, int j);
+int		valid_player(char **av, s_data *lst, int j);
 
 // PARSING MAP
+int		check_map(char **av, s_data *lst, int j);
+int		check_file(char **av, s_data *lst);
 void	valid_data(s_data *lst);
-int		check_map(s_data *lst);
-int		check_file(s_data *lst);
 
 // PARSING PATH
 int		count_duplicate_path(s_data *lst);
@@ -87,6 +89,12 @@ void	decimal_value_floor(s_data *lst);
 int		get_data(s_data *lst, int *j);
 int		found_space(char c);
 int		mx(int *j, int i);
+
+// MAP OUTILS 1
+
+int		no_map(char **av, s_data *lst, int count, int j);
+void    check_two(s_data *lst, int j);
+void    check_one(int j, int count);
 
 // GET NEXT LINE
 char    *get_next_line(int fd);
