@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 15:59:07 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/24 23:50:06 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ int main(int ac, char **av)
 	}
 	else 
 	{
-		t_data  *lst;
+		t_data  lst;
 
-		lst = malloc(sizeof(t_data));
-		if (!lst)
-			return (0);
+		// lst = malloc(sizeof(t_data));
+		// if (!lst)
+		// 	return (0);
+		lst.begin = 0;
 		check_extension(ac, av);
-		get_file(lst, av);
-		check_storing_file_data(lst);
-		// check_map(lst);
+		get_file(&lst, av);
+		check_storing_file_data(&lst);
+		check_map(&lst);
 	}
 }
+
+// NOTE 
+// 3 ster mora l map
+// player in edge
+// no xpm

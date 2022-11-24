@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Debug",
             "program": "/Users/yamzil/Desktop/Cub3d/cub3D",
-            "args": [],
+            "args": ["maps/maze.cub"],
             "cwd": "/Users/yamzil/Desktop/Cub3d"
         }
     ]

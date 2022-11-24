@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:47:23 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 15:58:30 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:50:21 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ int parsing_path(t_data *lst)
 
     count = 0;
     i = 0;
-	j = -1;
     while(lst->file[i])
     {
-        if (!ft_strncmp(lst->file[i], "NO", 2) && check_dup(0))
+        if (!ft_strncmp(lst->file[i], "NO ", 3) && check_dup(0))
             count++;
-        else if (!ft_strncmp(lst->file[i], "SO", 2) && check_dup(1))
+        else if (!ft_strncmp(lst->file[i], "SO ", 3) && check_dup(1))
             count++;
-        else if (!ft_strncmp(lst->file[i], "WE", 2) && check_dup(2))
+        else if (!ft_strncmp(lst->file[i], "WE ", 3) && check_dup(2))
             count++;
-        else if(!ft_strncmp(lst->file[i], "EA", 2) && check_dup(3))
+        else if(!ft_strncmp(lst->file[i], "EA ", 3) && check_dup(3))
             count++;
         i++;
     }
@@ -50,8 +49,11 @@ int	parsing_floor(t_data *lst)
 	i = 0;
 	while (lst->file[i])
 	{
-		if (ft_strchr(lst->file[i], 'F'))
+		if (!ft_strncmp(lst->file[i], "F ", 2))
+		{
+			mx(&lst->begin, i);
 			count++;
+		}
 		i++;
 	}
 	if (count != 1)
@@ -70,8 +72,11 @@ int	parsing_ceilling(t_data *lst)
 	i = 0;
 	while (lst->file[i])
 	{
-		if (ft_strchr(lst->file[i], 'C'))
+		if (!ft_strncmp(lst->file[i], "C ", 2))
+		{
+			mx(&lst->begin, i);
 			count++;
+		}
 		i++;
 	}
 	if (count != 1)

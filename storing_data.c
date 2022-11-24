@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:34:16 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 15:58:10 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:46:20 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	storing_path(t_data *lst, int *j)
 	int	i;
 
 	i = 0;
-	
 	while (lst->file[i])
 	{
 		if (!ft_strncmp(lst->file[i], "NO", 2) &&  mx(j, i))
@@ -39,7 +38,7 @@ int	storing_path(t_data *lst, int *j)
 		parsing_error(2);
 	else if (open(lst->east, O_RDWR) == -1)
 		parsing_error(2);
-	lst->begin = i;
+	lst->begin = *j;
 	return (i);
 }
 

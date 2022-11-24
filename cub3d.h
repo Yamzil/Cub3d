@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 15:25:47 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/24 22:49:25 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <sys/fcntl.h>
-#include "./Get_Next_line/get_next_line.h"
+#include "Get_Next_line/get_next_line.h"
 
 typedef struct s_data{
 	char	**file;

@@ -6,25 +6,26 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:34:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 15:37:56 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/24 22:49:50 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 int	check_valid(t_data *lst)
 {
     int	i;
 	int	j;
 
-	i = lst->begin;
+	i = lst->begin + 1;
 	if (!map_execite(lst))
 	{
+		while (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
+			i++;
 		while (lst->file[i])
 		{
 			j = 0;
-			while (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
-				i++;
 			while (lst->file[i] && lst->file[i][j])
 			{
 				check_valid_util(lst, i, j);
@@ -41,14 +42,14 @@ int	valid_map_elements(t_data *lst)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = lst->begin + 1;
 	if (!map_execite(lst))
 	{
+		while (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
+			i++;
 		while (lst->file[i])
 		{
 			j = 0;
-			while (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
-				i++;
 			while (lst->file[i] && lst->file[i][j]) 
 			{
 				if (lst->file[i][j] != '0' && lst->file[i][j] != '1' 
@@ -68,16 +69,12 @@ int	valid_player(t_data *lst)
 {
 	int	i;
 
-	i = 0;
+	i = lst->begin + 1;
 	if (!map_execite(lst))
 	{
-		while (lst->file[i])
-		{
-			while (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
-				i++;
-			check_player_util(lst, i);
+		while (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
 			i++;
-		}
+		check_player_util(lst, i);
 	}
 	return (0);
 }
@@ -87,7 +84,7 @@ int	valid_player_sourrnder(t_data *lst)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = lst->begin + 1;
 	if (!map_execite(lst))
 	{
 		while (lst->file[i])
