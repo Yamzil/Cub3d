@@ -5,38 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:58:45 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/21 22:00:36 by yamzil           ###   ########.fr       */
+/*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
+/*   Updated: 2022/11/24 15:59:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-void	error_msg(int i)
-{
-	if (i == 0)
-	{
-		ft_putendl_fd("Error: empty space", 2);
-		exit (0);
-	}
-	else if (i == 1)
-	{
-		ft_putendl_fd("Error: imposter element", 2);
-		exit (0);
-	}
-	else if (i == 2)
-	{
-		ft_putendl_fd("Error: invalid player", 2);
-		exit (0);	
-	}
-	else if (i == 3)
-	{
-		ft_putendl_fd("cannot open the path", 2);
-		exit (0);
-	}
-}
 
 void    check_extension(int ac, char **av)
 {
@@ -53,18 +27,21 @@ void    check_extension(int ac, char **av)
 
 int main(int ac, char **av)
 {
-    s_data  *lst;
-
-    lst = malloc(sizeof(s_data));
-    if (!lst)
-        return (0);
-    if (ac == 2)
+	if (ac != 2)
 	{
-        check_extension(ac, av);
-        get_file(lst, av);
-		check_file(av, lst);
-    }
-}
+		ft_putendl_fd("Incorrect numbers of arguments", 2);
+		exit (0);
+	}
+	else 
+	{
+		t_data  *lst;
 
-// HEAP OVERFLOW WITH SANITIZE WHEN FOUND AN EMPTY LINE // otherwise everythihg woking fine
-// RAY CASTING ISSUE
+		lst = malloc(sizeof(t_data));
+		if (!lst)
+			return (0);
+		check_extension(ac, av);
+		get_file(lst, av);
+		check_storing_file_data(lst);
+		// check_map(lst);
+	}
+}

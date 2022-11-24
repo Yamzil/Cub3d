@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/11/21 22:35:42 by yamzil           ###   ########.fr        #
+#    Updated: 2022/11/24 15:05:36 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,17 @@ NAME =	cub3D
 INC =	cub3d.h
 
 SRC =	cub3d.c\
+		allocate_file.c\
+		parsing_file.c\
+		parsing_utils.c\
+		parsing_error.c\
+		storing_data.c\
+		check_file.c\
+		check_map.c\
+		check_map_utils.c\
+		check_map_utils1.c\
 		Get_Next_line/get_next_line.c\
 		Get_Next_line/get_next_line_utils.c\
-		floor_ceilling.c\
-		parsing_map.c\
-		parsing_path.c\
-		file_utils.c\
-		parsing_utils.c\
-		parsing_utils1.c\
-		map_utils.c\
-		ceilling_floor_utils.c\
-		map_utils1.c
 
 OBJ = $(SRC:.c=.o)
 
