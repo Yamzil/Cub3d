@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:34:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/25 18:33:28 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/25 19:46:34 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,21 @@ int	valid_player_position(t_data *lst)
 	i = lst->begin + 1;
 	while(lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
 		i++;
+	lst->begin = i;
 	while (lst->file[i])
 	{
 		j = 0;
-		if (lst->file[i][j] == 'S' || lst->file[i][j] == 'N' || lst->file[i][j] == 'W' || lst->file[i][j] == 'E')
+		while (lst->file[i][j])
 		{
-			if (lst->file[i][j + 1] != '1' || lst->file[i][j + 1] != '0' 
-				|| lst->file[i + 1][j] != '0' || lst->file[i + 1][j] != '1' 
-				|| lst->file[i - 1][j] != '0' || lst->file[i - 1][j] != '1')
-				map_error(2);
+			if (lst->file[i][j] == 'S' || lst->file[i][j] == 'N' || lst->file[i][j] == 'W' || lst->file[i][j] == 'E')
+			{
+				if (i == lst->begin || i == lst->end - 1 || (lst->file[i][j + 1] != '1' && lst->file[i][j + 1] != '0') 
+					|| (lst->file[i + 1][j] != '0' && lst->file[i + 1][j] != '1') 
+					|| (lst->file[i - 1][j] != '0' && lst->file[i - 1][j] != '1') 
+					|| (lst->file[i][j - 1] != '0' && lst->file[i][j - 1] != '1'))
+					map_error(2);
+			}
+			j++;
 		}
 		i++;
 	}
