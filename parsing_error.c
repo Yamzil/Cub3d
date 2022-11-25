@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:56:13 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/23 16:13:11 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/25 18:18:12 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,4 @@ void    map_error(int i)
         ft_putendl_fd("Error: Invalid player", 2);
         exit (0);
     }
-    else if (i == 3)
-    {
-        ft_putendl_fd("Error: No map", 2);
-        exit (0);
-    }
-    
 }

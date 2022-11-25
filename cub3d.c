@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 23:50:06 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/25 18:12:06 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int main(int ac, char **av)
 }
 
 // NOTE 
-// 3 ster mora l map
 // player in edge
 // no xpm
