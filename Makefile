@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/11/24 23:33:22 by yamzil           ###   ########.fr        #
+#    Updated: 2022/11/25 18:09:20 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRC =	cub3d.c\
 		check_file.c\
 		check_map.c\
 		check_map_utils.c\
-		check_map_utils1.c\
 		Get_Next_line/get_next_line.c\
 		Get_Next_line/get_next_line_utils.c\
 

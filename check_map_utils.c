@@ -6,25 +6,13 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 20:17:59 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/25 18:09:01 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
-
-// void	get_starting_point(t_data *lst)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (lst->file[i])
-// 	{
-// 		lst->file[i] = ft_strtrim(lst->file[i], "\n ");
-// 		i++;
-// 	}
-// 	lst->begin = i;
-// }
+#include <sys/resource.h>
 
 bool	check_char(char c)
 {
@@ -33,35 +21,61 @@ bool	check_char(char c)
 	return false;
 }
 
-int	valid_map(t_data *lst, int j)
+void    check_valid_util(t_data *lst, int i, int j)
 {
-	if (j < lst->end)
+	if (lst->file[i][j] == '0')
 	{
-		if (!ft_strncmp(lst->file[j], "C ", 2) 
-			|| !ft_strncmp(lst->file[j], "F ", 2))
-			j++;
+		if (i < (int)ft_strlen(lst->file[i + 1])
+			|| i < (int)ft_strlen(lst->file[i - 1]))
+		{
+			if (check_char(lst->file[i][j - 1]))
+				map_error(0);
+			else if (check_char(lst->file[i][j + 1]))
+				map_error(0);
+			else if (check_char(lst->file[i - 1][j]))
+				map_error(0);
+			else if (check_char(lst->file[i + 1][j]))
+				map_error(0);
+		}
 	}
-	else
-		map_error(3);
-	return j;
 }
 
-int	map_execite(t_data *lst)
+void	check_player_util(t_data *lst, int i)
 {
-	int	i;
+	int	player;
+	int	j;
 
-	i = lst->begin + 1;
-	while(lst->file[i])
+	player = 0;
+	while (lst->file[i])
 	{
-		if (lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
+		j = 0;
+		while (lst->file[i] && lst->file[i][j])
 		{
-			i++;
-			if (lst->file[i] == 0)
-				map_error(3);
+			if (lst->file[i][j] == 'N' || lst->file[i][j] == 'S'
+				|| lst->file[i][j] == 'W' || lst->file[i][j] == 'E')
+				player++;
+			j++;
 		}
-		else if (i == lst->end)
-			map_error(3);
 		i++;
 	}
-	return (0);
+	if (player != 1)
+		map_error(2);	
+}
+
+void	checking_player_position(t_data *lst, int i)
+{
+	int	j;
+	
+	while (lst->file[i])
+	{
+		j = 0;
+		while (lst->file[i][j])
+		{
+			if (lst->file[i][0] == 'N' || lst->file[i][0] == 'S' || lst->file[i][0] == 'W' || lst->file[i][0] == 'E')
+				map_error(2);
+			if (lst->file[ft_strlen(lst->file[i])][j])
+			j++;
+		}
+		i++;
+	}
 }

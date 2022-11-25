@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 22:49:25 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/25 18:09:14 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,15 @@ int		storing_colors_floor(t_data *lst);
 int		check_storing_file_data(t_data *lst);
 
 // CHECK MAP
-int		valid_player_sourrnder(t_data *lst);
+int		valid_player_position(t_data *lst);
 int		valid_map_elements(t_data *lst);
 int		valid_player(t_data *lst);
 int		check_valid(t_data *lst);
 void    check_map(t_data *lst);
 
 // CHECK MAP UTILS
-void	get_starting_point(t_data *lst);
-int		valid_map(t_data *lst, int j);
-int		map_execite(t_data *lst);
-bool	check_char(char c);
-
-// CHECK MAP UTILS 1
-void	checking_player_sourrender(t_data *lst, int i);
+void	checking_player_position(t_data *lst, int i);
 void    check_valid_util(t_data *lst, int i, int j);
 void	check_player_util(t_data *lst, int i);
+bool	check_char(char c);
 #endif
