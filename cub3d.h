@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/25 18:09:14 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/27 22:50:50 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,40 @@
 #define CUB3D_H
 
 #include <unistd.h>
+#include "./minilibx_opengl_20191021/mlx.h"
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <sys/fcntl.h>
 #include "Get_Next_line/get_next_line.h"
+
+#define WIN_HEIGHT 720
+#define WIN_WIDTH 1080
+
+enum {
+	red_cross = 17,
+	esc = 53,
+};
+
+typedef struct s_player{
+	int		x;
+	int		y;
+	int		raduis;
+	int 	move;
+	int		turn;
+	double	speed;
+	double	rotions;
+	double	rotion_speed;
+}t_player;
+
+typedef struct s_map{
+	void	*img;
+	char	*address;
+	int		bits_per_pxl;
+	int		size_line;
+	int		endian;
+} t_map;
 
 typedef struct s_data{
 	char	**file;
@@ -32,6 +60,15 @@ typedef struct s_data{
 	char	*ceilling;
 	int		begin;
 	int		end;
+	void	*mlx;
+	void	*windows;
+	int		px;
+	int		pdx;
+	int		pdy;
+	int 	py;
+	double	angle;
+	t_map	*list;
+	
 }t_data;
 
 // LIBFT
@@ -49,6 +86,7 @@ char	*ft_itoa(int n);
 // AllOCATE FILE
 char	**get_file(t_data *lst,char **av);
 void	countline(t_data *lst, char **av);
+char	**get_map(t_data *lst);
 
 // MAIN
 void	messages_error(int i);
@@ -86,6 +124,7 @@ int		check_storing_file_data(t_data *lst);
 // CHECK MAP
 int		valid_player_position(t_data *lst);
 int		valid_map_elements(t_data *lst);
+int		check_last_line(t_data *lst);
 int		valid_player(t_data *lst);
 int		check_valid(t_data *lst);
 void    check_map(t_data *lst);
@@ -95,4 +134,16 @@ void	checking_player_position(t_data *lst, int i);
 void    check_valid_util(t_data *lst, int i, int j);
 void	check_player_util(t_data *lst, int i);
 bool	check_char(char c);
+
+// HOOK UTILS
+int		key_press();
+
+// MINIMAP
+void	writing_pxl_to_img(t_map *list, int x, int y, int color);
+void    render(t_map *lst, t_data *data, int flag);
+
+// PLAYER MOUVEMENT
+void	render_player(t_player *player, t_map *map, t_data *data);
+void    init_player_coordination(t_player *player);
+void	player_position(t_data *data);
 #endif

@@ -6,11 +6,21 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/25 18:34:44 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/27 21:58:27 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	mlx_functions(t_data *lst, t_map *list)
+{
+	lst->mlx =  mlx_init ();
+	lst->windows = mlx_new_window(lst->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
+	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
+	list->address = mlx_get_data_addr(list->img, &list->bits_per_pxl, &list->size_line, &list->endian);
+	mlx_hook(lst->windows, 2, 0, key_press, lst);
+
+}
 
 void    check_extension(int ac, char **av)
 {
@@ -34,18 +44,22 @@ int main(int ac, char **av)
 	}
 	else 
 	{
-		t_data  lst;
+		t_data  	lst;
+		t_map		list;
+		t_player	player;
 
-		// lst = malloc(sizeof(t_data));
-		// if (!lst)
-		// 	return (0);
 		lst.begin = 0;
 		check_extension(ac, av);
 		get_file(&lst, av);
 		check_storing_file_data(&lst);
 		check_map(&lst);
+		get_map(&lst);
+		mlx_functions(&lst, &list);
+		lst.list = &list;
+		render(&list, &lst, 1);
+		render_player(&player, &list, &lst);
+		mlx_put_image_to_window(lst.mlx, lst.windows, list.img, 0, 0);
+		mlx_loop(lst.mlx);
+
 	}
 }
-
-// NOTE 
-// no xpm

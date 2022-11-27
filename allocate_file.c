@@ -6,11 +6,12 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:44:24 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 15:08:55 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/27 19:22:15 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdlib.h>
 
 void	countline(t_data *lst, char **av)
 {
@@ -50,4 +51,26 @@ char	**get_file(t_data *lst,char **av)
 	}
 	lst->file[i] = NULL;
 	return (lst->file);
+}
+
+char	**get_map(t_data *lst)
+{
+	int	i;
+	int	j;
+
+	i = lst->begin;
+	j = 0;
+	lst->map = malloc((((lst->end) - lst->begin) + 1)	* sizeof(char *));
+	if (!lst->map)
+		return (NULL);
+	while (lst->file[i])
+	{
+		if (lst->file[i] && !ft_strncmp(lst->file[i],"\n", 2))
+			i++;
+		lst->map[j] = lst->file[i];
+		j++;
+		i++;
+	}
+	lst->map[j] = NULL;
+	return (lst->map);
 }

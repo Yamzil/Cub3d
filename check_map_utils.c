@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/25 18:16:35 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/26 16:33:15 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    check_valid_util(t_data *lst, int i, int j)
 {
 	if (lst->file[i][j] == '0')
 	{
-		if (i < (int)ft_strlen(lst->file[i + 1])
+		if (lst->file[i] || i < (int)ft_strlen(lst->file[i + 1])
 			|| i < (int)ft_strlen(lst->file[i - 1]))
 		{
 			if (check_char(lst->file[i][j - 1]))
@@ -34,7 +34,7 @@ void    check_valid_util(t_data *lst, int i, int j)
 				map_error(0);
 			else if (check_char(lst->file[i - 1][j]))
 				map_error(0);
-			else if (check_char(lst->file[i + 1][j]))
+			else if (lst->file[i + 1] && check_char(lst->file[i + 1][j]))
 				map_error(0);
 		}
 	}
