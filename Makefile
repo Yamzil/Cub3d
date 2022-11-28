@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/11/27 21:31:30 by yamzil           ###   ########.fr        #
+#    Updated: 2022/11/28 22:08:17 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC =	cub3d.c\
 		check_file.c\
 		check_map.c\
 		raycasting.c\
-		player_mouvement.c\
+		player_move.c\
+		dda.c\
 		minimap.c\
 		check_map_utils.c\
 		hook_utils.c\

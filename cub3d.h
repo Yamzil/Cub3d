@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/27 22:50:50 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/28 22:06:50 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
 
-enum {
-	red_cross = 17,
-	esc = 53,
-};
-
 typedef struct s_player{
-	int		x;
-	int		y;
 	int		raduis;
+	int 	x;
+	int		y;
 	int 	move;
 	int		turn;
 	double	speed;
@@ -50,24 +45,24 @@ typedef struct s_map{
 } t_map;
 
 typedef struct s_data{
-	char	**file;
-	char	**map;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int		floor;
-	char	*ceilling;
-	int		begin;
-	int		end;
-	void	*mlx;
-	void	*windows;
-	int		px;
-	int		pdx;
-	int		pdy;
-	int 	py;
-	double	angle;
-	t_map	*list;
+	char		**file;
+	char		**map;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	int			floor;
+	char		*ceilling;
+	int			begin;
+	int			end;
+	void		*mlx;
+	void		*windows;
+	double			px;
+	double 		py;
+	int			step;
+	double		angle;
+	t_map		*list;
+	t_player	*player;
 	
 }t_data;
 
@@ -142,8 +137,10 @@ int		key_press();
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
 void    render(t_map *lst, t_data *data, int flag);
 
-// PLAYER MOUVEMENT
-void	render_player(t_player *player, t_map *map, t_data *data);
-void    init_player_coordination(t_player *player);
-void	player_position(t_data *data);
+// PLAYER MOUVE
+void	draw_player(t_map *lst, int x, int y, int color);
+void	render_player(t_player *player, t_map *map);
+
+// DDA
+void    dda_algo(t_data *data, double x1, double y1);
 #endif

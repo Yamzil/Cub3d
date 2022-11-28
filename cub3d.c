@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/27 21:58:27 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/28 22:56:52 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int main(int ac, char **av)
 		t_player	player;
 
 		lst.begin = 0;
+		lst.angle = 3 * M_PI / 2;
+		lst.step = 2;
 		check_extension(ac, av);
 		get_file(&lst, av);
 		check_storing_file_data(&lst);
@@ -57,7 +59,7 @@ int main(int ac, char **av)
 		mlx_functions(&lst, &list);
 		lst.list = &list;
 		render(&list, &lst, 1);
-		render_player(&player, &list, &lst);
+		render_player(&player, &list);
 		mlx_put_image_to_window(lst.mlx, lst.windows, list.img, 0, 0);
 		mlx_loop(lst.mlx);
 

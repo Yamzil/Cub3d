@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/27 22:19:49 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/28 23:05:38 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@ void	writing_pxl_to_img(t_map *list, int x, int y, int color)
 	char	*adr;
 	adr = list->address + (y *  list->size_line + x * (list->bits_per_pxl / 8));
 	*(unsigned int *) adr = color;
-}
-
-void draw_player(t_map *lst, int x, int y, int color){
-    int i;
-	int	j;
-
-    i = 0;
-    while (i < 5)
-    {
-        j = 0;
-        while (j < 5)
-        {
-			writing_pxl_to_img(lst, x + i, y + j, color);
-			j++;	
-        }
-		i++;
-    }
 }
 
 void    draw_square(t_map *lst, int x, int y, int color)
@@ -83,5 +66,7 @@ void    render(t_map *lst, t_data *data, int flag)
 		y  += 10; 
 		i++;
     }
+    
     draw_player(lst, data->px, data->py, 14335);
+    dda_algo(data, data->px + cos(data->angle) * 10,data->py + sin(data->angle) * 10);
 }
