@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:48:40 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/28 23:05:24 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:38:46 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,14 @@ void	move_back(t_data *lst)
 
 void	left_arrow(t_data *lst)
 {
-	// mlx_destroy_image(lst->mlx, lst->list->img);
-	// lst->list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
-	// 	 WIN_HEIGHT);
-	lst->angle -= 3 * (M_PI / 180);
+	lst->player->moveStep = 1;
+	lst->angle -= (M_PI / 180) * lst->step;
 }
 
 void	right_arrow(t_data *lst)
 {
-	// mlx_destroy_image(lst->mlx, lst->list->img);
-	// lst->list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
-	// 	 WIN_HEIGHT);
-	lst->angle += 3 * (M_PI / 180);
+	lst->player->moveStep = 1;
+	lst->angle += (M_PI / 180) * lst->step;
 }
 
 int	key_press(int key, t_data  *lst)
@@ -94,11 +90,24 @@ int	key_press(int key, t_data  *lst)
 		move_forward(lst);
 	else if (key == 1)
 		move_back(lst);
-	else if (key == 123)
+	else if (key == 123 )
+	{
+		lst->player->moveStep = 0;
 		left_arrow(lst);
+	}
 	else if (key == 124)
+	{
+		lst->player->moveStep = 0;
 		right_arrow(lst);
-	// else if (key == 126)
-	// else if (key == 125)
+	}
+	return (0);
+}
+
+int	key_realse(int key, t_data  *lst)
+{
+	if (key == 123)
+		lst->player->moveStep = 0;
+	else if (key == 124)
+		lst->player->moveStep = 0;
 	return (0);
 }

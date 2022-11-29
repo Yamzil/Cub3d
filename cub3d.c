@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/28 22:56:52 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:32:39 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	mlx_functions(t_data *lst, t_map *list)
 	lst->windows = mlx_new_window(lst->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
 	list->address = mlx_get_data_addr(list->img, &list->bits_per_pxl, &list->size_line, &list->endian);
+	mlx_hook(lst->windows, 2, 0, key_realse, lst);
 	mlx_hook(lst->windows, 2, 0, key_press, lst);
 
 }
@@ -46,7 +47,7 @@ int main(int ac, char **av)
 	{
 		t_data  	lst;
 		t_map		list;
-		t_player	player;
+		// t_player	player;
 
 		lst.begin = 0;
 		lst.angle = 3 * M_PI / 2;
@@ -59,7 +60,6 @@ int main(int ac, char **av)
 		mlx_functions(&lst, &list);
 		lst.list = &list;
 		render(&list, &lst, 1);
-		render_player(&player, &list);
 		mlx_put_image_to_window(lst.mlx, lst.windows, list.img, 0, 0);
 		mlx_loop(lst.mlx);
 

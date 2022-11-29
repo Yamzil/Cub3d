@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/28 22:06:50 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:18:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <sys/fcntl.h>
-#include "Get_Next_line/get_next_line.h"
+#include "get_next_line/get_next_line.h"
 
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
@@ -29,7 +29,7 @@ typedef struct s_player{
 	int		raduis;
 	int 	x;
 	int		y;
-	int 	move;
+	int 	moveStep;
 	int		turn;
 	double	speed;
 	double	rotions;
@@ -57,7 +57,7 @@ typedef struct s_data{
 	int			end;
 	void		*mlx;
 	void		*windows;
-	double			px;
+	double		px;
 	double 		py;
 	int			step;
 	double		angle;
@@ -131,8 +131,8 @@ void	check_player_util(t_data *lst, int i);
 bool	check_char(char c);
 
 // HOOK UTILS
-int		key_press();
-
+int		key_realse(int key, t_data *lst);
+int		key_press(int key, t_data *lst);
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
 void    render(t_map *lst, t_data *data, int flag);

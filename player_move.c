@@ -6,17 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:42:35 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/28 18:54:38 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:39:21 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
-
-void	render_player(t_player *player, t_map *map)
-{
-	writing_pxl_to_img(map, player->x, player->y, 14335);
-}
 
 void draw_player(t_map *lst, int x, int y, int color)
 {
