@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/29 15:47:50 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/30 01:16:52 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	writing_pxl_to_img(t_map *list, int x, int y, int color)
 {
 	char	*adr;
-	adr = list->address + (y *  list->size_line + x * (list->bits_per_pxl / 8));
-	*(unsigned int *) adr = color;
+    adr = list->address + (y *  list->size_line + x * (list->bits_per_pxl / 8));
+    *(unsigned int *) adr = color; 
 }
 
 void    draw_square(t_map *lst, int x, int y, int color)
@@ -56,7 +56,8 @@ void    render(t_map *lst, t_data *data, int flag)
                 draw_square(lst, x, y, 16777215);
 			if (data->map[i][j] == '1')
 				draw_square(lst, x , y, 8421504);
-            if (flag && data->map[i][j] == 'N'){
+            if (flag && data->map[i][j] == 'N')
+            {
                 data->px = x;
                 data->py = y;
             }
@@ -66,7 +67,6 @@ void    render(t_map *lst, t_data *data, int flag)
 		y  += 10; 
 		i++;
     }
-    
     draw_player(lst, data->px, data->py, 14335);
     dda_algo(data, data->px + cos(data->angle) * 10,data->py + sin(data->angle) * 10);
 }

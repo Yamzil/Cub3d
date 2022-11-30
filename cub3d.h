@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/29 17:18:07 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/11/30 00:27:23 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_player{
 	int 	x;
 	int		y;
 	int 	moveStep;
+	int		move_w_s;
+	int		move_a_d;
 	int		turn;
 	double	speed;
 	double	rotions;
@@ -132,7 +134,8 @@ bool	check_char(char c);
 
 // HOOK UTILS
 int		key_realse(int key, t_data *lst);
-int		key_press(int key, t_data *lst);
+int		key_start(int key, t_data  *lst);
+int		key_press(t_data *lst);
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
 void    render(t_map *lst, t_data *data, int flag);
