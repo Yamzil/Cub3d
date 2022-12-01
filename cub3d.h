@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/30 00:27:23 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/01 01:30:13 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
 
+enum{
+	RED_CROSS = 17,
+	ESCHAP = 53,
+	LEFT_ARROW = 123,
+	RIGHT_ARROW = 124,
+	FORWARD = 13,
+	BACKWARD = 1,
+	LEFT = 0,
+	RIGHT = 2,
+};
 typedef struct s_player{
 	int		raduis;
 	int 	x;
@@ -146,4 +156,7 @@ void	render_player(t_player *player, t_map *map);
 
 // DDA
 void    dda_algo(t_data *data, double x1, double y1);
+
+// RAYCASTING
+bool	check_wall(t_data *data, double x, double y);
 #endif

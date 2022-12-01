@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/30 01:20:34 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/01 00:22:33 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,8 @@ int main(int ac, char **av)
 		mlx_loop(lst.mlx);
 	}
 }
+
+/// CHECK X AND Y WINDOWS
+// lst->angle = fmod(lst->angle, 2 * M_PI);
+// if (lst->angle < 0)
+// 	lst->angle = lst->angle + 2 * M_PI;
