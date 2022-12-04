@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:34:16 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/24 19:46:20 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/01 13:25:16 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	utils_storing_color_floor(t_data *lst, char **color, int i)
 	}
 }
 
-void	utils_storing_color_ceilling(t_data *lst, char **color, int i)
+void	utils_storing_color_ceilling(t_data *lst, char **color, int i) 
 {
 	if (ft_atoi(color[i]) < 0 || ft_atoi(color[i]) > 255)
 		parsing_error(4);
 	else
 	{
-		lst->floor = (ft_atoi(color[0]) * 256 * 256) + 
+		lst->ceilling = (ft_atoi(color[0]) * 256 * 256) + 
 		(ft_atoi(color[1]) * 256) + ft_atoi(color[2]);
 	}
 }

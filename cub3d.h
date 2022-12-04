@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/01 01:30:13 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/04 23:58:39 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
+#define SQUARE_SIZE 10
+#define PLAYER_SQUARE 5
+#define WHITE 16777215
+#define BLACK 8421504
+#define BLUE 14335
 
 enum{
 	RED_CROSS = 17,
@@ -36,16 +41,11 @@ enum{
 	RIGHT = 2,
 };
 typedef struct s_player{
-	int		raduis;
-	int 	x;
-	int		y;
-	int 	moveStep;
+	double	px;
+	double	py;
+	int 	rotate_cam;
 	int		move_w_s;
 	int		move_a_d;
-	int		turn;
-	double	speed;
-	double	rotions;
-	double	rotion_speed;
 }t_player;
 
 typedef struct s_map{
@@ -56,6 +56,15 @@ typedef struct s_map{
 	int		endian;
 } t_map;
 
+typedef struct s_ray{
+	double	fov_angle;
+	double	ray_x;
+	double	ray_y;
+	int		numbers_rays;
+	int		increament_rays;
+	int		rayCasting;
+}t_ray;
+
 typedef struct s_data{
 	char		**file;
 	char		**map;
@@ -64,18 +73,16 @@ typedef struct s_data{
 	char		*west;
 	char		*east;
 	int			floor;
-	char		*ceilling;
+	int			ceilling;
 	int			begin;
 	int			end;
 	void		*mlx;
 	void		*windows;
-	double		px;
-	double 		py;
 	int			step;
 	double		angle;
 	t_map		*list;
 	t_player	*player;
-	
+	t_ray		*rays;
 }t_data;
 
 // LIBFT
@@ -150,13 +157,22 @@ int		key_press(t_data *lst);
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
 void    render(t_map *lst, t_data *data, int flag);
 
-// PLAYER MOUVE
+// PLAYER
 void	draw_player(t_map *lst, int x, int y, int color);
-void	render_player(t_player *player, t_map *map);
+void	check_player_position(t_data *lst);
 
 // DDA
 void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
 bool	check_wall(t_data *data, double x, double y);
+void	horizental_inter(t_data *data);
+void	vertical_inter(t_data *data);
+
+// RAYCASTING UTILS
+double	sanitize_angle(t_data *data);
+bool	rayisdown(t_data *data);
+bool	rayisup(t_data *data);
+bool	rayisright(t_data *data);
+bool	rayisleft(t_data *data);
 #endif

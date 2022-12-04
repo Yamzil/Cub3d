@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:43:43 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/01 01:12:52 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/01 13:23:13 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void    dda_algo(t_data *data, double x1, double y1)
 	double new_y;
 
 
-	dx = x1 - data->px;
-	dy = y1 - data->py;
-	new_x = data->px;
-	new_y = data->py;
+	dx = x1 - data->player->px;
+	dy = y1 - data->player->py;
+	new_x = data->player->px;
+	new_y = data->player->py;
 	if (fabs(dx) > fabs(dy))
 		step = fabs(dx);
 	else

@@ -6,11 +6,12 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/01 00:22:33 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/04 22:35:03 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdlib.h>
 
 void	mlx_functions(t_data *lst, t_map *list)
 {
@@ -29,9 +30,15 @@ void	init_values(t_data *lst)
 	lst->begin = 0;
 	lst->angle = 3 * M_PI / 2;
 	lst->step = 2;
-	lst->player->moveStep = 0;
+	lst->player->rotate_cam = 0;
 	lst->player->move_a_d  = 0;
 	lst->player->move_w_s = 0;
+	lst->rays->fov_angle = 60 * M_PI / 180;
+	lst->rays->numbers_rays = WIN_WIDTH / 1;
+	lst->rays->increament_rays = lst->rays->fov_angle / WIN_WIDTH;
+	lst->rays->ray_x = 0.0;
+	lst->rays->ray_y = 0.0;
+	lst->rays->rayCasting = 64; // The amout of every ray position to check the wall (higher the value, more iterations) for each ray
 }
 
 void    check_extension(int ac, char **av)
@@ -61,7 +68,10 @@ int main(int ac, char **av)
 
 		lst.player = malloc(sizeof(t_player));
 		if (!lst.player)
-			exit(1);
+			return (0);
+		lst.rays = malloc(sizeof(t_ray));
+		if (!lst.rays)
+			return (0);
 		check_extension(ac, av);
 		get_file(&lst, av);
 		check_storing_file_data(&lst);
@@ -70,14 +80,10 @@ int main(int ac, char **av)
 		init_values(&lst);
 		mlx_functions(&lst, &list);
 		lst.list = &list;
+		horizental_inter(&lst);
 		render(&list, &lst, 1);
 		mlx_put_image_to_window(lst.mlx, lst.windows,\
 		lst.list->img, 0, 0);
 		mlx_loop(lst.mlx);
 	}
 }
-
-/// CHECK X AND Y WINDOWS
-// lst->angle = fmod(lst->angle, 2 * M_PI);
-// if (lst->angle < 0)
-// 	lst->angle = lst->angle + 2 * M_PI;

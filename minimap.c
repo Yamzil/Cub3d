@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/01 01:13:38 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/01 13:22:58 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void    draw_square(t_map *lst, int x, int y, int color)
 	int	j;
 
     i = 0;
-    while (i < 10)
+    while (i < SQUARE_SIZE)
     {
         j = 0;
-        while (j < 10)
+        while (j < SQUARE_SIZE)
         {
 			writing_pxl_to_img(lst, x + i, y + j, color);
 			j++;	
@@ -53,13 +53,13 @@ void    render(t_map *lst, t_data *data, int flag)
         while (data->map[i][j])
         {
             if (data->map[i][j] == '0' || data->map[i][j] == 'N')
-                draw_square(lst, x, y, 16777215);
+                draw_square(lst, x, y, WHITE);
 			if (data->map[i][j] == '1')
-				draw_square(lst, x , y, 8421504);
+				draw_square(lst, x , y, BLACK);
             if (flag && data->map[i][j] == 'N')
             {
-                data->px = x;
-                data->py = y;
+                data->player->px = x;
+                data->player->py = y;
             }
 			x += 10;
 			j++;	
@@ -67,6 +67,6 @@ void    render(t_map *lst, t_data *data, int flag)
 		y  += 10; 
 		i++;
     }
-    draw_player(lst, data->px, data->py, 14335);
-    dda_algo(data, data->px + cos(data->angle) * 10,data->py + sin(data->angle) * 10);
+    draw_player(lst, data->player->px, data->player->py, BLUE);
+    dda_algo(data, data->player->px + cos(data->angle) * 10,data->player->py + sin(data->angle) * 10);
 }

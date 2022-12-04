@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/12/01 00:19:05 by yamzil           ###   ########.fr        #
+#    Updated: 2022/12/04 21:35:00 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,18 @@ SRC =	cub3d.c\
 		check_file.c\
 		check_map.c\
 		raycasting.c\
-		player_move.c\
 		dda.c\
 		minimap.c\
+		raycasting_utils.c\
+		player.c\
 		check_map_utils.c\
 		hook_utils.c\
 		Get_Next_line/get_next_line.c\
 		Get_Next_line/get_next_line_utils.c\
 
 OBJ = $(SRC:.c=.o)
+
+MLX = -lmlx -framework OpenGL -framework AppKit
 
 CC = cc
 
@@ -41,7 +44,7 @@ all : $(NAME)
 
 $(NAME) : $(INC) $(OBJ)
 	make -C libft/
-	$(CC) $(CFLAGS) $(SRC) libft/libft.a -lmlx -framework OpenGL -framework AppKit -o $(NAME) -g
+	$(CC) $(CFLAGS) $(SRC) libft/libft.a $(MLX) -o $(NAME)
 
 clean : 
 	@rm -rf $(OBJ)
