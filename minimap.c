@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/01 13:22:58 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/05 22:42:45 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void    draw_square(t_map *lst, int x, int y, int color)
 	int	j;
 
     i = 0;
-    while (i < SQUARE_SIZE)
+    while (i < TILE_SIZE)
     {
         j = 0;
-        while (j < SQUARE_SIZE)
+        while (j < TILE_SIZE)
         {
 			writing_pxl_to_img(lst, x + i, y + j, color);
 			j++;	

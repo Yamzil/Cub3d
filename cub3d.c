@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/04 22:35:03 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/06 00:24:36 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ void	init_values(t_data *lst)
 	lst->player->rotate_cam = 0;
 	lst->player->move_a_d  = 0;
 	lst->player->move_w_s = 0;
-	lst->rays->fov_angle = 60 * M_PI / 180;
-	lst->rays->numbers_rays = WIN_WIDTH / 1;
-	lst->rays->increament_rays = lst->rays->fov_angle / WIN_WIDTH;
-	lst->rays->ray_x = 0.0;
-	lst->rays->ray_y = 0.0;
-	lst->rays->rayCasting = 64; // The amout of every ray position to check the wall (higher the value, more iterations) for each ray
+	lst->rays->ax_horizontal = 0.0;
+	lst->rays->ay_horizontal = 0.0;
 }
 
 void    check_extension(int ac, char **av)
@@ -80,7 +76,6 @@ int main(int ac, char **av)
 		init_values(&lst);
 		mlx_functions(&lst, &list);
 		lst.list = &list;
-		horizental_inter(&lst);
 		render(&list, &lst, 1);
 		mlx_put_image_to_window(lst.mlx, lst.windows,\
 		lst.list->img, 0, 0);

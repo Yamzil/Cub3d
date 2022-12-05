@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/04 23:58:39 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/06 00:21:43 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
-#define SQUARE_SIZE 10
+#define TILE_SIZE 10
 #define PLAYER_SQUARE 5
 #define WHITE 16777215
 #define BLACK 8421504
@@ -58,11 +58,22 @@ typedef struct s_map{
 
 typedef struct s_ray{
 	double	fov_angle;
-	double	ray_x;
-	double	ray_y;
-	int		numbers_rays;
-	int		increament_rays;
-	int		rayCasting;
+	double	ray_angle;
+	double	rayCasting_incrementAngle;
+	double	ax_horizontal;
+	double	ay_horizontal;
+	double	ax_vertical;
+	double	ay_vertical;
+	double	step_horizentaly;
+	double	step_horizentalx;
+	double	step_verticaly;
+	double	step_verticalx;
+	double	hit_wall_xvertical;
+	double	hit_wall_yvertical;
+	double	hit_wall_xhorizental;
+	double	hit_wall_yhorizental;
+	double	vertical_dst;
+	double	horizental_dst;
 }t_ray;
 
 typedef struct s_data{
@@ -166,8 +177,6 @@ void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
 bool	check_wall(t_data *data, double x, double y);
-void	horizental_inter(t_data *data);
-void	vertical_inter(t_data *data);
 
 // RAYCASTING UTILS
 double	sanitize_angle(t_data *data);
@@ -175,4 +184,13 @@ bool	rayisdown(t_data *data);
 bool	rayisup(t_data *data);
 bool	rayisright(t_data *data);
 bool	rayisleft(t_data *data);
+
+// FIND INTERSECTION
+void	hit_wall_horizental(t_data *data);
+void	hit_wall_vertical(t_data *data);
+void    horizontal(t_data *data);
+void	vertical(t_data *data);
+
+// DISTANCE
+void    check_distance(t_data *data);
 #endif
