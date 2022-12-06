@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/27 22:50:50 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/06 00:21:43 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,28 @@
 
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
+#define TILE_SIZE 10
+#define PLAYER_SQUARE 5
+#define WHITE 16777215
+#define BLACK 8421504
+#define BLUE 14335
 
-enum {
-	red_cross = 17,
-	esc = 53,
+enum{
+	RED_CROSS = 17,
+	ESCHAP = 53,
+	LEFT_ARROW = 123,
+	RIGHT_ARROW = 124,
+	FORWARD = 13,
+	BACKWARD = 1,
+	LEFT = 0,
+	RIGHT = 2,
 };
-
 typedef struct s_player{
-	int		x;
-	int		y;
-	int		raduis;
-	int 	move;
-	int		turn;
-	double	speed;
-	double	rotions;
-	double	rotion_speed;
+	double	px;
+	double	py;
+	int 	rotate_cam;
+	int		move_w_s;
+	int		move_a_d;
 }t_player;
 
 typedef struct s_map{
@@ -49,26 +56,44 @@ typedef struct s_map{
 	int		endian;
 } t_map;
 
+typedef struct s_ray{
+	double	fov_angle;
+	double	ray_angle;
+	double	rayCasting_incrementAngle;
+	double	ax_horizontal;
+	double	ay_horizontal;
+	double	ax_vertical;
+	double	ay_vertical;
+	double	step_horizentaly;
+	double	step_horizentalx;
+	double	step_verticaly;
+	double	step_verticalx;
+	double	hit_wall_xvertical;
+	double	hit_wall_yvertical;
+	double	hit_wall_xhorizental;
+	double	hit_wall_yhorizental;
+	double	vertical_dst;
+	double	horizental_dst;
+}t_ray;
+
 typedef struct s_data{
-	char	**file;
-	char	**map;
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int		floor;
-	char	*ceilling;
-	int		begin;
-	int		end;
-	void	*mlx;
-	void	*windows;
-	int		px;
-	int		pdx;
-	int		pdy;
-	int 	py;
-	double	angle;
-	t_map	*list;
-	
+	char		**file;
+	char		**map;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	int			floor;
+	int			ceilling;
+	int			begin;
+	int			end;
+	void		*mlx;
+	void		*windows;
+	int			step;
+	double		angle;
+	t_map		*list;
+	t_player	*player;
+	t_ray		*rays;
 }t_data;
 
 // LIBFT
@@ -136,14 +161,36 @@ void	check_player_util(t_data *lst, int i);
 bool	check_char(char c);
 
 // HOOK UTILS
-int		key_press();
-
+int		key_realse(int key, t_data *lst);
+int		key_start(int key, t_data  *lst);
+int		key_press(t_data *lst);
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
 void    render(t_map *lst, t_data *data, int flag);
 
-// PLAYER MOUVEMENT
-void	render_player(t_player *player, t_map *map, t_data *data);
-void    init_player_coordination(t_player *player);
-void	player_position(t_data *data);
+// PLAYER
+void	draw_player(t_map *lst, int x, int y, int color);
+void	check_player_position(t_data *lst);
+
+// DDA
+void    dda_algo(t_data *data, double x1, double y1);
+
+// RAYCASTING
+bool	check_wall(t_data *data, double x, double y);
+
+// RAYCASTING UTILS
+double	sanitize_angle(t_data *data);
+bool	rayisdown(t_data *data);
+bool	rayisup(t_data *data);
+bool	rayisright(t_data *data);
+bool	rayisleft(t_data *data);
+
+// FIND INTERSECTION
+void	hit_wall_horizental(t_data *data);
+void	hit_wall_vertical(t_data *data);
+void    horizontal(t_data *data);
+void	vertical(t_data *data);
+
+// DISTANCE
+void    check_distance(t_data *data);
 #endif

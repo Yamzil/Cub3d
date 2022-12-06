@@ -6,20 +6,35 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/11/27 21:58:27 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/06 00:24:36 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdlib.h>
 
 void	mlx_functions(t_data *lst, t_map *list)
 {
 	lst->mlx =  mlx_init ();
 	lst->windows = mlx_new_window(lst->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
-	list->address = mlx_get_data_addr(list->img, &list->bits_per_pxl, &list->size_line, &list->endian);
-	mlx_hook(lst->windows, 2, 0, key_press, lst);
+	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
+		 WIN_HEIGHT);
+	list->address = mlx_get_data_addr(list->img, &list->bits_per_pxl, &list->size_line,& list->endian);
+	mlx_hook(lst->windows, 2, 0, key_start, lst);
+	mlx_hook(lst->windows, 3, 0, key_realse, lst);
+	mlx_loop_hook (lst->mlx , key_press, lst);
+}
 
+void	init_values(t_data *lst)
+{
+	lst->begin = 0;
+	lst->angle = 3 * M_PI / 2;
+	lst->step = 2;
+	lst->player->rotate_cam = 0;
+	lst->player->move_a_d  = 0;
+	lst->player->move_w_s = 0;
+	lst->rays->ax_horizontal = 0.0;
+	lst->rays->ay_horizontal = 0.0;
 }
 
 void    check_extension(int ac, char **av)
@@ -46,20 +61,24 @@ int main(int ac, char **av)
 	{
 		t_data  	lst;
 		t_map		list;
-		t_player	player;
 
-		lst.begin = 0;
+		lst.player = malloc(sizeof(t_player));
+		if (!lst.player)
+			return (0);
+		lst.rays = malloc(sizeof(t_ray));
+		if (!lst.rays)
+			return (0);
 		check_extension(ac, av);
 		get_file(&lst, av);
 		check_storing_file_data(&lst);
 		check_map(&lst);
 		get_map(&lst);
+		init_values(&lst);
 		mlx_functions(&lst, &list);
 		lst.list = &list;
 		render(&list, &lst, 1);
-		render_player(&player, &list, &lst);
-		mlx_put_image_to_window(lst.mlx, lst.windows, list.img, 0, 0);
+		mlx_put_image_to_window(lst.mlx, lst.windows,\
+		lst.list->img, 0, 0);
 		mlx_loop(lst.mlx);
-
 	}
 }
