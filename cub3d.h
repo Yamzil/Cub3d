@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <sys/fcntl.h>
-#include "Get_Next_line/get_next_line.h"
+#include "get_next_line/get_next_line.h"
 
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
