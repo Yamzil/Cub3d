@@ -37,6 +37,20 @@ void    draw_square(t_map *lst, int x, int y, int color)
     }
 }
 
+void    draw_fov(t_data *data){
+
+    double deg = data->angle - (30 * RAD);
+    double incr = (((double)60  * RAD) / (double)WIN_WIDTH);
+    int i = 0;
+    /*  */
+    while (i < WIN_WIDTH)
+    {
+        dda_algo(data, data->player->px + cos(deg) * WIN_WIDTH,data->player->py + sin(deg) * WIN_WIDTH);
+        deg += incr;
+        i++;
+    }
+}
+
 void    render(t_map *lst, t_data *data, int flag)
 {
     int i;
@@ -68,5 +82,6 @@ void    render(t_map *lst, t_data *data, int flag)
 		i++;
     }
     draw_player(lst, data->player->px, data->player->py, BLUE);
-    dda_algo(data, data->player->px + cos(data->angle) * 10,data->player->py + sin(data->angle) * 10);
+    draw_fov(data);
+    // dda_algo(data, data->player->px + cos(data->angle) * WIN_WIDTH,data->player->py + sin(data->angle) * WIN_WIDTH);
 }

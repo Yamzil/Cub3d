@@ -29,6 +29,7 @@
 #define WHITE 16777215
 #define BLACK 8421504
 #define BLUE 14335
+#define RAD (M_PI / (double)180) 
 
 enum{
 	RED_CROSS = 17,

@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+
+
 void draw_player(t_map *lst, int x, int y, int color)
 {
     int i;
@@ -35,7 +37,7 @@ void	check_player_position(t_data *lst)
 	double x;
 	double y;
 
-	lst->angle += (M_PI / 180) * lst->step * lst->player->rotate_cam;
+	lst->angle += 0.0872665 * lst->player->rotate_cam;
 	if (lst->player->move_a_d == -1)
 	{
 		y = lst->player->py + cos(lst->angle) * lst->step;
@@ -51,9 +53,12 @@ void	check_player_position(t_data *lst)
 		y = lst->player->py + sin(lst->angle) * lst->step * lst->player->move_w_s;
 		x = lst->player->px + cos(lst->angle) * lst->step * lst->player->move_w_s;
 	}
-	if (!check_wall(lst, x, y))
+	if (!check_wall(lst, x, lst->player->py))
+	{
+		lst->player->px = x;
+	}
+	if (!check_wall(lst, lst->player->px, y))
 	{
 		lst->player->py = y;
-		lst->player->px = x;
 	}
 }

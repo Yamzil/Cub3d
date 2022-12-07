@@ -38,9 +38,12 @@ void    dda_algo(t_data *data, double x1, double y1)
 	i = 0;
 	while (i < step)
 	{
-		new_x += xinc;
 		new_y += yinc;
+		new_x += xinc;
+		if(check_wall(data, new_x, new_y-yinc) || check_wall(data, new_x-xinc, new_y))
+			break;
 		writing_pxl_to_img(data->list, new_x, new_y , 14335);
 		i++;
 	}
+	//save new_x and new_y;
 }

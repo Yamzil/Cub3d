@@ -13,6 +13,12 @@
 #include "cub3d.h"
 #include <stdlib.h>
 
+int	close_win(void *param){
+	if(param)
+		exit(0);
+	return 0;
+}
+
 void	mlx_functions(t_data *lst, t_map *list)
 {
 	lst->mlx =  mlx_init ();
@@ -22,6 +28,7 @@ void	mlx_functions(t_data *lst, t_map *list)
 	list->address = mlx_get_data_addr(list->img, &list->bits_per_pxl, &list->size_line,& list->endian);
 	mlx_hook(lst->windows, 2, 0, key_start, lst);
 	mlx_hook(lst->windows, 3, 0, key_realse, lst);
+	mlx_hook(lst->windows, 17, 0, close_win, lst);
 	mlx_loop_hook (lst->mlx , key_press, lst);
 }
 
@@ -29,7 +36,7 @@ void	init_values(t_data *lst)
 {
 	lst->begin = 0;
 	lst->angle = 3 * M_PI / 2;
-	lst->step = 2;
+	lst->step = 1;
 	lst->player->rotate_cam = 0;
 	lst->player->move_a_d  = 0;
 	lst->player->move_w_s = 0;

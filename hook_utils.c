@@ -26,7 +26,7 @@ int	key_press(t_data *lst)
 
 int	key_start(int key, t_data  *lst)
 {
-	if (key == ESCHAP || key == RED_CROSS)
+	if (key == ESCHAP)
 		exit (0);
 	else if (key == LEFT_ARROW)
 		lst->player->rotate_cam = -1;
