@@ -19,8 +19,8 @@ bool	check_wall(t_data *data, double x, double y)
     int	map_x;
     int	map_y;
 
-    map_y = floor(y / TILE_SIZE) - 1;
-    map_x = floor(x / TILE_SIZE) - 1;
+    map_y = (int)(y / TILE_SIZE) - 1;
+    map_x = (int)(x / TILE_SIZE) - 1;
     if (data->map[map_y][map_x] != '0' && data->map[map_y][map_x] != 'N'
         && data->map[map_y][map_x] != 'S' && data->map[map_y][map_x] != 'W'
         && data->map[map_y][map_x] != 'E')
