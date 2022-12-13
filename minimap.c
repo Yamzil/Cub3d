@@ -18,25 +18,73 @@ typedef struct s_cast {
     double xA;
     double yA;
     double deg;
-    double     wallX;
-    double     wallY;
+    double wallX;
+    double wallY;
+    double vxstep;
+    double vystep;
+    double vxA;
+    double vyA;
+    double vwallX;
+    double vwallY;
 } t_cast; 
 
+void    find_ver_inter(t_cast   *info, t_data *data){
+    info->vxA = (int)(data->player->px / TILE_SIZE) * TILE_SIZE;
+    if (info->deg < (M_PI / 2) || info->deg > ((3 * M_PI )/ 2)) // ray is right
+        info->vxA += TILE_SIZE;
+    info->vyA = data->player->py + ((info->vxA - data->player->px)  * tan(info->deg));
+    // printf("yA = %f && xA = %f\n", info->vyA, info->vxA);
+}
+
+void    find_ver_step(t_cast   *info){
+
+    info->vxstep = TILE_SIZE;
+    if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2)) // ray is left
+        info->vxstep *= -1;
+    info->vystep = TILE_SIZE * tan(info->deg);
+    if ((info->deg > M_PI && info->deg < (2 * M_PI) && info->vystep > 0) || (info->deg < M_PI && info->deg > 0 && info->vystep < 0)) // ray is up and step is postive or ray is down and step negative
+        info->vystep *= -1;
+    // printf("xstep = %f && ystep %f\n", info->vxstep, info->vystep);
+}
+
+void    find_ver_point(t_cast   *info, t_data *data){
+    double tmpX;
+    double tmpY;
+
+    tmpX = info->vxA;
+    tmpY = info->vyA;
+    if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2))
+        tmpX--;
+    while (tmpX < WIN_WIDTH && tmpY < WIN_HEIGHT && tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
+    {
+        tmpX += info->vxstep;
+        tmpY += info->vystep;
+    }
+    info->wallX = tmpX;
+    info->wallY = tmpY;
+    // printf("wallX = %f, WallY = %f\n", tmpX, tmpY);
+}
 
 void    find_hor_inter(t_cast   *info, t_data *data){
     info->yA = (int)(data->player->py / TILE_SIZE) * TILE_SIZE;
-    info->xA = data->player->px + ((data->player->py - (double)info->yA) / tan(info->deg));
-    printf("yA = %f && xA = %f\n", info->yA, info->xA);
+    if (info->deg < M_PI && info->deg > 0) // ray is down
+        info->yA += TILE_SIZE;
+    info->xA = data->player->px + ((info->yA - data->player->py) / tan(info->deg)); 
+    // printf("yA = %f && xA = %f\n", info->yA, info->xA);
 }
 
 void    find_hor_step(t_cast   *info){
-    info->ystep = -1 * TILE_SIZE;
+
+    info->ystep = TILE_SIZE;
+    if (info->deg > M_PI && info->deg < (2 * M_PI)) //ray is up
+        info->ystep *= -1;
+
     info->xstep = TILE_SIZE / tan(info->deg);
-    // if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2)){
-    //     printf("deg = %f\n", info->deg);
+    if (((info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2)) && info->xstep > 0) // ray is left
+     || ((info->deg < (M_PI / 2) || info->deg > ((3 * M_PI )/ 2)) && info->xstep < 0)){// ray is right
         info->xstep *= -1;
-    // }
-    printf("xstep = %f && ystep %f\n", info->xstep, info->ystep);
+    }
+    // printf("xstep = %f && ystep %f\n", info->xstep, info->ystep);
 }
 
 void    find_hor_point(t_cast   *info, t_data *data){
@@ -45,20 +93,25 @@ void    find_hor_point(t_cast   *info, t_data *data){
 
     tmpX = info->xA;
     tmpY = info->yA;
-    while (!check_wall(data, tmpX, tmpY))
+    if (info->deg > M_PI && info->deg < (2 * M_PI)) 
+        tmpY--;
+    while (tmpX < WIN_WIDTH && tmpY < WIN_HEIGHT && tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
         tmpX += info->xstep;
         tmpY += info->ystep;
     }
     info->wallX = tmpX;
     info->wallY = tmpY;
-    printf("wallX = %f, WallY = %f\n", tmpX, tmpY);
+    // printf("wallX = %f, WallY = %f\n", tmpX, tmpY);
 }
 
 void    raycast(t_cast   *info, t_data *data){
-    find_hor_inter(info, data);
-    find_hor_step(info);
-    find_hor_point(info, data);
+    // find_hor_inter(info, data);
+    // find_hor_step(info);
+    // find_hor_point(info, data);
+    find_ver_inter(info, data);
+    find_ver_step(info);
+    find_ver_point(info, data);
 }
 
 
@@ -87,6 +140,14 @@ void    draw_square(t_map *lst, int x, int y, int color)
     }
 }
 
+double  check_deg(double deg){
+    if (deg < 0)
+        deg *= -1;
+    if (deg >  (2 * M_PI))
+        deg -= (2 * M_PI);
+    return deg;
+}
+
 void    draw_fov(t_data *data){
     t_cast  info;
     double deg = data->angle - (30 * RAD);
@@ -95,10 +156,13 @@ void    draw_fov(t_data *data){
     /*  */
     while (i < WIN_WIDTH)
     { 
+        deg = fmod(deg , (2 * M_PI));
+        if (deg < 0)
+            deg = (2 * M_PI) + deg;
         info.deg = deg;
-        printf("player x = %f && player y = %f\n", data->player->px, data->player->py);
+        // printf("player x = %f && player y = %f && deg = %f\n", data->player->px, data->player->py, deg);
         raycast(&info, data);
-        printf("deg = %f && WallX = %f && wallY = %f\n", deg, info.wallX, info.wallY);
+        // printf("deg = %f && WallX = %f && wallY = %f\n", deg, info.wallX, info.wallY);
         // dda_algo(data, data->player->px + cos(deg) * WIN_WIDTH,data->player->py + sin(deg) * WIN_WIDTH);
         dda_algo(data, info.wallX, info.wallY);
         deg += incr;

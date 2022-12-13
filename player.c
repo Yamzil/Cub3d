@@ -37,7 +37,7 @@ void	check_player_position(t_data *lst)
 	double x;
 	double y;
 
-	lst->angle += 0.0872665 * lst->player->rotate_cam;
+	lst->angle += 0.026 * lst->player->rotate_cam;
 	if (lst->player->move_a_d == -1)
 	{
 		y = lst->player->py + cos(lst->angle) * lst->step;
