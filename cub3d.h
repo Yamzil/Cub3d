@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/06 00:21:43 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/13 20:50:54 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ enum{
 	LEFT = 0,
 	RIGHT = 2,
 };
+
+typedef struct s_cast {
+    double xstep;
+    double ystep;
+    double xA;
+    double yA;
+    double deg;
+    double hwallX;
+    double hwallY;
+    double vxstep;
+    double vystep;
+    double vxA;
+    double vyA;
+    double vwallX;
+    double vwallY;
+    double vdis;
+    double hdis;
+    double dis;
+    double wx;
+    double wy;
+} t_cast; 
+
 typedef struct s_player{
 	double	px;
 	double	py;
@@ -177,21 +199,24 @@ void	check_player_position(t_data *lst);
 void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
-bool	check_wall(t_data *data, double x, double y);
+void    raycast(t_cast   *info, t_data *data);
+void    draw_fov(t_data *data);
 
 // RAYCASTING UTILS
-double	sanitize_angle(t_data *data);
-bool	rayisdown(t_data *data);
-bool	rayisup(t_data *data);
-bool	rayisright(t_data *data);
-bool	rayisleft(t_data *data);
+bool	check_wall(t_data *data, double x, double y);
+double  check_deg(double deg);
+int		map_len(char **map);
 
-// FIND INTERSECTION
-void	hit_wall_horizental(t_data *data);
-void	hit_wall_vertical(t_data *data);
-void    horizontal(t_data *data);
-void	vertical(t_data *data);
+// INTERSECTION HORIZENTAL
+void    find_hor_inter(t_cast   *info, t_data *data);
+void    find_hor_point(t_cast   *info, t_data *data);
+void    find_hor_step(t_cast   *info);
 
+// INTERSECTION VERTICAL
+void    find_ver_inter(t_cast   *info, t_data *data);
+void    find_ver_point(t_cast   *info, t_data *data);
+void    find_ver_step(t_cast   *info);
 // DISTANCE
-void    check_distance(t_data *data);
+double distance(double x1, double y1, double x2, double y2);
+void    find_dis(t_cast *info);
 #endif

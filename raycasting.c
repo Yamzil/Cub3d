@@ -6,55 +6,42 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:13:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/06 00:24:51 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/13 20:52:01 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
-#include <stdbool.h>
 
-bool	check_wall(t_data *data, double x, double y)
+void    raycast(t_cast   *info, t_data *data)
 {
-    int	map_x;
-    int	map_y;
-
-	if (x < 0 && y < 0)
-		return true;
-	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
-		return true;
-    map_y = floor(y / TILE_SIZE);
-    map_x = floor(x / TILE_SIZE);
-	// if (map_y < 0 || map_x < 0)
-	// 	return true;
-	if (map_y >= 26)// should be fixed later !!!!!!!!
-		return true;
-	if (map_x >= ft_strlen(data->map[map_y]))
-		return true;
-    if (data->map[map_y][map_x] == '1')
-        return (true);
-    return (false);
+    find_hor_inter(info, data);
+    find_hor_step(info);
+    find_hor_point(info, data);
+    find_ver_inter(info, data);
+    find_ver_step(info);
+    find_ver_point(info, data);
+    find_dis(info);
 }
 
-void	ray_casting(t_data *data)
+void    draw_fov(t_data *data)
 {
-	data->angle = sanitize_angle(data);
-	horizontal(data);
-	vertical(data);
-	hit_wall_vertical(data);
-	hit_wall_horizental(data);
-	check_distance(data);
-}
-void	cast_rays(t_data *data)
-{
-	data->rays->fov_angle = 60 * M_PI / 180;
-	data->rays->ray_angle = data->angle - data->rays->fov_angle / 2;
-	data->rays->rayCasting_incrementAngle = data->rays->fov_angle / WIN_WIDTH;
-	int	i;
-	i = -1;
-	while (++i)
-	{
-		ray_casting(data);
-		data->rays->ray_angle += data->rays->rayCasting_incrementAngle;
-	}
+    t_cast	info;
+    double	deg;
+    double	incr;
+	int		i;
+
+    i = 0;
+	deg = data->angle - (30 * RAD);
+	incr = (((double)60  * RAD) / (double)WIN_WIDTH);
+    while (i < WIN_WIDTH)
+    { 
+        deg = fmod(deg , (2 * M_PI));
+        if (deg < 0)
+            deg = (2 * M_PI) + deg;
+        info.deg = deg;
+        raycast(&info, data);
+        dda_algo(data, info.wx, info.wy);
+        deg += incr;
+        i++;
+    }
 }
