@@ -18,15 +18,24 @@ typedef struct s_cast {
     double xA;
     double yA;
     double deg;
-    double wallX;
-    double wallY;
+    double hwallX;
+    double hwallY;
     double vxstep;
     double vystep;
     double vxA;
     double vyA;
     double vwallX;
     double vwallY;
+    double vdis;
+    double hdis;
+    double dis;
+    double wx;
+    double wy;
 } t_cast; 
+
+double distance(double x1, double y1, double x2, double y2){
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
 
 void    find_ver_inter(t_cast   *info, t_data *data){
     info->vxA = (int)(data->player->px / TILE_SIZE) * TILE_SIZE;
@@ -60,9 +69,11 @@ void    find_ver_point(t_cast   *info, t_data *data){
         tmpX += info->vxstep;
         tmpY += info->vystep;
     }
-    info->wallX = tmpX;
-    info->wallY = tmpY;
+    info->vwallX = tmpX;
+    info->vwallY = tmpY;
     // printf("wallX = %f, WallY = %f\n", tmpX, tmpY);
+    info->vdis = distance(data->player->px, data->player->py, info->vwallX, info->vwallX);
+    printf("vdis = %f\n", info->vdis);
 }
 
 void    find_hor_inter(t_cast   *info, t_data *data){
@@ -100,18 +111,38 @@ void    find_hor_point(t_cast   *info, t_data *data){
         tmpX += info->xstep;
         tmpY += info->ystep;
     }
-    info->wallX = tmpX;
-    info->wallY = tmpY;
+    info->hwallX = tmpX;
+    info->hwallY = tmpY;
     // printf("wallX = %f, WallY = %f\n", tmpX, tmpY);
+    info->hdis = distance(data->player->px, data->player->py, info->hwallX, info->hwallX);
+    printf("hdis = %f\n", info->hdis);
+}
+
+
+
+void    find_dis(t_cast *info){
+    if (info->vdis > info->hdis)
+    {
+        info->wx = info->hwallX;
+        info->wy = info->hwallY;
+        info->dis = info->hdis;
+    }
+    else
+    {
+        info->wx = info->vwallX;
+        info->wy = info->vwallY;
+        info->dis = info->vdis;
+    }
 }
 
 void    raycast(t_cast   *info, t_data *data){
-    // find_hor_inter(info, data);
-    // find_hor_step(info);
-    // find_hor_point(info, data);
+    find_hor_inter(info, data);
+    find_hor_step(info);
+    find_hor_point(info, data);
     find_ver_inter(info, data);
     find_ver_step(info);
     find_ver_point(info, data);
+    find_dis(info);
 }
 
 
@@ -154,7 +185,7 @@ void    draw_fov(t_data *data){
     double incr = (((double)60  * RAD) / (double)WIN_WIDTH);
     int i = 0;
     /*  */
-    while (i < WIN_WIDTH)
+    while (i < 1)
     { 
         deg = fmod(deg , (2 * M_PI));
         if (deg < 0)
@@ -164,7 +195,9 @@ void    draw_fov(t_data *data){
         raycast(&info, data);
         // printf("deg = %f && WallX = %f && wallY = %f\n", deg, info.wallX, info.wallY);
         // dda_algo(data, data->player->px + cos(deg) * WIN_WIDTH,data->player->py + sin(deg) * WIN_WIDTH);
-        dda_algo(data, info.wallX, info.wallY);
+        // dda_algo(data, info.wx, info.wy);
+        dda_algo(data, info.hwallX, info.hwallY);
+        dda_algo(data, info.vwallX, info.vwallY);
         deg += incr;
         i++;
     }
