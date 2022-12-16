@@ -19,11 +19,19 @@ bool	check_wall(t_data *data, double x, double y)
     int	map_x;
     int	map_y;
 
-    map_y = floor(y / TILE_SIZE) - 1;
-    map_x = floor(x / TILE_SIZE) - 1;
-    if (data->map[map_y][map_x] != '0' && data->map[map_y][map_x] != 'N'
-        && data->map[map_y][map_x] != 'S' && data->map[map_y][map_x] != 'W'
-        && data->map[map_y][map_x] != 'E')
+	if (x < 0 && y < 0)
+		return true;
+	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
+		return true;
+    map_y = floor(y / TILE_SIZE);
+    map_x = floor(x / TILE_SIZE);
+	// if (map_y < 0 || map_x < 0)
+	// 	return true;
+	if (map_y >= 26)// should be fixed later !!!!!!!!
+		return true;
+	if (map_x >= ft_strlen(data->map[map_y]))
+		return true;
+    if (data->map[map_y][map_x] == '1')
         return (true);
     return (false);
 }

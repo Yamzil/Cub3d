@@ -28,7 +28,7 @@
 #define PLAYER_SQUARE 5
 #define WHITE 16777215
 #define BLACK 8421504
-#define BLUE 14335
+#define BLUE 15594228
 #define RAD (M_PI / (double)180) 
 
 enum{
