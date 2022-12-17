@@ -6,18 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/06 00:24:36 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/17 11:27:41 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdlib.h>
-
-int	close_win(void *param){
-	if(param)
-		exit(0);
-	return 0;
-}
 
 void	mlx_functions(t_data *lst, t_map *list)
 {
@@ -25,7 +18,7 @@ void	mlx_functions(t_data *lst, t_map *list)
 	lst->windows = mlx_new_window(lst->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
 		 WIN_HEIGHT);
-	list->address = mlx_get_data_addr(list->img, &list->bits_per_pxl, &list->size_line,& list->endian);
+	list->addr = mlx_get_data_addr(list->img, &list->bits, &list->size,&list->end);
 	mlx_hook(lst->windows, 2, 0, key_start, lst);
 	mlx_hook(lst->windows, 3, 0, key_realse, lst);
 	mlx_hook(lst->windows, 17, 0, close_win, lst);
@@ -35,13 +28,11 @@ void	mlx_functions(t_data *lst, t_map *list)
 void	init_values(t_data *lst)
 {
 	lst->begin = 0;
-	lst->angle = 3 * M_PI / 2;
 	lst->step = 1;
+	lst->angle = player_direction(lst);
 	lst->player->rotate_cam = 0;
 	lst->player->move_a_d  = 0;
 	lst->player->move_w_s = 0;
-	lst->rays->ax_horizontal = 0.0;
-	lst->rays->ay_horizontal = 0.0;
 }
 
 void    check_extension(int ac, char **av)
@@ -71,9 +62,6 @@ int main(int ac, char **av)
 
 		lst.player = malloc(sizeof(t_player));
 		if (!lst.player)
-			return (0);
-		lst.rays = malloc(sizeof(t_ray));
-		if (!lst.rays)
 			return (0);
 		check_extension(ac, av);
 		get_file(&lst, av);

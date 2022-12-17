@@ -6,45 +6,47 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 21:31:37 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/04 23:58:34 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/17 10:29:47 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
 
-double	sanitize_angle(t_data *data)
+int		arr_len(char **map)
 {
-	data->angle = fmod(data->angle, (2 * M_PI));
-	if (data->angle < 0)
-		data->angle = (2 * M_PI) + data->angle;
-	return data->angle;
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }
 
-bool	rayisdown(t_data *data)
+bool	check_wall(t_data *data, double x, double y)
 {
-	if (data->angle > 0 && data->angle < M_PI)
-		return (true);
-	return (false);
+    int	map_x;
+    int	map_y;
+
+	if (x < 0 && y < 0)
+		return true;
+	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
+		return true;
+    map_y = floor(y / TILE_SIZE);
+    map_x = floor(x / TILE_SIZE);
+	if (map_y >= arr_len(data->map))
+		return true;
+	if (map_x >= ft_strlen(data->map[map_y]))
+		return true;
+    if (data->map[map_y][map_x] == '1')
+        return (true);
+    return (false);
 }
 
-bool	rayisup(t_data *data)
+double  check_deg(double deg)
 {
-	if (!rayisdown(data))
-		return (true);
-	return (false);
-}
-
-bool	rayisright(t_data *data)
-{
-	if (data->angle < 0.5 * M_PI || data->angle > 1.5 * M_PI)
-		return (true);
-	return (false);
-}
-
-bool	rayisleft(t_data *data)
-{
-	if (!rayisright(data))
-		return (true);
-	return (false);
+    if (deg < 0)
+        deg *= -1;
+    if (deg >  (2 * M_PI))
+        deg -= (2 * M_PI);
+    return deg;
 }

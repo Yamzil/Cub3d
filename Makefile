@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/12/05 23:51:31 by yamzil           ###   ########.fr        #
+#    Updated: 2022/12/17 11:26:42 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRC =	cub3d.c\
 		dda.c\
 		minimap.c\
 		distance.c\
-		finding_intersection.c\
+		intersection_ver.c\
+		intersection_hor.c\
+		draw_floor_ceilling.c\
 		raycasting_utils.c\
 		player.c\
 		check_map_utils.c\
@@ -40,7 +42,7 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 all : $(NAME)
 

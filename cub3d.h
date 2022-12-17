@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/06 00:21:43 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/17 12:51:48 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define PLAYER_SQUARE 5
 #define WHITE 16777215
 #define BLACK 8421504
-#define BLUE 15594228
+#define BLUE 33023
 #define RAD (M_PI / (double)180) 
 
 enum{
@@ -41,6 +41,34 @@ enum{
 	LEFT = 0,
 	RIGHT = 2,
 };
+
+typedef struct s_cast {
+    double	xstep;
+    double	ystep;
+    double	xA;
+    double	yA;
+    double	deg;
+    double	hwallX;
+    double	hwallY;
+    double	vxstep;
+    double	vystep;
+    double	vxA;
+    double	vyA;
+    double	vwallX;
+    double	vwallY;
+    double	vdis;
+    double	hdis;
+    double	dis;
+    double	wx;
+    double	wy;
+    double	dpp;
+    double	wallHeight;
+	double	TopPixel;
+	double	BotPixel;
+	bool	vertical_inter;
+	bool	horizontal_inter;
+} t_cast; 
+
 typedef struct s_player{
 	double	px;
 	double	py;
@@ -51,31 +79,11 @@ typedef struct s_player{
 
 typedef struct s_map{
 	void	*img;
-	char	*address;
-	int		bits_per_pxl;
-	int		size_line;
-	int		endian;
+	char	*addr;
+	int		bits;
+	int		size;
+	int		end;
 } t_map;
-
-typedef struct s_ray{
-	double	fov_angle;
-	double	ray_angle;
-	double	rayCasting_incrementAngle;
-	double	ax_horizontal;
-	double	ay_horizontal;
-	double	ax_vertical;
-	double	ay_vertical;
-	double	step_horizentaly;
-	double	step_horizentalx;
-	double	step_verticaly;
-	double	step_verticalx;
-	double	hit_wall_xvertical;
-	double	hit_wall_yvertical;
-	double	hit_wall_xhorizental;
-	double	hit_wall_yhorizental;
-	double	vertical_dst;
-	double	horizental_dst;
-}t_ray;
 
 typedef struct s_data{
 	char		**file;
@@ -92,9 +100,10 @@ typedef struct s_data{
 	void		*windows;
 	int			step;
 	double		angle;
+	int			img_width;
+	int			img_height;
 	t_map		*list;
 	t_player	*player;
-	t_ray		*rays;
 }t_data;
 
 // LIBFT
@@ -165,33 +174,48 @@ bool	check_char(char c);
 int		key_realse(int key, t_data *lst);
 int		key_start(int key, t_data  *lst);
 int		key_press(t_data *lst);
+int		close_win(void *param);
+
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
 void    render(t_map *lst, t_data *data, int flag);
 
 // PLAYER
 void	draw_player(t_map *lst, int x, int y, int color);
+char	map_direction(t_data *data);
 void	check_player_position(t_data *lst);
+void	get_playerposition(t_data *data);
+double 	player_direction(t_data *data);
 
 // DDA
 void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
-bool	check_wall(t_data *data, double x, double y);
+void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data);
+void	draw_line(int x1, int y1, int y2, t_map *lst,t_data *data);
+void	raycast(t_cast *info, t_data *data);
+void	draw_fov(t_data *data, t_map *lst);
 
 // RAYCASTING UTILS
-double	sanitize_angle(t_data *data);
-bool	rayisdown(t_data *data);
-bool	rayisup(t_data *data);
-bool	rayisright(t_data *data);
-bool	rayisleft(t_data *data);
+bool	check_wall(t_data *data, double x, double y);
+double  check_deg(double deg);
+int		arr_len(char **map);
 
-// FIND INTERSECTION
-void	hit_wall_horizental(t_data *data);
-void	hit_wall_vertical(t_data *data);
-void    horizontal(t_data *data);
-void	vertical(t_data *data);
+// HORIZONTAL INTERSECTION
+void	find_hor_point(t_cast *info, t_data *data);
+void	find_hor_inter(t_cast *info, t_data *data);
+void	find_hor_step(t_cast *info);
+
+// VERTICAL INTERSECTION
+void	find_ver_inter(t_cast   *info, t_data *data);
+void	find_ver_point(t_cast *info, t_data *data);
+void	find_ver_step(t_cast *info);
 
 // DISTANCE
-void    check_distance(t_data *data);
+double	distance(double x1, double y1, double x2, double y2);
+void	find_dis(t_cast *info);
+
+// DRAW FLOOR AND CEILLING
+void	draw_celling(int x1, int y1, t_map *lst, t_data *data);
+void	draw_floor(int x1, int y1, t_map *lst, t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:13:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/06 00:24:51 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/17 12:53:51 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,64 @@
 #include <math.h>
 #include <stdbool.h>
 
-bool	check_wall(t_data *data, double x, double y)
+void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data)
 {
-    int	map_x;
-    int	map_y;
-
-	if (x < 0 && y < 0)
-		return true;
-	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
-		return true;
-    map_y = floor(y / TILE_SIZE);
-    map_x = floor(x / TILE_SIZE);
-	// if (map_y < 0 || map_x < 0)
-	// 	return true;
-	if (map_y >= 26)// should be fixed later !!!!!!!!
-		return true;
-	if (map_x >= ft_strlen(data->map[map_y]))
-		return true;
-    if (data->map[map_y][map_x] == '1')
-        return (true);
-    return (false);
-}
-
-void	ray_casting(t_data *data)
-{
-	data->angle = sanitize_angle(data);
-	horizontal(data);
-	vertical(data);
-	hit_wall_vertical(data);
-	hit_wall_horizental(data);
-	check_distance(data);
-}
-void	cast_rays(t_data *data)
-{
-	data->rays->fov_angle = 60 * M_PI / 180;
-	data->rays->ray_angle = data->angle - data->rays->fov_angle / 2;
-	data->rays->rayCasting_incrementAngle = data->rays->fov_angle / WIN_WIDTH;
-	int	i;
-	i = -1;
-	while (++i)
+    if (y1 < 0)
+        y1 = 0;
+    else
+        draw_celling(x1, y1, lst, data);
+    if (y2 >= WIN_HEIGHT)
+        y2 = WIN_HEIGHT - 1;
+    else
+        draw_floor(x1, y2, lst, data);
+    while (y1 <= y2)
 	{
-		ray_casting(data);
-		data->rays->ray_angle += data->rays->rayCasting_incrementAngle;
-	}
+        writing_pxl_to_img(lst, x1, y1, WHITE);
+        y1++;
+    }
+}
+
+void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data)
+{
+    double  deg;
+
+    deg = data->angle;
+    deg = fmod(deg , (2 * M_PI));
+    if (deg < 0)
+        deg = (2 * M_PI) + deg;
+    info->wallHeight = (TILE_SIZE / (info->dis * cos(deg - info->deg))) * info->dpp;
+    info->TopPixel = (WIN_HEIGHT - info->wallHeight) / 2;
+    info->BotPixel = WIN_HEIGHT - info->TopPixel;
+    draw_line(x, info->TopPixel, info->BotPixel, lst, data);
+}
+
+void	raycast(t_cast *info, t_data *data)
+{
+    find_hor_inter(info, data);
+    find_hor_step(info);
+    find_hor_point(info, data);
+    find_ver_inter(info, data);
+    find_ver_step(info);
+    find_ver_point(info, data);
+    find_dis(info);
+}
+
+void	draw_fov(t_data *data, t_map *lst)
+{
+    t_cast  info;
+    double deg = data->angle - (30 * RAD);
+    double incr = (((double)60  * RAD) / (double)WIN_WIDTH);
+    info.dpp = (WIN_WIDTH / 2) / tan(30 * RAD);
+    int i = 0;
+    while (i < WIN_WIDTH)
+    { 
+        deg = fmod(deg , (2 * M_PI));
+        if (deg < 0)
+            deg = (2 * M_PI) + deg;
+        info.deg = deg;
+        raycast(&info, data);
+        draw_wall(&info, i, lst,data);
+        deg += incr;
+        i++;
+    }
 }
