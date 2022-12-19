@@ -59,6 +59,7 @@ int main(int ac, char **av)
 	{
 		t_data  	lst;
 		t_map		list;
+		t_txtdata	txt;
 
 		lst.player = malloc(sizeof(t_player));
 		if (!lst.player)
@@ -71,7 +72,10 @@ int main(int ac, char **av)
 		init_values(&lst);
 		mlx_functions(&lst, &list);
 		lst.list = &list;
-		render(&list, &lst, 1);
+		txt.data.img = mlx_xpm_file_to_image(lst.mlx, lst.north, &txt.width, &txt.height);
+		txt.addr = (int *)mlx_get_data_addr(txt.data.img, &txt.data.bits, &txt.data.size, &txt.data.end);
+		lst.txt = &txt;
+		render(&list, &lst, 1, &txt);
 		mlx_put_image_to_window(lst.mlx, lst.windows,\
 		lst.list->img, 0, 0);
 		mlx_loop(lst.mlx);

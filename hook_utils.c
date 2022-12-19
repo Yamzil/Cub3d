@@ -18,7 +18,7 @@ int	key_press(t_data *lst)
 	lst->list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
 		 WIN_HEIGHT);
 	check_player_position(lst);
-	render(lst->list, lst, 0);
+	render(lst->list, lst, 0, lst->txt);
 	mlx_put_image_to_window(lst->mlx, lst->windows,\
 		lst->list->img, 0, 0);
 	return (0);

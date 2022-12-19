@@ -85,6 +85,23 @@ typedef struct s_map{
 	int		end;
 } t_map;
 
+typedef struct s_txtdata
+{
+	t_map	data;
+	int		height;
+	int		width;
+	int		*addr;
+	double  xofset;
+    double  yofset;
+} t_txtdata;
+
+typedef struct s_texture
+{
+	t_txtdata	*north;
+	t_txtdata	*south;
+	t_txtdata	*west;
+	t_txtdata	*east;
+} t_texture;
 typedef struct s_data{
 	char		**file;
 	char		**map;
@@ -104,6 +121,7 @@ typedef struct s_data{
 	int			img_height;
 	t_map		*list;
 	t_player	*player;
+	t_txtdata	*txt;
 }t_data;
 
 // LIBFT
@@ -178,7 +196,7 @@ int		close_win(void *param);
 
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
-void    render(t_map *lst, t_data *data, int flag);
+void    render(t_map *lst, t_data *data, int flag, t_txtdata *txt);
 
 // PLAYER
 void	draw_player(t_map *lst, int x, int y, int color);
@@ -191,10 +209,15 @@ double 	player_direction(t_data *data);
 void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
-void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data);
-void	draw_line(int x1, int y1, int y2, t_map *lst,t_data *data);
+// void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data);
+void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data, t_txtdata *txt);
+// void	draw_line(int x1, int y1, int y2, t_map *lst,t_data *data);
+// void 	draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info);
+void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info, t_txtdata *txt);
 void	raycast(t_cast *info, t_data *data);
-void	draw_fov(t_data *data, t_map *lst);
+// void	draw_fov(t_data *data, t_map *lst);
+void	draw_fov(t_data *data, t_map *lst, t_txtdata *txt);
+
 
 // RAYCASTING UTILS
 bool	check_wall(t_data *data, double x, double y);
@@ -218,4 +241,8 @@ void	find_dis(t_cast *info);
 // DRAW FLOOR AND CEILLING
 void	draw_celling(int x1, int y1, t_map *lst, t_data *data);
 void	draw_floor(int x1, int y1, t_map *lst, t_data *data);
+
+void	writing_pxl_to_img2(t_map *list, int x, int y, t_txtdata *txt);
+void	texture(t_cast *info, double y1, t_txtdata *txt);
+
 #endif

@@ -35,6 +35,7 @@ SRC =	cub3d.c\
 		hook_utils.c\
 		Get_Next_line/get_next_line.c\
 		Get_Next_line/get_next_line_utils.c\
+		texture.c\
 
 OBJ = $(SRC:.c=.o)
 

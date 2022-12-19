@@ -14,8 +14,9 @@
 #include <math.h>
 #include <stdbool.h>
 
-void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data)
+void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info, t_txtdata *txt)
 {
+
     if (y1 < 0)
         y1 = 0;
     else
@@ -26,12 +27,14 @@ void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data)
         draw_floor(x1, y2, lst, data);
     while (y1 <= y2)
 	{
-        writing_pxl_to_img(lst, x1, y1, WHITE);
+        texture(info, y1, txt);
+        // printf("xof %f && yof = %f\n", txt->xofset, txt->yofset);
+        writing_pxl_to_img2(lst, x1, y1, txt);
         y1++;
     }
 }
 
-void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data)
+void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data, t_txtdata *txt)
 {
     double  deg;
 
@@ -42,7 +45,7 @@ void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data)
     info->wallHeight = (TILE_SIZE / (info->dis * cos(deg - info->deg))) * info->dpp;
     info->TopPixel = (WIN_HEIGHT - info->wallHeight) / 2;
     info->BotPixel = WIN_HEIGHT - info->TopPixel;
-    draw_line(x, info->TopPixel, info->BotPixel, lst, data);
+    draw_line(x, info->TopPixel, info->BotPixel, lst, data, info, txt);
 }
 
 void	raycast(t_cast *info, t_data *data)
@@ -56,7 +59,7 @@ void	raycast(t_cast *info, t_data *data)
     find_dis(info);
 }
 
-void	draw_fov(t_data *data, t_map *lst)
+void	draw_fov(t_data *data, t_map *lst, t_txtdata *txt)
 {
     t_cast  info;
     double deg = data->angle - (30 * RAD);
@@ -70,7 +73,7 @@ void	draw_fov(t_data *data, t_map *lst)
             deg = (2 * M_PI) + deg;
         info.deg = deg;
         raycast(&info, data);
-        draw_wall(&info, i, lst,data);
+        draw_wall(&info, i, lst, data, txt);
         deg += incr;
         i++;
     }

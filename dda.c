@@ -45,7 +45,7 @@ void    dda_algo(t_data *data, double x1, double y1)
 		// 	break;
 		// // if(new_x >= WIN_WIDTH || new_y >= WIN_HEIGHT || new_y < 0 || new_x < 0)
 		// // 	break;
-		writing_pxl_to_img(data->list, 0.5 * new_x, 0.5 * new_y , BLACK);
+		writing_pxl_to_img(data->list, 0.5 * new_x, 0.5 * new_y , BLUE);
 		i++;
 	}
 }

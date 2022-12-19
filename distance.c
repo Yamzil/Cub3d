@@ -23,14 +23,14 @@ void	find_dis(t_cast *info)
 	info->vertical_inter = false;
     if (info->vdis > info->hdis)
     {
-		info->vertical_inter = true;
+		info->horizontal_inter = true;
         info->wx = info->hwallX;
         info->wy = info->hwallY;
         info->dis = info->hdis;
     }
     else
     {
-		info->horizontal_inter = true;
+		info->vertical_inter = true;
         info->wx = info->vwallX;
         info->wy = info->vwallY;
         info->dis = info->vdis;

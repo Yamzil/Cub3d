@@ -41,7 +41,7 @@ void    draw_square(t_map *lst, int x, int y, int color)
     }
 }
 
-void    render(t_map *lst, t_data *data, int flag)
+void    render(t_map *lst, t_data *data, int flag, t_txtdata *txt)
 {
     int i;
 	int	j;
@@ -52,7 +52,9 @@ void    render(t_map *lst, t_data *data, int flag)
     y = 0;
 	if (flag)
 		get_playerposition(data);
-    draw_fov(data, lst);
+    draw_fov(data, lst, txt);
+    // texture(data);
+    //if(draw)
     while (data->map[i])
     {
         j = 0;
