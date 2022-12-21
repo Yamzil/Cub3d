@@ -6,36 +6,61 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/12/21 13:04:00 by yamzil           ###   ########.fr        #
+#    Updated: 2022/12/21 20:20:15 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	cub3D
 
-INC =	cub3d.h
+NAME_SRC =	cub3D_bonus
 
-SRC =	cub3d.c\
-		allocate_file.c\
-		parsing_file.c\
-		parsing_utils.c\
-		parsing_error.c\
-		storing_data.c\
-		check_file.c\
-		check_map.c\
-		raycasting.c\
-		dda.c\
-		minimap.c\
-		distance.c\
-		intersection_ver.c\
-		intersection_hor.c\
-		draw_floor_ceilling.c\
-		raycasting_utils.c\
-		player.c\
-		check_map_utils.c\
-		hook_utils.c\
-		Get_Next_line/get_next_line.c\
-		Get_Next_line/get_next_line_utils.c\
-		texture.c\
+INC =	mandatory_part/cub3d.h
+
+SRC =	mandatory_part/cub3d.c\
+		mandatory_part/parsing_part/check_map_utils.c\
+		mandatory_part/parsing_part/allocate_file.c\
+		mandatory_part/parsing_part/parsing_utils.c\
+		mandatory_part/parsing_part/parsing_error.c\
+		mandatory_part/parsing_part/parsing_file.c\
+		mandatory_part/parsing_part/storing_data.c\
+		mandatory_part/parsing_part/check_file.c\
+		mandatory_part/parsing_part/check_map.c\
+		mandatory_part/graphic_part/draw_floor_ceilling.c\
+		mandatory_part/graphic_part/intersection_ver.c\
+		mandatory_part/graphic_part/intersection_hor.c\
+		mandatory_part/graphic_part/raycasting_utils.c\
+		mandatory_part/graphic_part/raycasting.c\
+		mandatory_part/graphic_part/hook_utils.c\
+		mandatory_part/graphic_part/distance.c\
+		mandatory_part/graphic_part/minimap.c\
+		mandatory_part/graphic_part/texture.c\
+		mandatory_part/graphic_part/player.c\
+		mandatory_part/graphic_part/dda.c\
+		get_next_line/get_next_line.c\
+		get_next_line/get_next_line_utils.c\
+
+BNC_SRC =	bonus_part/cub3d_bonus.c\
+			bonus_part/parsing_part/check_map_utils.c\
+			bonus_part/parsing_part/allocate_file.c\
+			bonus_part/parsing_part/parsing_utils.c\
+			bonus_part/parsing_part/parsing_error.c\
+			bonus_part/parsing_part/parsing_file.c\
+			bonus_part/parsing_part/storing_data.c\
+			bonus_part/parsing_part/check_file.c\
+			bonus_part/parsing_part/check_map.c\
+			bonus_part/graphic_part/draw_floor_ceilling.c\
+			bonus_part/graphic_part/intersection_ver.c\
+			bonus_part/graphic_part/intersection_hor.c\
+			bonus_part/graphic_part/raycasting_utils.c\
+			bonus_part/graphic_part/raycasting.c\
+			bonus_part/graphic_part/hook_utils.c\
+			bonus_part/graphic_part/distance.c\
+			bonus_part/graphic_part/minimap.c\
+			bonus_part/graphic_part/texture.c\
+			bonus_part/graphic_part/player.c\
+			bonus_part/graphic_part/dda.c\
+			get_next_line/get_next_line.c\
+			get_next_line/get_next_line_utils.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -51,10 +76,14 @@ $(NAME) : $(INC) $(OBJ)
 	make -C libft/
 	$(CC) $(CFLAGS) $(SRC) libft/libft.a $(MLX) -o $(NAME)
 
+bonus :  $(INC) $(OBJ)
+	make -C libft/
+	$(CC) $(CFLAGS) $(BNC_SRC) libft/libft.a $(MLX) -o $(NAME_SRC)
+
 clean : 
 	@rm -rf $(OBJ)
 
 fclean : clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(NAME_SRC)
 
 re :fclean all

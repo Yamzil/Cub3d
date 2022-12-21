@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 13:30:35 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 20:41:21 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #define CUB3D_H
 
 #include <unistd.h>
-#include "./minilibx_opengl_20191021/mlx.h"
+#include "./minilibx/mlx.h"
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <sys/fcntl.h>
-#include "get_next_line/get_next_line.h"
+#include "./get_next_line/get_next_line.h"
 
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
@@ -28,7 +28,7 @@
 #define PLAYER_SQUARE 5
 #define WHITE 16777215
 #define BLACK 8421504
-#define BLUE 33023
+#define ORANGE 65454456
 #define RAD (M_PI / (double)180) 
 
 enum{
@@ -244,6 +244,6 @@ void	draw_floor(int x1, int y1, t_map *lst, t_data *data);
 // TEXTURE
 void	writing_pxl_to_img2(t_map *list, int x, int y, t_data *data);
 void	texture(t_data *data, t_cast *info, double y1);
+void	loading_textures(t_data *data);
 int		choose_texture(t_cast *info);
-void	loading_img(t_data *data);
 #endif
