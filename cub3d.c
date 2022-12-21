@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/17 11:27:41 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:30:55 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	mlx_functions(t_data *lst, t_map *list)
 {
 	lst->mlx =  mlx_init ();
 	lst->windows = mlx_new_window(lst->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
-		 WIN_HEIGHT);
+	list->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
 	list->addr = mlx_get_data_addr(list->img, &list->bits, &list->size,&list->end);
+	loading_img(lst);
 	mlx_hook(lst->windows, 2, 0, key_start, lst);
 	mlx_hook(lst->windows, 3, 0, key_realse, lst);
 	mlx_hook(lst->windows, 17, 0, close_win, lst);
@@ -57,27 +57,27 @@ int main(int ac, char **av)
 	}
 	else 
 	{
-		t_data  	lst;
+		t_data  	*data;
 		t_map		list;
-		t_txtdata	txt;
+		// t_txtdata	txt;
 
-		lst.player = malloc(sizeof(t_player));
-		if (!lst.player)
+		data = malloc(sizeof(t_data));
+		if (!data)
+			return 0;
+		data->player = malloc(sizeof(t_player));
+		if (!data->player)
 			return (0);
 		check_extension(ac, av);
-		get_file(&lst, av);
-		check_storing_file_data(&lst);
-		check_map(&lst);
-		get_map(&lst);
-		init_values(&lst);
-		mlx_functions(&lst, &list);
-		lst.list = &list;
-		txt.data.img = mlx_xpm_file_to_image(lst.mlx, lst.north, &txt.width, &txt.height);
-		txt.addr = (int *)mlx_get_data_addr(txt.data.img, &txt.data.bits, &txt.data.size, &txt.data.end);
-		lst.txt = &txt;
-		render(&list, &lst, 1, &txt);
-		mlx_put_image_to_window(lst.mlx, lst.windows,\
-		lst.list->img, 0, 0);
-		mlx_loop(lst.mlx);
+		get_file(data, av);
+		check_storing_file_data(data);
+		check_map(data);
+		get_map(data);
+		init_values(data);
+		mlx_functions(data, &list);
+		data->list = &list;
+		render(&list, data, 1);
+		mlx_put_image_to_window(data->mlx, data->windows,\
+		data->list->img, 0, 0);
+		mlx_loop(data->mlx);
 	}
 }

@@ -6,15 +6,13 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:13:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/17 12:53:51 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:29:48 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
-#include <stdbool.h>
 
-void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info, t_txtdata *txt)
+void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info)
 {
 
     if (y1 < 0)
@@ -27,14 +25,13 @@ void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info, t_
         draw_floor(x1, y2, lst, data);
     while (y1 <= y2)
 	{
-        texture(info, y1, txt);
-        // printf("xof %f && yof = %f\n", txt->xofset, txt->yofset);
-        writing_pxl_to_img2(lst, x1, y1, txt);
+        texture(data, info, y1);
+        writing_pxl_to_img2(lst, x1, y1, data);
         y1++;
     }
 }
 
-void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data, t_txtdata *txt)
+void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data)
 {
     double  deg;
 
@@ -45,7 +42,7 @@ void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data, t_txtdata *
     info->wallHeight = (TILE_SIZE / (info->dis * cos(deg - info->deg))) * info->dpp;
     info->TopPixel = (WIN_HEIGHT - info->wallHeight) / 2;
     info->BotPixel = WIN_HEIGHT - info->TopPixel;
-    draw_line(x, info->TopPixel, info->BotPixel, lst, data, info, txt);
+    draw_line(x, info->TopPixel, info->BotPixel, lst, data, info);
 }
 
 void	raycast(t_cast *info, t_data *data)
@@ -59,12 +56,12 @@ void	raycast(t_cast *info, t_data *data)
     find_dis(info);
 }
 
-void	draw_fov(t_data *data, t_map *lst, t_txtdata *txt)
+void	draw_fov(t_data *data, t_map *lst)
 {
     t_cast  info;
     double deg = data->angle - (30 * RAD);
     double incr = (((double)60  * RAD) / (double)WIN_WIDTH);
-    info.dpp = (WIN_WIDTH / 2) / tan(30 * RAD);
+    info.dpp = ((double)WIN_WIDTH / 2) / tan(30 * RAD);
     int i = 0;
     while (i < WIN_WIDTH)
     { 
@@ -73,7 +70,7 @@ void	draw_fov(t_data *data, t_map *lst, t_txtdata *txt)
             deg = (2 * M_PI) + deg;
         info.deg = deg;
         raycast(&info, data);
-        draw_wall(&info, i, lst, data, txt);
+        draw_wall(&info, i, lst, data);
         deg += incr;
         i++;
     }

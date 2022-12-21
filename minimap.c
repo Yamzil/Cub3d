@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/17 11:12:55 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:30:28 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    draw_square(t_map *lst, int x, int y, int color)
     }
 }
 
-void    render(t_map *lst, t_data *data, int flag, t_txtdata *txt)
+void    render(t_map *lst, t_data *data, int flag)
 {
     int i;
 	int	j;
@@ -52,7 +52,7 @@ void    render(t_map *lst, t_data *data, int flag, t_txtdata *txt)
     y = 0;
 	if (flag)
 		get_playerposition(data);
-    draw_fov(data, lst, txt);
+    draw_fov(data, lst);
     // texture(data);
     //if(draw)
     while (data->map[i])

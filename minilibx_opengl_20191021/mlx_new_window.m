@@ -448,7 +448,7 @@ int get_mouse_button(NSEventType eventtype)
   //      printf("err? 0x%x\n", glGetError());
 
   glUseProgram(glsl.font_program);
-  glsl.loc_font_texture = glGetUniformLocation(glsl.font_program, "texture");
+  glsl.loc_font_txtdata = glGetUniformLocation(glsl.font_program, "texture");
   glsl.loc_font_color = glGetUniformLocation(glsl.font_program, "color");
   glsl.loc_font_posinwin = glGetUniformLocation(glsl.font_program, "fontposinwin");
   glsl.loc_font_posinatlas = glGetUniformLocation(glsl.font_program, "fontposinatlas");
@@ -588,7 +588,7 @@ int get_mouse_button(NSEventType eventtype)
 
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, imgctx->texture);
-  glUniform1i(glsl.loc_font_texture, 0);
+  glUniform1i(glsl.loc_font_txtdata, 0);
   glUniform4fv(glsl.loc_font_color, 1, color_tab);
 
   glUniform2f(glsl.loc_font_winhalfsize, size_x/2, size_y/2);

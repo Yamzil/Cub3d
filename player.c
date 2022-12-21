@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:10:08 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/17 11:13:44 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:36:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	check_player_position(t_data *lst)
 	double x;
 	double y;
 
-	lst->angle += 0.026 * lst->player->rotate_cam;
+	lst->angle += 0.0523599 * lst->player->rotate_cam;
 	if (lst->player->move_a_d == -1)
 	{
 		y = lst->player->py + cos(lst->angle) * lst->step;

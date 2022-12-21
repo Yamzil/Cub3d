@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:48:40 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/17 10:54:14 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 13:31:16 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	key_press(t_data *lst)
 	lst->list->img = mlx_new_image(lst->mlx, WIN_WIDTH, \
 		 WIN_HEIGHT);
 	check_player_position(lst);
-	render(lst->list, lst, 0, lst->txt);
+	render(lst->list, lst, 0);
 	mlx_put_image_to_window(lst->mlx, lst->windows,\
 		lst->list->img, 0, 0);
 	return (0);
