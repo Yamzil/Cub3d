@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:48:40 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 15:47:15 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:04:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 int	key_press(t_data *lst)
 {

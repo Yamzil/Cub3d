@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 16:29:04 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:03:30 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 bool	check_char(char c)
 {

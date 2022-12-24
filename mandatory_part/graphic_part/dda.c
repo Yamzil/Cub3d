@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:43:43 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 18:17:00 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:04:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void    dda_algo(t_data *data, double x1, double y1)
 {

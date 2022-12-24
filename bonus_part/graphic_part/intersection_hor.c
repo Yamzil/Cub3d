@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 10:12:18 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 17:08:30 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/23 18:34:46 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	find_hor_inter(t_cast *info, t_data *data)
 {
@@ -41,10 +41,11 @@ void	find_hor_point(t_cast *info, t_data *data)
 
     tmpX = info->xA;
     tmpY = info->yA;
+    info->my_doors = NULL;
+    info->doors = false;
     if (info->deg > M_PI && info->deg < (2 * M_PI))
         tmpY -= 0.1;
-    while (/* tmpX < WIN_WIDTH && tmpY < WIN_HEIGHT && */ tmpX >= 0 && tmpY >= 0 \
-		&& !check_wall(data, tmpX, tmpY))
+    while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
         tmpX += info->xstep;
         tmpY += info->ystep;

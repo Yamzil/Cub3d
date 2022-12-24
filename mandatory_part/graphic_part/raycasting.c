@@ -6,12 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:13:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 18:11:31 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/22 13:21:23 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
-#include <stdio.h>
+#include "../../cub3d.h"
 
 void draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info)
 {
@@ -72,7 +71,7 @@ void	draw_fov(t_data *data, t_map *lst)
         info.deg = deg;
         raycast(&info, data);
         draw_wall(&info, i, lst, data);
-        dda_algo(data, info.wx, info.wy);
+        // dda_algo(data, info.wx, info.wy);
         deg += incr;
         i++;
     }

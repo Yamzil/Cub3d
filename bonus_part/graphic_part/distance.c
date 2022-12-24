@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:51:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 16:50:05 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:04:08 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 double	distance(double x1, double y1, double x2, double y2)
 {

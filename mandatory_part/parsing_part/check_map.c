@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:34:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 15:54:35 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:04:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 int	check_last_line(t_data *lst)
 {

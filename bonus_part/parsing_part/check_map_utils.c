@@ -6,15 +6,16 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 16:29:04 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:31:57 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 bool	check_char(char c)
 {
-	if (c != '0' && c != '1' && c != 'N' && c != 'W' && c != 'E' && c != 'S')
+	if (c != '0' && c != '1' && c != 'N' && c != 'W' && c != 'E' && c != 'S' 
+		&& c != '2')
 		return true;
 	return false;
 }

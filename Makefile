@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/12/21 20:20:15 by yamzil           ###   ########.fr        #
+#    Updated: 2022/12/24 15:50:32 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =	cub3D
 
 NAME_SRC =	cub3D_bonus
 
-INC =	mandatory_part/cub3d.h
+INC =	cub3d.h
 
 SRC =	mandatory_part/cub3d.c\
 		mandatory_part/parsing_part/check_map_utils.c\
@@ -53,6 +53,7 @@ BNC_SRC =	bonus_part/cub3d_bonus.c\
 			bonus_part/graphic_part/intersection_hor.c\
 			bonus_part/graphic_part/raycasting_utils.c\
 			bonus_part/graphic_part/raycasting.c\
+			bonus_part/graphic_part/doors_utils.c\
 			bonus_part/graphic_part/hook_utils.c\
 			bonus_part/graphic_part/distance.c\
 			bonus_part/graphic_part/minimap.c\
@@ -63,6 +64,8 @@ BNC_SRC =	bonus_part/cub3d_bonus.c\
 			get_next_line/get_next_line_utils.c\
 
 OBJ = $(SRC:.c=.o)
+
+OBJ_BNC = $(BNC_SRC:.c=.o)
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
@@ -76,12 +79,12 @@ $(NAME) : $(INC) $(OBJ)
 	make -C libft/
 	$(CC) $(CFLAGS) $(SRC) libft/libft.a $(MLX) -o $(NAME)
 
-bonus :  $(INC) $(OBJ)
+bonus :  $(INC) $(OBJ_BNC)
 	make -C libft/
 	$(CC) $(CFLAGS) $(BNC_SRC) libft/libft.a $(MLX) -o $(NAME_SRC)
 
 clean : 
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(OBJ_BNC)
 
 fclean : clean
 	@rm -rf $(NAME) $(NAME_SRC)

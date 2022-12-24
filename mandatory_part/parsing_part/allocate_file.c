@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:44:24 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 15:41:15 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:04:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	countline(t_data *lst, char **av)
 {

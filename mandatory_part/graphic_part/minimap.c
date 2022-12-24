@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 18:16:41 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:04:07 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	writing_pxl_to_img(t_map *list, int x, int y, int color)
 {

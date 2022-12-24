@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 18:29:43 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/22 13:08:28 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 #include <stdlib.h>
 
 void	mlx_functions(t_data *lst, t_map *list)
@@ -66,7 +66,6 @@ int main(int ac, char **av)
 	{
 		t_data  	*data;
 		t_map		list;
-		// t_txtdata	txt;
 
 		data = malloc(sizeof(t_data));
 		if (!data)

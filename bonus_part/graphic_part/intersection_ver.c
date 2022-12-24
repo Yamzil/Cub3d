@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 10:09:56 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 17:08:38 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/23 18:34:51 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	find_ver_inter(t_cast *info, t_data *data)
 {
@@ -34,15 +34,16 @@ void	find_ver_step(t_cast *info)
 
 void	find_ver_point(t_cast *info, t_data *data)
 {
-    double tmpX;
-    double tmpY;
+    double  tmpX;
+    double  tmpY;
 
     tmpX = info->vxA;
     tmpY = info->vyA;
+    info->my_doors = NULL;
+	info->doors = false;
     if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2))
         tmpX -= 0.1;
-    while (/* tmpX < WIN_WIDTH && tmpY < WIN_HEIGHT && */ tmpX >= 0 && tmpY >= 0 \
-		&& !check_wall(data, tmpX, tmpY))
+    while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
         tmpX += info->vxstep;
         tmpY += info->vystep;

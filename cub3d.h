@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 20:41:21 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/24 15:51:46 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,15 @@ enum{
 	SOUTH,
 	WEST,
 	EAST,
+	DOORS,
 };
+
+typedef struct s_door{
+	double	x;
+	double	y;
+	int		distance;
+	struct s_door	*next;
+}	t_door;
 
 typedef struct s_cast {
     double	xstep;
@@ -74,6 +82,8 @@ typedef struct s_cast {
 	double	BotPixel;
 	bool	vertical_inter;
 	bool	horizontal_inter;
+	bool	doors;
+	t_door *my_doors;
 } t_cast; 
 
 typedef struct s_player{
@@ -120,11 +130,18 @@ typedef struct s_data{
 	void		*mlx;
 	void		*windows;
 	int			step;
+	int			door_dst;
 	double		angle;
+	int			open_x;
+	int			open_y;
+	int			rays;
+	char	hit_door;
 	t_map		*list;
 	t_player	*player;
 	t_txtdata	*txt;
-	t_txtdata	arr[4];
+	t_cast		*info;
+	t_door		*doors;
+	t_txtdata	arr[5];
 }t_data;
 
 // LIBFT
@@ -212,7 +229,7 @@ double 	player_direction(t_data *data);
 void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
-void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data);
+void    draw_wall_doors(t_cast *info, double  x, t_map *lst, t_data *data);
 void	draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info);
 void	raycast(t_cast *info, t_data *data);
 void	draw_fov(t_data *data, t_map *lst);
@@ -220,6 +237,7 @@ void	draw_fov(t_data *data, t_map *lst);
 
 // RAYCASTING UTILS
 bool	check_wall(t_data *data, double x, double y);
+bool	check_door(t_data *data, double x, double y);
 double  check_deg(double deg);
 int		arr_len(char **map);
 
@@ -246,4 +264,15 @@ void	writing_pxl_to_img2(t_map *list, int x, int y, t_data *data);
 void	texture(t_data *data, t_cast *info, double y1);
 void	loading_textures(t_data *data);
 int		choose_texture(t_cast *info);
+
+// DOORS
+bool	check_doors(t_data *data, double x, double y);
+// DOORS UTILS
+t_door	*ft_newlst(double x, double y, int distance);
+void	ft_lstadd_front(t_door **lst, t_door *new);
+
+// TESTING
+void	open_door(t_data *data);
+void	doors_textures(t_data *data, t_cast *info, double y1);
+int		choose_door_textures(t_cast *info);
 #endif

@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:10:08 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 17:00:55 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/23 17:47:52 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 char	map_direction(t_data *data)
 {

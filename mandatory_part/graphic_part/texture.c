@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:08:58 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 18:42:37 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/22 15:15:08 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 #include <stdio.h>
 
 void	writing_pxl_to_img2(t_map *list, int x, int y, t_data *data)
@@ -40,8 +40,8 @@ void	texture(t_data *data, t_cast *info, double y1)
 		xofset = ((info->wy - ((int)(info->wy / TILE_SIZE) * TILE_SIZE)) * data->arr[data->ti].width) / TILE_SIZE;
 	distance_top = y + (info->wallHeight / 2) - ((double)WIN_HEIGHT / 2);
 	yofset = distance_top * data->arr[data->ti].height / info->wallHeight;
-	data->arr[data->ti].xofset = (int)xofset;
-	data->arr[data->ti].yofset = (int)yofset;
+	data->arr[data->ti].xofset = abs((int)xofset);
+	data->arr[data->ti].yofset = abs((int)yofset);
 }
 
 void	loading_textures(t_data *data)

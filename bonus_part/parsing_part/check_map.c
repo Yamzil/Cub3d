@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:34:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 15:54:35 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/21 21:51:16 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 int	check_last_line(t_data *lst)
 {
@@ -69,10 +69,8 @@ int	valid_map_elements(t_data *lst)
 		while (lst->file[i] && lst->file[i][j]) 
 		{
 			x = lst->file[i][j];
-			if (x != '0' && x != '1' 
-				&& x != 'N' && x != 'S' 
-				&& x != 'W' && x != 'E' 
-				&& x != ' ' && x != '\n')
+			if (x != '0' && x != '2' && x != '1' && x != 'N' && x != 'S' \
+				&& x != 'W' && x != 'E' && x != ' ' && x != '\n')
 				map_error(1);
 			j++;
 		}
@@ -94,8 +92,9 @@ int	valid_player(t_data *lst)
 
 int	valid_player_position(t_data *lst)
 {
-	int	i;
-	int	j;
+	char	x;
+	int		i;
+	int		j;
 
 	i = lst->begin + 1;
 	while(lst->file[i] && !ft_strncmp(lst->file[i], "\n", 2))
@@ -106,15 +105,15 @@ int	valid_player_position(t_data *lst)
 		j = 0;
 		while (lst->file[i][j])
 		{
-			if (lst->file[i][j] == 'S' || lst->file[i][j] == 'N' 
-				|| lst->file[i][j] == 'W' || lst->file[i][j] == 'E')
+			x = lst->file[i][j];
+			if (x == 'S' || x == 'N' || x == 'W' || x == 'E')
 			{
-				if (i == lst->begin || i == lst->end - 1
-					|| (lst->file[i][j + 1] != '1' && lst->file[i][j + 1] != '0') 
-					|| (lst->file[i + 1][j] != '0' && lst->file[i + 1][j] != '1') 
-					|| (lst->file[i - 1][j] != '0' && lst->file[i - 1][j] != '1') 
+				if (i == lst->begin || i == lst->end - 1 || (lst->file[i][j + 1] != '1' && lst->file[i][j + 1] != '0' && lst->file[i][j + 1] != '2') || (lst->file[i + 1][j] != '0' && lst->file[i + 1][j] != '1' && lst->file[i + 1][j] != '2') || (lst->file[i - 1][j] != '0' && lst->file[i - 1][j] != '1' && lst->file[i - 1][j] != '2') 
 					|| (lst->file[i][j - 1] != '0' && lst->file[i][j - 1] != '1'))
+				{
+					puts("yess");
 					map_error(2);
+				}
 			}
 			j++;
 		}

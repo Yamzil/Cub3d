@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 20:20:00 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 20:20:03 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/24 15:40:25 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 #include <stdlib.h>
 
 void	mlx_functions(t_data *lst, t_map *list)
@@ -40,6 +40,7 @@ void	init_values(t_data *lst)
 	lst->player->rotate_cam = 0;
 	lst->player->move_a_d  = 0;
 	lst->player->move_w_s = 0;
+	lst->door_dst = 0;
 }
 
 void    check_extension(int ac, char **av)
@@ -83,8 +84,7 @@ int main(int ac, char **av)
 		mlx_functions(data, &list);
 		data->list = &list;
 		render(&list, data, 1);
-		mlx_put_image_to_window(data->mlx, data->windows,\
-		data->list->img, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->windows, data->list->img, 0, 0);
 		mlx_loop(data->mlx);
 	}
 }
