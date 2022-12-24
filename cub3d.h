@@ -25,7 +25,7 @@
 #define WIN_HEIGHT 720
 #define WIN_WIDTH 1080
 #define TILE_SIZE 10
-#define PLAYER_SQUARE 5
+#define PLAYER_SQUARE 2
 #define WHITE 16777215
 #define BLACK 8421504
 #define ORANGE 65454456

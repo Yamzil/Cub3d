@@ -40,7 +40,7 @@ void	find_ver_point(t_cast *info, t_data *data)
     tmpX = info->vxA;
     tmpY = info->vyA;
     info->my_doors = NULL;
-	info->doors = false;
+	// info->doors = false;
     if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2))
         tmpX -= 0.1;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))

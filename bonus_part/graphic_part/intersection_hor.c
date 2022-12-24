@@ -42,7 +42,7 @@ void	find_hor_point(t_cast *info, t_data *data)
     tmpX = info->xA;
     tmpY = info->yA;
     info->my_doors = NULL;
-    info->doors = false;
+    // info->doors = false;
     if (info->deg > M_PI && info->deg < (2 * M_PI))
         tmpY -= 0.1;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))

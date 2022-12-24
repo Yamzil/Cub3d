@@ -13,6 +13,17 @@
 #include "../cub3d.h"
 #include <stdlib.h>
 
+int	mouse_move(int x, int y, t_data *lst){
+	if (x > (WIN_WIDTH / 2) + 200)
+		lst->player->rotate_cam = 1;
+	else if (x < (WIN_WIDTH / 2) - 200)
+		lst->player->rotate_cam = -1;
+	else
+		lst->player->rotate_cam = 0;
+	y = 0;
+	return (0);
+}
+
 void	mlx_functions(t_data *lst, t_map *list)
 {
 	lst->mlx =  mlx_init ();
@@ -27,6 +38,7 @@ void	mlx_functions(t_data *lst, t_map *list)
 	list->addr = mlx_get_data_addr(list->img, &list->bits, &list->size,&list->end);
 	loading_textures(lst);
 	mlx_hook(lst->windows, 2, 0, key_start, lst);
+	mlx_hook(lst->windows, 6, 0, mouse_move, lst);
 	mlx_hook(lst->windows, 3, 0, key_realse, lst);
 	mlx_hook(lst->windows, 17, 0, close_win, lst);
 	mlx_loop_hook (lst->mlx , key_press, lst);

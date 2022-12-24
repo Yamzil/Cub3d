@@ -90,6 +90,7 @@ void	draw_fov(t_data *data, t_map *lst)
         if (deg < 0)
             deg = (2 * M_PI) + deg;
         info.deg = deg;
+        info.doors = false;
         raycast(&info, data); // find door && calcul dst && make bool false 
 	   draw_wall_doors(&info, data->rays, lst, data);
 	//    open_door(data);

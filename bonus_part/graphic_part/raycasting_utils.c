@@ -37,16 +37,17 @@ bool	check_wall(t_data *data, double x, double y)
 		return true;
 	if (map_x >= ft_strlen(data->map[map_y]))
 		return true;
+    if (data->map[map_y][map_x] == '1')
+        return (true);
 	if (data->map[map_y][map_x] == '2')
 	{
+		// printf("%f && %f\n", x, y);
 		data->door_dst = distance(data->player->px, data->player->py, x, y);
 		data->open_y = map_y;
 		data->open_x = map_x;
 		data->info->doors = true;
 		return true;
 	}
-    if (data->map[map_y][map_x] == '1')
-        return (true);
     return (false);
 }
 
