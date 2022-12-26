@@ -78,10 +78,12 @@ all : $(NAME)
 $(NAME) : $(INC) $(OBJ)
 	make -C libft/
 	$(CC) $(CFLAGS) $(SRC) libft/libft.a $(MLX) -o $(NAME)
+	
+bonus : $(NAME_SRC)
 
-bonus :  $(INC) $(OBJ_BNC)
+$(NAME_SRC) :  $(INC) $(OBJ_BNC)
 	make -C libft/
-	$(CC) $(CFLAGS) $(BNC_SRC) libft/libft.a $(MLX) -o $(NAME_SRC)
+	$(CC) $(CFLAGS) $(MLX) libft/libft.a  $(OBJ_BNC) -o $(NAME_SRC)
 
 clean : 
 	@rm -rf $(OBJ) $(OBJ_BNC)
@@ -90,3 +92,5 @@ fclean : clean
 	@rm -rf $(NAME) $(NAME_SRC)
 
 re :fclean all
+
+.PHONY: all 

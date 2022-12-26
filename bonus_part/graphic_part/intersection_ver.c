@@ -12,6 +12,8 @@
 
 #include "../../cub3d.h"
 
+
+
 void	find_ver_inter(t_cast *info, t_data *data)
 {
     info->vxA = (int)(data->player->px / TILE_SIZE) * TILE_SIZE;
@@ -39,12 +41,21 @@ void	find_ver_point(t_cast *info, t_data *data)
 
     tmpX = info->vxA;
     tmpY = info->vyA;
-    info->my_doors = NULL;
+    info->vdoor = false;
+    // info->my_doors = NULL;
 	// info->doors = false;
     if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2))
         tmpX -= 0.1;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
+        if (check_door(data, tmpX, tmpY))
+        {
+            info->my_door->distance = distance(data->player->px, data->player->py, tmpX, tmpY);
+            info->my_door->x = tmpX;
+            info->my_door->y = tmpY;
+            data->info->doors = true;
+            info->vdoor = true;
+        }
         tmpX += info->vxstep;
         tmpY += info->vystep;
     }

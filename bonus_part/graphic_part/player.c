@@ -126,11 +126,7 @@ void	check_player_position(t_data *lst)
 		x = lst->player->px + cos(lst->angle) * lst->step * lst->player->move_w_s;
 	}
 	if (!check_wall(lst, x, lst->player->py))
-	{
 		lst->player->px = x;
-	}
 	if (!check_wall(lst, lst->player->px, y))
-	{
 		lst->player->py = y;
-	}
 }

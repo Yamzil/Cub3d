@@ -29,6 +29,7 @@
 #define WHITE 16777215
 #define BLACK 8421504
 #define ORANGE 65454456
+#define RED 16711680
 #define RAD (M_PI / (double)180) 
 
 enum{
@@ -40,6 +41,7 @@ enum{
 	BACKWARD = 1,
 	LEFT = 0,
 	RIGHT = 2,
+	SPACE = 49,
 };
 
 enum{
@@ -53,7 +55,9 @@ enum{
 typedef struct s_door{
 	double	x;
 	double	y;
-	int		distance;
+	int		i;
+	int		j;
+	double	distance;
 	struct s_door	*next;
 }	t_door;
 
@@ -78,12 +82,17 @@ typedef struct s_cast {
     double	wy;
     double	dpp;
     double	wallHeight;
+	double	doorHeight;
+	double 	tdPixel;
+	double	bdPixel;
 	double	TopPixel;
 	double	BotPixel;
 	bool	vertical_inter;
 	bool	horizontal_inter;
+	bool	vdoor;
+	bool	hdoor;
 	bool	doors;
-	t_door *my_doors;
+	t_door *my_door;
 } t_cast; 
 
 typedef struct s_player{
@@ -142,6 +151,7 @@ typedef struct s_data{
 	t_cast		*info;
 	t_door		*doors;
 	t_txtdata	arr[5];
+	t_txtdata	door_arr[7];
 }t_data;
 
 // LIBFT
@@ -229,7 +239,7 @@ double 	player_direction(t_data *data);
 void    dda_algo(t_data *data, double x1, double y1);
 
 // RAYCASTING
-void    draw_wall_doors(t_cast *info, double  x, t_map *lst, t_data *data);
+void    draw_wall(t_cast *info, double  x, t_map *lst, t_data *data);
 void	draw_line(int x1, int y1, int y2, t_map *lst,t_data *data, t_cast *info);
 void	raycast(t_cast *info, t_data *data);
 void	draw_fov(t_data *data, t_map *lst);
@@ -266,13 +276,13 @@ void	loading_textures(t_data *data);
 int		choose_texture(t_cast *info);
 
 // DOORS
-bool	check_doors(t_data *data, double x, double y);
+bool	check_door(t_data *data, double x, double y);
 // DOORS UTILS
 t_door	*ft_newlst(double x, double y, int distance);
 void	ft_lstadd_front(t_door **lst, t_door *new);
 
 // TESTING
-void	open_door(t_data *data);
+int		open_door(t_data *data);
 void	doors_textures(t_data *data, t_cast *info, double y1);
 int		choose_door_textures(t_cast *info);
 #endif

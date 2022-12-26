@@ -41,42 +41,6 @@ void    draw_square(t_map *lst, int x, int y, int color)
     }
 }
 
-// void    render(t_map *lst, t_data *data, int flag)
-// {
-//     int i;
-// 	int	j;
-// 	int x;
-// 	int y;
-		
-//     i = 0;
-//     y = 0;
-// 	if (flag)
-// 		get_playerposition(data);
-//     draw_fov(data, lst);
-//     while (data->map[i]&& y < WIN_HEIGHT)
-//     {
-//         j = 0;
-// 		x = 0;
-//         while (data->map[i][j]&& x < WIN_WIDTH)
-//         {
-//             if (data->map[i][j] == '0' || data->map[i][j] == 'N' \
-// 				|| data->map[i][j] == 'S' || data->map[i][j] == 'E' \
-// 				|| data->map[i][j] == 'W')
-//                 draw_square(lst,  x * 0.5,  y * 0.5, WHITE);
-// 			if (data->map[i][j] == '1')
-// 				draw_square(lst,  x * 0.5,  y * 0.5, BLACK);
-//             if (data->map[i][j] == '2')
-//                 draw_square(lst,  x * 0.5,  y * 0.5, 16744448);
-// 			x += TILE_SIZE;
-// 			j++;	
-//         }
-// 		y  += TILE_SIZE; 
-// 		i++;
-//     }
-//     draw_player(lst, data->player->px * 0.5, data->player->py * 0.5, ORANGE);
-//     dda_algo(data, data->player->px + cos(data->angle) * 20,data->player->py + sin(data->angle) * 20);
-// }
-
 void    render(t_map *lst, t_data *data, int flag)
 {
     int i;
@@ -101,14 +65,13 @@ void    render(t_map *lst, t_data *data, int flag)
                 draw_square(lst,  x  - (data->player->px - 80),  y - (data->player->py - 80), WHITE);
 			if (data->map[i][j] == '1')
 				draw_square(lst,  x  - (data->player->px - 80),  y - (data->player->py - 80), BLACK);
+            if (data->map[i][j] == '2')
+				draw_square(lst,  x  - (data->player->px - 80),  y - (data->player->py - 80), RED);
 			x += TILE_SIZE;
 			j++;	
         }
 		y  += TILE_SIZE; 
 		i++;
     }
-    // draw_fov(data, lst);
     draw_player(lst, (data->player->px - (data->player->px - 80)) , (data->player->py - (data->player->py - 80)), ORANGE);
-    // dda_algo(data, data->player->px + cos(data->angle) * 20,data->player->py + sin(data->angle) * 20);
-    // map_borders(lst);
 }

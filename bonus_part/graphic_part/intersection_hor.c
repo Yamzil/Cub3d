@@ -12,6 +12,29 @@
 
 #include "../../cub3d.h"
 
+bool	check_door(t_data *data, double x, double y)
+{
+    int	map_x;
+    int	map_y;
+
+	if (x < 0 && y < 0)
+		return true;
+	// if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
+	// 	return true;
+    map_y = floor(y / TILE_SIZE);
+    map_x = floor(x / TILE_SIZE);
+	if (map_y >= arr_len(data->map))
+		return true;
+	if (map_x >= ft_strlen(data->map[map_y]))
+		return true;
+    if (data->map[map_y][map_x] == '2'){
+        data->info->my_door->i = map_y;
+        data->info->my_door->j = map_x;
+        return (true);
+    }
+    return (false);
+}
+
 void	find_hor_inter(t_cast *info, t_data *data)
 {
     info->yA = (int)(data->player->py / TILE_SIZE) * TILE_SIZE;
@@ -41,12 +64,22 @@ void	find_hor_point(t_cast *info, t_data *data)
 
     tmpX = info->xA;
     tmpY = info->yA;
-    info->my_doors = NULL;
+    info->hdoor = false;
+    // info->my_door = NULL;
     // info->doors = false;
     if (info->deg > M_PI && info->deg < (2 * M_PI))
         tmpY -= 0.1;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
+        if (check_door(data, tmpX, tmpY))
+        {
+            info->my_door->distance = distance(data->player->px, data->player->py, tmpX, tmpY);
+            info->my_door->x = tmpX;
+            info->my_door->y = tmpY;
+            data->info->doors = true;
+            info->hdoor = true;
+            // return true;
+        }
         tmpX += info->xstep;
         tmpY += info->ystep;
     }

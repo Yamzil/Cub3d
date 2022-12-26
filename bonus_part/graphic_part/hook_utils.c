@@ -40,6 +40,8 @@ int	key_start(int key, t_data  *lst)
 		lst->player->move_a_d = 1;
 	else if (key == RIGHT)
 		lst->player->move_a_d = -1;
+	// else if (key == SPACE)
+	// 	open_door(lst);
 	return (0);
 }
 
