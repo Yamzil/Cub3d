@@ -157,7 +157,7 @@ void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(char const *s, char c);
 void	ft_putendl_fd(char *s, int fd);
 int		ft_strcmp(char *s1, char *s2);
-char	*ft_strdup(const char *s1);
+// char	*ft_strdup(const char *s1);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 

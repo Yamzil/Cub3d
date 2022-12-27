@@ -15,9 +15,9 @@
 
 int	mouse_move(int x, int y, t_data *lst)
 {
-	if (x > (WIN_WIDTH / 2) + 200)
+	if (x > (WIN_WIDTH / 2) + 100)
 		lst->p->rotate_cam = 1;
-	else if (x < (WIN_WIDTH / 2) - 200)
+	else if (x < (WIN_WIDTH / 2) - 100)
 		lst->p->rotate_cam = -1;
 	else
 		lst->p->rotate_cam = 0;
