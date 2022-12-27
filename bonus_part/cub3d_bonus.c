@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 20:20:00 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:21:28 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:07:32 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "cub3d_bonus.h"
 #include <stdlib.h>
 
 int	mouse_move(int x, int y, t_data *lst)
@@ -27,6 +27,9 @@ int	mouse_move(int x, int y, t_data *lst)
 
 void	mlx_functions(t_data *lst, t_map *l)
 {
+	if (WIN_WIDTH > 2000 || WIN_HEIGHT > 2000
+		|| WIN_HEIGHT < 0 || WIN_WIDTH < 0)
+		exit(EXIT_FAILURE);
 	lst->mlx = mlx_init ();
 	if (!lst->mlx)
 		exit(EXIT_FAILURE);

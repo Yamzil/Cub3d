@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:10:08 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:23:28 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:08:38 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d_bonus.h"
+#include "../cub3d_bonus.h"
 
 char	map_direction(t_data *data)
 {

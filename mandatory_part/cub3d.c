@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:09:54 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void	init_values(t_data *lst)
 {
@@ -41,11 +41,6 @@ void	check_extension(t_data *data, int ac, char **av)
 		}
 	}
 }
-
-// void fun()
-// {
-// 	system("leaks cub3D");
-// }
 
 int	main(int ac, char **av)
 {

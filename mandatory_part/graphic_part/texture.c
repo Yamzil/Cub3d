@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:08:58 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:26:44 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:10:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 void	writing_pxl_to_img2(t_map *l, int x, int y, t_data *data)
 {
@@ -59,12 +59,20 @@ void	loading_textures(t_data *d)
 {
 	d->arr[NORTH].img = mlx_xpm_file_to_image(d->mlx, d->north, \
 		&d->arr[NORTH].width, &d->arr[NORTH].height);
+	if (!d->arr[NORTH].img)
+		exit(EXIT_FAILURE);
 	d->arr[SOUTH].img = mlx_xpm_file_to_image(d->mlx, d->south, \
 		&d->arr[SOUTH].width, &d->arr[SOUTH].height);
+	if (!d->arr[SOUTH].img)
+		exit(EXIT_FAILURE);
 	d->arr[WEST].img = mlx_xpm_file_to_image(d->mlx, d->west, \
 		&d->arr[WEST].width, &d->arr[WEST].height);
+	if (!d->arr[WEST].img)
+		exit(EXIT_FAILURE);
 	d->arr[EAST].img = mlx_xpm_file_to_image(d->mlx, d->east, \
 		&d->arr[EAST].width, &d->arr[EAST].height);
+	if (!d->arr[EAST].img)
+		exit(EXIT_FAILURE);
 	d->arr[NORTH].addr = (int *)mlx_get_data_addr(d->arr[NORTH].img, \
 		&d->arr[NORTH].bits, &d->arr[NORTH].size, &d->arr[NORTH].end);
 	d->arr[SOUTH].addr = (int *)mlx_get_data_addr(d->arr[SOUTH].img, \

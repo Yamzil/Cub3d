@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_ver.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 10:09:56 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:10:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 void	find_ver_inter(t_cast *info, t_data *d)
 {
@@ -39,7 +39,7 @@ void	find_ver_point(t_cast *in, t_data *d)
 	tmpx = in->vxa;
 	tmpy = in->vya;
 	if (in->deg > (M_PI / 2) && in->deg < ((3 * M_PI) / 2))
-		tmpx -= 0.000001;
+		tmpx -= 0.00001;
 	while (tmpx >= 0 && tmpy >= 0 && !check_wall(d, tmpx, tmpy))
 	{
 		tmpx += in->vxstep;

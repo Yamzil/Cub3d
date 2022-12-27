@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 21:31:37 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:08:02 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d_bonus.h"
+#include "../cub3d_bonus.h"
 
 int	arr_len(char **map)
 {
@@ -29,10 +29,10 @@ bool	check_wall(t_data *data, double x, double y)
 
 	if (x < 0 && y < 0)
 		return (true);
-	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
-		return (true);
 	map_y = floor(y / TILE_SIZE);
 	map_x = floor(x / TILE_SIZE);
+	if (map_y < 0 || map_x < 0)
+		return (true);
 	if (map_y >= arr_len(data->map))
 		return (true);
 	if (map_x >= ft_strlen(data->map[map_y]))

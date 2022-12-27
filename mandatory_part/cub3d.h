@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:18:33 by yamzil           ###   ########.fr       */
+/*   Created: 2022/12/27 21:55:48 by mjlem             #+#    #+#             */
+/*   Updated: 2022/12/27 23:10:01 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define CUB3D_H
 
 # include <unistd.h>
-# include "./minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <sys/fcntl.h>
-# include "./get_next_line/get_next_line.h"
+# include "../get_next_line/get_next_line.h"
 
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1080

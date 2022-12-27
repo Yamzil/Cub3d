@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:13:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:16:45 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:08:07 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d_bonus.h"
+#include "../cub3d_bonus.h"
 
 void	draw_line(int x1, int y1, int y2, t_data *data)
 {

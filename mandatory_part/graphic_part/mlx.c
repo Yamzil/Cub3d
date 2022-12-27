@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 17:41:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:27:07 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:10:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 void	mlx_functions(t_data *lst, t_map *l)
 {
+	if (WIN_WIDTH > 2000 || WIN_HEIGHT > 2000
+		|| WIN_HEIGHT < 0 || WIN_WIDTH < 0)
+		exit(EXIT_FAILURE);
 	lst->mlx = mlx_init();
 	if (!lst->mlx)
 		exit(EXIT_FAILURE);

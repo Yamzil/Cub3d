@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:34:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:10:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 int	check_last_line(t_data *lst)
 {
@@ -23,7 +23,7 @@ int	check_last_line(t_data *lst)
 		j = 0;
 		while (lst->file[i][j])
 		{
-			if (lst->file[i][j] != '1')
+			if (lst->file[i][j] != ' ' && lst->file[i][j] != '1')
 				map_error(lst, 0);
 			j++;
 		}
@@ -43,6 +43,8 @@ int	check_valid(t_data *lst)
 	while (lst->file[i])
 	{
 		j = 0;
+		if (lst->file[i][0] == '\n')
+			map_error(lst, 0);
 		while (lst->file[i] && lst->file[i][j])
 		{
 			check_valid_util(lst, i, j);

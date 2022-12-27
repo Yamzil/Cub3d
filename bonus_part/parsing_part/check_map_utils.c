@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:07:20 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d_bonus.h"
 
 bool	check_char(char c)
 {
@@ -30,7 +30,7 @@ void	check_valid_util(t_data *lst, int i, int j)
 				map_error(lst, 0);
 			else if (check_char(lst->file[i][j + 1]))
 				map_error(lst, 0);
-			else if (check_char(lst->file[i - 1][j]))
+			else if (lst->file[i - 1] && check_char(lst->file[i - 1][j]))
 				map_error(lst, 0);
 			else if (lst->file[i + 1] && check_char(lst->file[i + 1][j]))
 				map_error(lst, 0);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*   ../cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 18:28:28 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:23:15 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:06:16 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define CUB3D_BONUS_H
 
 # include <unistd.h>
-# include "./minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <sys/fcntl.h>
-# include "./get_next_line/get_next_line.h"
+# include "../get_next_line/get_next_line.h"
 
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1080

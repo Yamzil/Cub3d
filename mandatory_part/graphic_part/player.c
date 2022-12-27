@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mjlem <mjlem@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:10:08 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:26:57 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:10:48 by mjlem            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 char	map_direction(t_data *data)
 {
@@ -72,8 +72,8 @@ void	get_playerposition(t_data *d)
 			if (d->map[i][j] == 'N' || d->map[i][j] == 'S' \
 				|| d->map[i][j] == 'E' || d->map[i][j] == 'W')
 			{
-				d->player->px = x;
-				d->player->py = y;
+				d->player->px = (j + 0.5) * TILE_SIZE;
+				d->player->py = (i + 0.5) * TILE_SIZE;
 			}
 			j++;
 			x += TILE_SIZE;
