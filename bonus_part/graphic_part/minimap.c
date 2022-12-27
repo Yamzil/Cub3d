@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 20:10:40 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	writing_pxl_to_img(t_map *li, int x, int y, int color)
 {
 	char	*adr;
 
-	if (x < 0 || y < 0)
-		printf("x%d | y%d\n", x, y);
 	li->addr = mlx_get_data_addr(li->img, &li->bits, &li->size, &li->end);
 	adr = li->addr + (y * li->size + x * (li->bits / 8));
 	*(unsigned int *) adr = color;
