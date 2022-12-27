@@ -1,5 +1,5 @@
 /*
-** mlx.h for MinilibX in 
+** mlx.h for Minilibx in 
 ** 
 ** Made by Charlie Root
 ** Login   <ol@staff.42.fr>
@@ -9,27 +9,27 @@
 */
 
 /*
-**   MinilibX -  Please report bugs
+**   Minilibx -  Please report bugs
 */
 
 
 /*
 ** FR msg - FR msg - FR msg
 **
-** MacOSX
-** La MinilibX utilise 2 frameworks Mac : OpenGL et AppKit
+** MacOSx
+** La Minilibx utilise 2 frameworks Mac : OpenGL et AppKit
 **    qu'il faut ajouter a la compilation :
 **   -framework OpenGL -framework AppKit
 **
-** UNIX / Linux
-** La MinilibX utilise 2 librairies supplementaires qu'il
+** UNIx / Linux
+** La Minilibx utilise 2 librairies supplementaires qu'il
 **      est necessaire de rajouter a la compilation :
-**   -lmlx -lXext -lX11
+**   -lmlx -lxext -lx11
 **
-** La MinilibX permet le chargement des images de type Xpm.
+** La Minilibx permet le chargement des images de type xpm.
 ** Notez que cette implementation est incomplete.
 **
-** Il y a des differences entre X11 et MacOS.
+** Il y a des differences entre x11 et MacOS.
 ** les numeros des touches ne sont pas les memes,
 ** les numeros des boutons souris ne sont pas les memes.
 ** Egalement l'expose est gere differemment, et sous MacOS
@@ -42,9 +42,9 @@
 */
 
 
-#ifndef MLX_H
+#ifndef MLx_H
 
-#define	MLX_H
+#define	MLx_H
 
 
 void	*mlx_init();
@@ -82,7 +82,7 @@ void	*mlx_new_image(void *mlx_ptr,int width,int height);
 char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
 			   int *size_line, int *endian);
 /*
-**  endian : 0 = sever X is little endian, 1 = big endian
+**  endian : 0 = sever x is little endian, 1 = big endian
 **  endian : useless on macos, client and graphical framework have the same endian
 */
 int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
@@ -130,8 +130,8 @@ int	mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 
 /*
-**  generic hook system for all events, and minilibX functions that
-**    can be hooked. Some macro and defines from X11/X.h are needed here.
+**  generic hook system for all events, and minilibx functions that
+**    can be hooked. Some macro and defines from x11/x.h are needed here.
 */
 
 int	mlx_hook(void *win_ptr, int x_event, int x_mask,
@@ -146,4 +146,4 @@ int	mlx_do_key_autorepeatoff(void *mlx_ptr);
 int	mlx_do_key_autorepeaton(void *mlx_ptr);
 int	mlx_do_sync(void *mlx_ptr);
 
-#endif /* MLX_H */
+#endif /* MLx_H */

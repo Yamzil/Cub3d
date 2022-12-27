@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:08:58 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 20:10:57 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:26:44 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	texture(t_data *d, t_cast *in, double y1)
 		xofset = ((in->wy - ((int)(in->wy / TILE_SIZE) * TILE_SIZE)) \
 			* d->arr[d->ti].width) / TILE_SIZE;
 	}
-	distance_top = y + (in->wallHeight / 2) - ((double)WIN_HEIGHT / 2);
-	yofset = distance_top * d->arr[d->ti].height / in->wallHeight;
+	distance_top = y + (in->wallheight / 2) - ((double)WIN_HEIGHT / 2);
+	yofset = distance_top * d->arr[d->ti].height / in->wallheight;
 	d->arr[d->ti].xofset = abs((int)xofset);
 	d->arr[d->ti].yofset = abs((int)yofset);
 }
@@ -65,13 +65,13 @@ void	loading_textures(t_data *d)
 		&d->arr[WEST].width, &d->arr[WEST].height);
 	d->arr[EAST].img = mlx_xpm_file_to_image(d->mlx, d->east, \
 		&d->arr[EAST].width, &d->arr[EAST].height);
-	d->arr[NORTH].addr = (int *)mlx_get_d_addr(d->arr[NORTH].img, \
+	d->arr[NORTH].addr = (int *)mlx_get_data_addr(d->arr[NORTH].img, \
 		&d->arr[NORTH].bits, &d->arr[NORTH].size, &d->arr[NORTH].end);
-	d->arr[SOUTH].addr = (int *)mlx_get_d_addr(d->arr[SOUTH].img, \
+	d->arr[SOUTH].addr = (int *)mlx_get_data_addr(d->arr[SOUTH].img, \
 		&d->arr[SOUTH].bits, &d->arr[SOUTH].size, &d->arr[SOUTH].end);
-	d->arr[WEST].addr = (int *)mlx_get_d_addr(d->arr[WEST].img, \
+	d->arr[WEST].addr = (int *)mlx_get_data_addr(d->arr[WEST].img, \
 		&d->arr[WEST].bits, &d->arr[WEST].size, &d->arr[WEST].end);
-	d->arr[EAST].addr = (int *)mlx_get_d_addr(d->arr[EAST].img, \
+	d->arr[EAST].addr = (int *)mlx_get_data_addr(d->arr[EAST].img, \
 		&d->arr[EAST].bits, &d->arr[EAST].size, &d->arr[EAST].end);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 23:51:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 19:41:39 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	find_dis(t_cast *info)
 	if (info->vdis > info->hdis)
 	{
 		info->horizontal_inter = true;
-		info->wx = info->hwallX;
-		info->wy = info->hwallY;
+		info->wx = info->hwallx;
+		info->wy = info->hwally;
 		info->dis = info->hdis;
 	}
 	else
 	{
 		info->vertical_inter = true;
-		info->wx = info->vwallX;
-		info->wy = info->vwallY;
+		info->wx = info->vwallx;
+		info->wy = info->vwally;
 		info->dis = info->vdis;
 	}
 }

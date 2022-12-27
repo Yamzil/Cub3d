@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 13:29:58 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 bool	check_char(char c)
 {
-	if (c != '0' && c != '1' && c != 'N' && c != 'W' && c != 'E' && c != 'S' 
-		&& c != '2')
-		return true;
-	return false;
+	if (c != '0' && c != '1' && c != 'N' && c != 'W' && c != 'E' && c != 'S')
+		return (true);
+	return (false);
 }
 
-void    check_valid_util(t_data *lst, int i, int j)
+void	check_valid_util(t_data *lst, int i, int j)
 {
 	if (lst->file[i][j] == '0')
 	{

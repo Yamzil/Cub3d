@@ -6,72 +6,78 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 17:02:20 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 12:58:46 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../cub3d_bonus.h"
 
-void	writing_pxl_to_img(t_map *list, int x, int y, int color)
+void	writing_pxl_to_img(t_map *li, int x, int y, int color)
 {
 	char	*adr;
-    list->addr = mlx_get_data_addr(list->img, \
-		&list->bits, &list->size,&list->end);
-    adr = list->addr + (y *  list->size + x * (list->bits / 8));
-    *(unsigned int *) adr = color; 
+
+	if (x < 0 || y < 0)
+		printf("x%d | y%d\n", x, y);
+	li->addr = mlx_get_data_addr(li->img, &li->bits, &li->size, &li->end);
+	adr = li->addr + (y * li->size + x * (li->bits / 8));
+	*(unsigned int *) adr = color;
 }
 
-void    draw_square(t_map *lst, int x, int y, int color)
+void	draw_square(t_map *lst, int x, int y, int color)
 {
-    int i;
+	int	i;
 	int	j;
 
-    if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
-        return;
-    i = 0;
-    while (i < TILE_SIZE)
-    {
-        j = 0;
-        while (j < TILE_SIZE)
-        {
+	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+		return ;
+	i = 0;
+	while (i < TILE_SIZE)
+	{
+		j = 0;
+		while (j < TILE_SIZE)
+		{
 			writing_pxl_to_img(lst, x + i, y + j, color);
-			j++;	
-        }
+			j++;
+		}
 		i++;
-    }
+	}
 }
 
-void    render(t_map *lst, t_data *data, int flag)
+void	minimap(t_data *d, t_map *lst)
 {
-    int i;
+	int	i;
 	int	j;
-	int x;
-	int y;
-		
-    i = 0;
-    y = 0;
-	if (flag)
-		get_playerposition(data);
-    draw_fov(data, lst);
-    while (data->map[i]&& y - (data->player->py - 80 ) < 160)
-    {
-        j = 0;
+	int	x;
+	int	y;
+
+	i = 0;
+	y = 0;
+	while (d->map[i] && y - (d->p->y - 80) < 160)
+	{
+		j = 0;
 		x = 0;
-        while (data->map[i][j]&& x - (data->player->px - 80) < 160)
-        {
-            if (data->map[i][j] == '0' || data->map[i][j] == 'N' \
-				|| data->map[i][j] == 'S' || data->map[i][j] == 'E' \
-				|| data->map[i][j] == 'W')
-                draw_square(lst,  x  - (data->player->px - 80),  y - (data->player->py - 80), WHITE);
-			if (data->map[i][j] == '1')
-				draw_square(lst,  x  - (data->player->px - 80),  y - (data->player->py - 80), BLACK);
-            if (data->map[i][j] == '2')
-				draw_square(lst,  x  - (data->player->px - 80),  y - (data->player->py - 80), RED);
+		while (d->map[i][j] && x - (d->p->x - 80) < 160)
+		{
+			if (d->map[i][j] == '0' || d->map[i][j] == 'N'
+			|| d->map[i][j] == 'S'
+				|| d->map[i][j] == 'E' || d->map[i][j] == 'W')
+				draw_square(lst, x - (d->p->x - 80), y - (d->p->y - 80), WHITE);
+			if (d->map[i][j] == '1')
+				draw_square(lst, x - (d->p->x - 80), y - (d->p->y - 80), BLACK);
 			x += TILE_SIZE;
-			j++;	
-        }
-		y  += TILE_SIZE; 
+			j++;
+		}
+		y += TILE_SIZE;
 		i++;
-    }
-    draw_player(lst, (data->player->px - (data->player->px - 80)) , (data->player->py - (data->player->py - 80)), ORANGE);
+	}
+}
+
+void	render(t_map *lst, t_data *d, int flag)
+{
+	if (flag)
+		get_playerposition(d);
+	draw_fov(d);
+	minimap(d, lst);
+	draw_player(lst, (d->p->x - (d->p->x - 80)), \
+		(d->p->y - (d->p->y - 80)), ORANGE);
 }

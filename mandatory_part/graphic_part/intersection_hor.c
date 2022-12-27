@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 10:12:18 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 19:49:15 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	find_hor_inter(t_cast *info, t_data *d)
 {
-	info->yA = (int)(d->player->py / TILE_SIZE) * TILE_SIZE;
+	info->ya = (int)(d->player->py / TILE_SIZE) * TILE_SIZE;
 	if (info->deg < M_PI && info->deg > 0)
-		info->yA += TILE_SIZE;
-	info->xA = d->player->px + ((info->yA - d->player->py) / tan(info->deg));
+		info->ya += TILE_SIZE;
+	info->xa = d->player->px + ((info->ya - d->player->py) / tan(info->deg));
 }
 
 void	find_hor_step(t_cast *info)
@@ -32,13 +32,13 @@ void	find_hor_step(t_cast *info)
 		info->xstep *= -1;
 }
 
-void	find_hor_point(t_cast *info, t_d *data)
+void	find_hor_point(t_cast *info, t_data *data)
 {
 	double	tmpx;
 	double	tmpy;
 
-	tmpx = info->xA;
-	tmpy = info->yA;
+	tmpx = info->xa;
+	tmpy = info->ya;
 	if (info->deg > M_PI && info->deg < (2 * M_PI))
 		tmpy -= 0.000001;
 	while (tmpx >= 0 && tmpy >= 0 && !check_wall(data, tmpx, tmpy))
@@ -46,8 +46,8 @@ void	find_hor_point(t_cast *info, t_d *data)
 		tmpx += info->xstep;
 		tmpy += info->ystep;
 	}
-	info->hwallX = tmpx;
-	info->hwallY = tmpy;
+	info->hwallx = tmpx;
+	info->hwally = tmpy;
 	info->hdis = distance(data->player->px, data->player->py, \
-	info->hwallX, info->hwallY);
+	info->hwallx, info->hwally);
 }

@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:42:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 18:18:06 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 	t_map	l;
-	// atexit(fun);
+
 	if (ac != 2)
 	{
 		ft_putendl_fd("Incorrect numbers of arguments", 2);
@@ -60,11 +60,7 @@ int	main(int ac, char **av)
 	else
 	{
 		data = malloc(sizeof(t_data));
-		if (!data)
-			return (0);
 		data->player = malloc(sizeof(t_player));
-		if (!data->player)
-			return (0);
 		check_extension(data, ac, av);
 		get_file(data, av);
 		check_storing_file_data(data);
@@ -73,7 +69,7 @@ int	main(int ac, char **av)
 		init_values(data);
 		mlx_functions(data, &l);
 		data->li = &l;
-		render(&l, data, 1);
+		render(data, 1);
 		mlx_put_image_to_window(data->mlx, data->windows, data->li->img, 0, 0);
 		mlx_loop(data->mlx);
 	}

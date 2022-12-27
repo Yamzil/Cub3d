@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:48:40 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 19:42:59 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_press(t_data *lst)
 	mlx_destroy_image(lst->mlx, lst->li->img);
 	lst->li->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
 	check_player_position(lst);
-	render(lst->li, lst, 0);
+	render(lst, 0);
 	mlx_put_image_to_window(lst->mlx, lst->windows, lst->li->img, 0, 0);
 	return (0);
 }

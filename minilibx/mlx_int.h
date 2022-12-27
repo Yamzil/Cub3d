@@ -7,8 +7,8 @@
 //
 
 
-#define	MAX_EVENT	32
-#define MAX_PIXEL_NB	200000
+#define	MAx_EVENT	32
+#define MAx_PIxEL_NB	200000
 #define UNIQ_BPP	4
 
 #define FONT_WIDTH	10

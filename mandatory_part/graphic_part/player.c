@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:10:08 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 20:36:05 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:26:57 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	get_playerposition(t_data *d)
 		while (d->map[i][j])
 		{
 			if (d->map[i][j] == 'N' || d->map[i][j] == 'S' \
-				|| d->map[i][j] == 'E'|| d->map[i][j] == 'W')
+				|| d->map[i][j] == 'E' || d->map[i][j] == 'W')
 			{
 				d->player->px = x;
 				d->player->py = y;
@@ -96,7 +96,7 @@ void	draw_player(t_map *lst, int x, int y, int color)
 		{
 			if ((x + i) >= WIN_WIDTH || (y + j) >= WIN_HEIGHT)
 				return ;
-			writing_pxl_to_img(lst, (x + i), ( y + j), color);
+			writing_pxl_to_img(lst, (x + i), (y + j), color);
 			j++;
 		}
 		i++;
@@ -125,11 +125,7 @@ void	check_player_position(t_data *l)
 		x = l->player->px + cos(l->angle) * l->step * l->player->move_w_s;
 	}
 	if (!check_wall(l, x, l->player->py))
-	{
 		l->player->px = x;
-	}
 	if (!check_wall(l, l->player->px, y))
-	{
 		l->player->py = y;
-	}
 }

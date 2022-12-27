@@ -6,11 +6,11 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 13:10:08 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/23 17:47:52 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:23:28 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../cub3d_bonus.h"
 
 char	map_direction(t_data *data)
 {
@@ -23,38 +23,38 @@ char	map_direction(t_data *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] ==  'N')
-				return  'N';
+			if (data->map[i][j] == 'N')
+				return ('N');
 			else if (data->map[i][j] == 'E')
-				return  'E';
+				return ('E');
 			else if (data->map[i][j] == 'W')
-				return  'W';
+				return ('W');
 			else if (data->map[i][j] == 'S')
-				return  'S';
+				return ('S');
 			j++;
 		}
 		i++;
 	}
-	return '\\';
+	return ('\\');
 }
 
 double	player_direction(t_data *data)
 {
 	char	direction;
-	
+
 	direction = map_direction(data);
 	if (direction == 'N')
-		return 3 * M_PI / 2;
+		return (3 * M_PI / 2);
 	else if (direction == 'S')
-		return M_PI / 2;
+		return (M_PI / 2);
 	else if (direction == 'E')
-		return 0;
+		return (0);
 	else if (direction == 'W')
-		return M_PI;
+		return (M_PI);
 	return (-1);
 }
 
-void	get_playerposition(t_data *data)
+void	get_playerposition(t_data *d)
 {
 	int	i;
 	int	j;
@@ -63,19 +63,18 @@ void	get_playerposition(t_data *data)
 
 	i = 0;
 	y = 0;
-	while (data->map[i])
+	while (d->map[i])
 	{
 		j = 0;
 		x = 0;
-		while (data->map[i][j])
+		while (d->map[i][j])
 		{
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' \
-				|| data->map[i][j] == 'E' \
-				|| data->map[i][j] == 'W')
-            {
-                data->player->px = x;
-                data->player->py = y;
-            }
+			if (d->map[i][j] == 'N' || d->map[i][j] == 'S' \
+				|| d->map[i][j] == 'E' || d->map[i][j] == 'W')
+			{
+				d->p->x = x;
+				d->p->y = y;
+			}
 			j++;
 			x += TILE_SIZE;
 		}
@@ -84,53 +83,49 @@ void	get_playerposition(t_data *data)
 	}
 }
 
-void draw_player(t_map *lst, int x, int y, int color)
+void	draw_player(t_map *lst, int x, int y, int color)
 {
-    int i;
+	int	i;
 	int	j;
 
-    i = 0;
-    while (i < PLAYER_SQUARE)
-    {
-        j = 0;
-        while (j < PLAYER_SQUARE)
-        {
+	i = 0;
+	while (i < PLAYER_SQUARE)
+	{
+		j = 0;
+		while (j < PLAYER_SQUARE)
+		{
 			if ((x + i) >= WIN_WIDTH || (y + j) >= WIN_HEIGHT)
-				return;
-			writing_pxl_to_img(lst, (x + i), ( y + j), color);
-			j++;	
-        }
+				return ;
+			writing_pxl_to_img(lst, (x + i), (y + j), color);
+			j++;
+		}
 		i++;
-    }
+	}
 }
 
-void	check_player_position(t_data *lst)
+void	check_player_position(t_data *l)
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 
-	lst->angle += 0.0523599 * lst->player->rotate_cam;
-	if (lst->player->move_a_d == -1)
+	l->angle += 0.0523599 * l->p->rotate_cam;
+	if (l->p->move_a_d == -1)
 	{
-		y = lst->player->py + cos(lst->angle) * lst->step;
-		x = lst->player->px - sin(lst->angle) * lst->step;
+		y = l->p->y + cos(l->angle) * l->step;
+		x = l->p->x - sin(l->angle) * l->step;
 	}
-	else if (lst->player->move_a_d == 1)
+	else if (l->p->move_a_d == 1)
 	{
-		y = lst->player->py - cos(lst->angle) * lst->step;
-		x = lst->player->px + sin(lst->angle) * lst->step;
+		y = l->p->y - cos(l->angle) * l->step;
+		x = l->p->x + sin(l->angle) * l->step;
 	}
 	else
 	{
-		y = lst->player->py + sin(lst->angle) * lst->step * lst->player->move_w_s;
-		x = lst->player->px + cos(lst->angle) * lst->step * lst->player->move_w_s;
+		y = l->p->y + sin(l->angle) * l->step * l->p->move_w_s;
+		x = l->p->x + cos(l->angle) * l->step * l->p->move_w_s;
 	}
-	if (!check_wall(lst, x, lst->player->py))
-	{
-		lst->player->px = x;
-	}
-	if (!check_wall(lst, lst->player->px, y))
-	{
-		lst->player->py = y;
-	}
+	if (!check_wall(l, x, l->p->y))
+		l->p->x = x;
+	if (!check_wall(l, l->p->x, y))
+		l->p->y = y;
 }

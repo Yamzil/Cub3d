@@ -11,8 +11,8 @@
 
 @interface NSWindowEvent : NSWindow
 {
-  func_t	event_funct[MAX_EVENT];
-  void		*(event_param[MAX_EVENT]);
+  func_t	event_funct[MAx_EVENT];
+  void		*(event_param[MAx_EVENT]);
   int		keyrepeat;
   int		keyflag;
   int		size_x;
@@ -45,10 +45,10 @@
 - (id) initWithRect: (NSRect)rect andTitle: (NSString *)title pfaAttrs: (NSOpenGLPixelFormatAttribute *)attrs;
 - (void) selectGLContext;
 - (void) flushGLContext;
-- (void) pixelPutColor: (int)color X:(int)x Y:(int)y;
+- (void) pixelPutColor: (int)color x:(int)x Y:(int)y;
 - (void) mlx_gl_draw;
-- (void) mlx_gl_draw_img:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y;
-- (void) mlx_gl_draw_font:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(int)y andColor:(int)color glyphX:(int)gx glyphY:(int)gy;
+- (void) mlx_gl_draw_img:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andx:(int)x andY:(int)y;
+- (void) mlx_gl_draw_font:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andx:(int)x andY:(int)y andColor:(int)color glyphx:(int)gx glyphY:(int)gy;
 - (NSOpenGLContext *) ctx;
 - (NSWindowEvent *) win;
 - (void) setEvent:(int)event andFunc:(func_t)func andParam:(void *)param;

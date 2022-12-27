@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 21:31:37 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 20:01:41 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ bool	check_wall(t_data *data, double x, double y)
 	int	map_y;
 
 	if (x < 0 && y < 0)
-		return (true);
-	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
 		return (true);
 	map_y = floor(y / TILE_SIZE);
 	map_x = floor(x / TILE_SIZE);

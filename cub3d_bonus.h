@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/27 19:18:33 by yamzil           ###   ########.fr       */
+/*   Created: 2022/12/27 18:28:28 by yamzil            #+#    #+#             */
+/*   Updated: 2022/12/27 19:23:15 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <unistd.h>
 # include "./minilibx/mlx.h"
@@ -92,8 +92,8 @@ typedef struct s_cast {
 }	t_cast;
 
 typedef struct s_player{
-	double	px;
-	double	py;
+	double	x;
+	double	y;
 	int		rotate_cam;
 	int		move_w_s;
 	int		move_a_d;
@@ -142,7 +142,7 @@ typedef struct s_data{
 	int			rays;
 	char		hit_door;
 	t_map		*li;
-	t_player	*player;
+	t_player	*p;
 	t_txtdata	*txt;
 	t_cast		*info;
 	t_door		*doors;
@@ -227,7 +227,7 @@ int		key_press(t_data *lst);
 
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
-void	render(t_data *data, int flag);
+void	render(t_map *lst, t_data *d, int flag);
 
 // PLAyER
 void	draw_player(t_map *lst, int x, int y, int color);

@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/12/26 19:39:54 by yamzil           ###   ########.fr        #
+#    Updated: 2022/12/27 19:25:14 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME =	cub3D
 NAME_SRC =	cub3D_bonus
 
 INC =	cub3d.h
+
+INC_BNS = cub3d_bonus.h
 
 SRC =	mandatory_part/cub3d.c\
 		mandatory_part/parsing_part/check_map_utils.c\
@@ -55,13 +57,11 @@ BNC_SRC =	bonus_part/cub3d_bonus.c\
 			bonus_part/graphic_part/intersection_hor.c\
 			bonus_part/graphic_part/raycasting_utils.c\
 			bonus_part/graphic_part/raycasting.c\
-			bonus_part/graphic_part/doors_utils.c\
 			bonus_part/graphic_part/hook_utils.c\
 			bonus_part/graphic_part/distance.c\
 			bonus_part/graphic_part/minimap.c\
 			bonus_part/graphic_part/texture.c\
 			bonus_part/graphic_part/player.c\
-			bonus_part/graphic_part/dda.c\
 			get_next_line/get_next_line.c\
 			get_next_line/get_next_line_utils.c\
 
@@ -73,7 +73,7 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
 
 all : $(NAME)
 
@@ -81,7 +81,9 @@ $(NAME) : $(INC) $(OBJ)
 	make -C libft/
 	$(CC) $(CFLAGS) $(SRC) libft/libft.a $(MLX) -o $(NAME)
 
-bonus :  $(INC) $(OBJ_BNC)
+bonus : $(NAME_SRC)
+
+$(NAME_SRC) :  $(INC_BNS) $(OBJ_BNC)
 	make -C libft/
 	$(CC) $(CFLAGS) $(BNC_SRC) libft/libft.a $(MLX) -o $(NAME_SRC)
 

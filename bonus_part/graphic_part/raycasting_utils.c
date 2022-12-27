@@ -6,13 +6,13 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 21:31:37 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 13:26:15 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/27 19:14:19 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../cub3d_bonus.h"
 
-int		arr_len(char **map)
+int	arr_len(char **map)
 {
 	int	i;
 
@@ -24,52 +24,29 @@ int		arr_len(char **map)
 
 bool	check_wall(t_data *data, double x, double y)
 {
-    int	map_x;
-    int	map_y;
+	int	map_x;
+	int	map_y;
 
 	if (x < 0 && y < 0)
-		return true;
+		return (true);
 	if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
-		return true;
-    map_y = floor(y / TILE_SIZE);
-    map_x = floor(x / TILE_SIZE);
+		return (true);
+	map_y = floor(y / TILE_SIZE);
+	map_x = floor(x / TILE_SIZE);
 	if (map_y >= arr_len(data->map))
-		return true;
+		return (true);
 	if (map_x >= ft_strlen(data->map[map_y]))
-		return true;
-    if (data->map[map_y][map_x] == '1')
-        return (true);
-    return (false);
+		return (true);
+	if (data->map[map_y][map_x] == '1')
+		return (true);
+	return (false);
 }
 
-bool	check_door(t_data *data, double x, double y)
+double	check_deg(double deg)
 {
-    int	map_x;
-    int	map_y;
-
-	if (x < 0 && y < 0)
-		return true;
-	// if (y >= WIN_HEIGHT || x >= WIN_WIDTH)
-	// 	return true;
-    map_y = floor(y / TILE_SIZE);
-    map_x = floor(x / TILE_SIZE);
-	if (map_y >= arr_len(data->map))
-		return true;
-	if (map_x >= ft_strlen(data->map[map_y]))
-		return true;
-    if (data->map[map_y][map_x] == '2'){
-        data->info->my_door->i = map_y;
-        data->info->my_door->j = map_x;
-        return (true);
-    }
-    return (false);
-}
-
-double  check_deg(double deg)
-{
-    if (deg < 0)
-        deg *= -1;
-    if (deg >  (2 * M_PI))
-        deg -= (2 * M_PI);
-    return deg;
+	if (deg < 0)
+		deg *= -1;
+	if (deg > (2 * M_PI))
+		deg -= (2 * M_PI);
+	return (deg);
 }
