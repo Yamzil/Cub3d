@@ -42,14 +42,13 @@ void	find_ver_point(t_cast *info, t_data *data)
     tmpX = info->vxA;
     tmpY = info->vyA;
     info->vdoor = false;
-    // info->my_doors = NULL;
-	// info->doors = false;
     if (info->deg > (M_PI / 2) && info->deg < ((3 * M_PI )/ 2))
-        tmpX -= 0.1;
+        tmpX -= 0.00001;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
         if (check_door(data, tmpX, tmpY))
         {
+            // ft_lstadd_front(&info->my_door,ft_newlst(tmpX, tmpY,distance(data->player->px, data->player->py, tmpX, tmpY)));
             info->my_door->distance = distance(data->player->px, data->player->py, tmpX, tmpY);
             info->my_door->x = tmpX;
             info->my_door->y = tmpY;

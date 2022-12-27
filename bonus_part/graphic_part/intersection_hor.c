@@ -65,14 +65,13 @@ void	find_hor_point(t_cast *info, t_data *data)
     tmpX = info->xA;
     tmpY = info->yA;
     info->hdoor = false;
-    // info->my_door = NULL;
-    // info->doors = false;
     if (info->deg > M_PI && info->deg < (2 * M_PI))
-        tmpY -= 0.1;
+        tmpY -= 0.0001;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
         if (check_door(data, tmpX, tmpY))
         {
+            // ft_lstadd_front(&info->my_door,ft_newlst(tmpX, tmpY,distance(data->player->px, data->player->py, tmpX, tmpY)));
             info->my_door->distance = distance(data->player->px, data->player->py, tmpX, tmpY);
             info->my_door->x = tmpX;
             info->my_door->y = tmpY;

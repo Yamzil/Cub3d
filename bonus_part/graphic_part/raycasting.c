@@ -139,8 +139,6 @@ void	draw_fov(t_data *data, t_map *lst)
         t = open_door(data);
        if(info.doors)
 	     draw_door(&info, data->rays, lst, data, t);
-	//    open_door(data);
-     //    dda_algo(data, info.wx, info.wy);
         deg += incr;
         data->rays++;
     }
