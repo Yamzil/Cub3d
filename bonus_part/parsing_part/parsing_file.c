@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:47:23 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/24 22:32:45 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 15:55:02 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	parsing_ceilling(t_data *lst)
 char	**getting_color_floor(t_data *lst)
 {
 	char	**color;
+	char	*str;
 	int		i;
 
 	i = 0;
@@ -94,7 +95,9 @@ char	**getting_color_floor(t_data *lst)
 		{
 			if (ft_strchr(lst->file[i], 'F'))
 			{
-				lst->file[i] =  ft_strtrim(lst->file[i], "F \n");
+				str = ft_strdup(lst->file[i]);
+				lst->file[i] =  ft_strtrim(str, "F \n");
+				free(str);
 				color = ft_split(lst->file[i], ','); // here allocate
 			}
 			i++;

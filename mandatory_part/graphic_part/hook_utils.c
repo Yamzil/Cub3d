@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:48:40 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 12:40:08 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 19:42:59 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	key_press(t_data *lst)
 {
-	mlx_destroy_image(lst->mlx, lst->list->img);
-	lst->list->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
+	mlx_destroy_image(lst->mlx, lst->li->img);
+	lst->li->img = mlx_new_image(lst->mlx, WIN_WIDTH, WIN_HEIGHT);
 	check_player_position(lst);
-	render(lst->list, lst, 0);
-	mlx_put_image_to_window(lst->mlx, lst->windows, lst->list->img, 0, 0);
+	render(lst->li, lst, 0);
+	mlx_put_image_to_window(lst->mlx, lst->windows, lst->li->img, 0, 0);
 	return (0);
 }
 
@@ -47,15 +47,14 @@ int	key_start(int key, t_data *lst)
 	return (0);
 }
 
-
-int	key_realse(int key, t_data  *lst)
+int	key_realse(int key, t_data *lst)
 {
 	if (key == LEFT_ARROW)
 		lst->player->rotate_cam = 0;
 	else if (key == RIGHT_ARROW)
 		lst->player->rotate_cam = 0;
 	else if (key == LEFT)
-		lst->player->move_a_d  = 0;
+		lst->player->move_a_d = 0;
 	else if (key == RIGHT)
 		lst->player->move_a_d = 0;
 	else if (key == FORWARD)
@@ -68,9 +67,6 @@ int	key_realse(int key, t_data  *lst)
 int	close_win(t_data *data)
 {
 	if (data)
-	{
-		free_all(data->file);
 		exit(0);
-	}
-	return 0;
+	return (0);
 }

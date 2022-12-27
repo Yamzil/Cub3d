@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:10:33 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/24 15:53:03 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 12:53:29 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,19 @@ void	ft_lstadd_front(t_door **lst, t_door *new)
 	*lst = new;
 }
 
-void	open_door(t_data *data)
+int	open_door(t_data *data)
 {
-	int	half_rays = data->rays / 2;
-	data->hit_door = '.';
-	
-	if (data->info->doors && data[half_rays].hit_door == '2')
-	{
-		data->map[data->open_y][data->open_x] = '0';
-	}
+	if (fabs(data->player->px - data->info->my_door->x) <= 4 && fabs(data->info->my_door->y - data->player->py) <= 4)
+		return 6;	
+	if (fabs(data->player->px - data->info->my_door->x) <= 6 && fabs(data->info->my_door->y - data->player->py) <= 6)
+		return 5;		
+	if (fabs(data->player->px - data->info->my_door->x) <= 8 && fabs(data->info->my_door->y - data->player->py) <= 8)
+		return 4;		
+	if (fabs(data->player->px - data->info->my_door->x) <= 10 && fabs(data->info->my_door->y - data->player->py) <= 10)
+		return 3;		
+	if (fabs(data->player->px - data->info->my_door->x) <= 12 && fabs(data->info->my_door->y - data->player->py) <= 12)
+		return 2;		
+	if (fabs(data->player->px - data->info->my_door->x) <= 14 && fabs(data->info->my_door->y - data->player->py) <= 14)
+		return 1;
+	return 0;
 }

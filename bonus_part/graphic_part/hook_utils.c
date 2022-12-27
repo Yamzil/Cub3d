@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:48:40 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 21:04:08 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 12:55:29 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	key_realse(int key, t_data  *lst)
 	return (0);
 }
 
-int	close_win(void *param)
+int	close_win(t_data *param)
 {
 	if (param)
 		exit(0);

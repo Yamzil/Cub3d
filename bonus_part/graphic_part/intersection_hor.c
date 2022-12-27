@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 10:12:18 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/23 18:34:46 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 12:56:55 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,19 @@ void	find_hor_point(t_cast *info, t_data *data)
 
     tmpX = info->xA;
     tmpY = info->yA;
-    info->my_doors = NULL;
-    // info->doors = false;
+    info->hdoor = false;
     if (info->deg > M_PI && info->deg < (2 * M_PI))
         tmpY -= 0.1;
     while (tmpX >= 0 && tmpY >= 0 && !check_wall(data, tmpX, tmpY))
     {
+        if (check_door(data, tmpX, tmpY))
+        {
+            info->my_door->distance = distance(data->player->px, data->player->py, tmpX, tmpY);
+            info->my_door->x = tmpX;
+            info->my_door->y = tmpY;
+            data->info->doors = true;
+            info->hdoor = true;
+        }
         tmpX += info->xstep;
         tmpY += info->ystep;
     }

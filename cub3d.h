@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:58:48 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 12:32:19 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 19:39:59 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #define PLAYER_SQUARE 2
 #define WHITE 16777215
 #define BLACK 8421504
+#define RED 16711680
 #define ORANGE 65454456
 #define RAD (M_PI / (double)180) 
 
@@ -51,45 +52,52 @@ enum{
 };
 
 typedef struct s_door{
-	double	x;
-	double	y;
-	int		distance;
+	double			x;
+	int				i;
+	int				j;
+	double			y;
+	double			distance;
 	struct s_door	*next;
 }	t_door;
 
 typedef struct s_cast {
-    double	xstep;
-    double	ystep;
-    double	xA;
-    double	yA;
-    double	deg;
-    double	hwallX;
-    double	hwallY;
-    double	vxstep;
-    double	vystep;
-    double	vxA;
-    double	vyA;
-    double	vwallX;
-    double	vwallY;
-    double	vdis;
-    double	hdis;
-    double	dis;
-    double	wx;
-    double	wy;
-    double	dpp;
-    double	wallHeight;
+	double	xstep;
+	double	ystep;
+	double	xA;
+	double	yA;
+	double	deg;
+	double	hwallX;
+	double	hwallY;
+	double	vxstep;
+	double	vystep;
+	double	vxA;
+	double	vyA;
+	double	vwallX;
+	double	vwallY;
+	double	vdis;
+	double	hdis;
+	double	dis;
+	double	wx;
+	double	wy;
+	double	dpp;
+	double	wallHeight;
+	double	doorHeight;
+	double 	tdPixel;
+	double	bdPixel;
 	double	TopPixel;
 	double	BotPixel;
 	bool	vertical_inter;
 	bool	horizontal_inter;
+	bool	vdoor;
+	bool	hdoor;
 	bool	doors;
-	t_door *my_doors;
-} t_cast; 
+	t_door	*my_door;
+}	t_cast;
 
 typedef struct s_player{
 	double	px;
 	double	py;
-	int 	rotate_cam;
+	int		rotate_cam;
 	int		move_w_s;
 	int		move_a_d;
 }t_player;
@@ -100,7 +108,7 @@ typedef struct s_map{
 	int		bits;
 	int		size;
 	int		end;
-} t_map;
+}	t_map;
 
 typedef struct s_txtdata
 {
@@ -111,9 +119,9 @@ typedef struct s_txtdata
 	int		width;
 	int		height;
 	int		*addr;
-	double  xofset;
-    double  yofset;
-} t_txtdata;
+	double	xofset;
+	double	yofset;
+}	t_txtdata;
 
 typedef struct s_data{
 	int			ti;
@@ -135,17 +143,18 @@ typedef struct s_data{
 	int			open_x;
 	int			open_y;
 	int			rays;
-	char	hit_door;
-	t_map		*list;
+	char		hit_door;
+	t_map		*li;
 	t_player	*player;
 	t_txtdata	*txt;
 	t_cast		*info;
 	t_door		*doors;
 	t_txtdata	arr[5];
+	t_txtdata	da[7];
 }t_data;
 
 // LIBFT
-int     ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strtrim(char const *s1, char const *set);
 void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(char const *s, char c);
@@ -154,10 +163,9 @@ int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
-char	*ft_itoa(int n);
 
 // AllOCATE FILE
-char	**get_file(t_data *lst,char **av);
+char	**get_file(t_data *lst, char **av);
 void	countline(t_data *lst, char **av);
 char	**get_map(t_data *lst);
 
@@ -169,7 +177,7 @@ void	error_msg(int i);
 void	mlx_functions(t_data *lst, t_map *list);
 
 // GET NEXT LINE
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 
 // PARSING FILE
 char	**getting_color_ceilling(t_data *lst);
@@ -179,8 +187,8 @@ int		parsing_floor(t_data *lst);
 int		parsing_path(t_data *lst);
 
 // PARSING ERROR
-void    parsing_error(t_data *data, int i);
-void    map_error(t_data *lst, int i);
+void	parsing_error(t_data *data, int i);
+void	map_error(t_data *lst, int i);
 
 // PARSING UTILS
 int		checking_color_ceilling(t_data *lst);
@@ -195,41 +203,41 @@ int		storing_path(t_data *lst, int *j);
 int		storing_colors_floor(t_data *lst);
 
 // CHECK FILE
+char	**color_number_ceilling(t_data *lst, char **color);
+char	**color_number_floor(t_data *lst, char **color);
 int		check_storing_file_data(t_data *lst);
 
 // CHECK MAP
-int		valid_player_position(t_data *lst);
+void	valid_player_position(t_data *lst);
 int		valid_map_elements(t_data *lst);
 int		check_last_line(t_data *lst);
 int		valid_player(t_data *lst);
 int		check_valid(t_data *lst);
-void    check_map(t_data *lst);
+void	check_map(t_data *lst);
 
 // CHECK MAP UTILS
+void	check_player_position_util(t_data *lst, int i);
 void	checking_player_position(t_data *lst, int i);
-void    check_valid_util(t_data *lst, int i, int j);
+void	check_valid_util(t_data *lst, int i, int j);
 void	check_player_util(t_data *lst, int i);
 bool	check_char(char c);
 
 // HOOK UTILS
 int		key_realse(int key, t_data *lst);
-int		key_start(int key, t_data  *lst);
+int		key_start(int key, t_data *lst);
 int		close_win(t_data *data);
 int		key_press(t_data *lst);
 
 // MINIMAP
 void	writing_pxl_to_img(t_map *list, int x, int y, int color);
-void    render(t_map *lst, t_data *data, int flag);
+void	render(t_map *lst, t_data *data, int flag);
 
 // PLAYER
 void	draw_player(t_map *lst, int x, int y, int color);
 char	map_direction(t_data *data);
 void	check_player_position(t_data *lst);
 void	get_playerposition(t_data *data);
-double 	player_direction(t_data *data);
-
-// DDA
-void    dda_algo(t_data *data, double x1, double y1);
+double	player_direction(t_data *data);
 
 // RAYCASTING
 void    draw_wall_doors(t_cast *info, double  x, t_map *lst, t_data *data);
@@ -269,17 +277,15 @@ int		choose_texture(t_cast *info);
 
 // DOORS
 bool	check_doors(t_data *data, double x, double y);
+
+
 // DOORS UTILS
 t_door	*ft_newlst(double x, double y, int distance);
 void	ft_lstadd_front(t_door **lst, t_door *new);
-
-// TESTING
-void	open_door(t_data *data);
-void	doors_textures(t_data *data, t_cast *info, double y1);
-int		choose_door_textures(t_cast *info);
+int		open_door(t_data *data);
 
 // FREE
-void    free_paths(t_data *data);
-void    free_all(char **temp);
-void    free_tab(char **str);
+void	free_paths(t_data *data);
+void	free_all(char **temp);
+void	free_tab(char **str);
 #endif

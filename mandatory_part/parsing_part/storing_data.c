@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:34:16 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/25 20:04:14 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 18:05:52 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	storing_path(t_data *lst, int *j)
 	i = 0;
 	while (lst->file[i])
 	{
-		if (!ft_strncmp(lst->file[i], "NO", 2) &&  mx(j, i))
+		if (!ft_strncmp(lst->file[i], "NO", 2) && mx(j, i))
 			lst->north = ft_strtrim(lst->file[i], "NO \n");
-		else if (!ft_strncmp(lst->file[i], "SO", 2) &&  mx(j, i))
+		else if (!ft_strncmp(lst->file[i], "SO", 2) && mx(j, i))
 			lst->south = ft_strtrim(lst->file[i], "SO \n");
-		else if (!ft_strncmp(lst->file[i], "WE", 2) &&  mx(j, i))
+		else if (!ft_strncmp(lst->file[i], "WE", 2) && mx(j, i))
 			lst->west = ft_strtrim(lst->file[i], "WE \n");
-		else if (!ft_strncmp(lst->file[i], "EA", 2) &&  mx(j, i))
+		else if (!ft_strncmp(lst->file[i], "EA", 2) && mx(j, i))
 			lst->east = ft_strtrim(lst->file[i], "EA \n");
 		i++;
 	}
@@ -47,18 +47,18 @@ void	utils_storing_color_floor(t_data *lst, char **color, int i)
 		parsing_error(lst, 3);
 	else
 	{
-		lst->floor = (ft_atoi(color[0]) * 256 * 256) + 
+		lst->floor = (ft_atoi(color[0]) * 256 * 256) + \
 		(ft_atoi(color[1]) * 256) + ft_atoi(color[2]);
 	}
 }
 
-void	utils_storing_color_ceilling(t_data *lst, char **color, int i) 
+void	utils_storing_color_ceilling(t_data *lst, char **color, int i)
 {
 	if (ft_atoi(color[i]) < 0 || ft_atoi(color[i]) > 255)
 		parsing_error(lst, 4);
 	else
 	{
-		lst->ceilling = (ft_atoi(color[0]) * 256 * 256) + 
+		lst->ceilling = (ft_atoi(color[0]) * 256 * 256) + \
 		(ft_atoi(color[1]) * 256) + ft_atoi(color[2]);
 	}
 }
@@ -80,7 +80,6 @@ int	storing_colors_floor(t_data *lst)
 				utils_storing_color_floor(lst, color, i);
 			else
 			{
-				// free_paths(lst);
 				free_tab(color);
 				parsing_error(lst, 3);
 			}
@@ -109,7 +108,6 @@ int	storing_colors_ceilling(t_data *lst)
 				utils_storing_color_ceilling(lst, color, i);
 			else
 			{
-				// free_paths(lst);
 				free_tab(color);
 				parsing_error(lst, 4);
 			}

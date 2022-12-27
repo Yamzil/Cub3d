@@ -1,34 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_floor_ceilling.c                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 10:25:12 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/26 19:42:31 by yamzil           ###   ########.fr       */
+/*   Created: 2022/12/26 13:33:39 by yamzil            #+#    #+#             */
+/*   Updated: 2022/12/26 13:33:41 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	draw_celling(int x1, int y1, t_map *lst, t_data *data)
+void    free_all(char **temp)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (i < y1)
-	{
-		writing_pxl_to_img(lst, x1, i, data->ceilling);
-		i++;
-	}
+    i = 0;
+    while (temp[i])
+    {
+        free(temp[i]);
+        i++;
+    }
+    free(temp);
+    temp = NULL;
 }
 
-void	draw_floor(int x1, int y1, t_map *lst, t_data *data)
+void    free_tab(char **str)
 {
-	while (y1 + 1 < WIN_HEIGHT)
-	{
-		writing_pxl_to_img(lst, x1, y1, data->floor);
-		y1++;
-	}
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
+    str = NULL;
+}
+
+void    free_paths(t_data *data)
+{
+    free(data->north);
+    free(data->south);
+    free(data->west);
+    free(data->east);
 }

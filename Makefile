@@ -6,7 +6,7 @@
 #    By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 15:58:39 by yamzil            #+#    #+#              #
-#    Updated: 2022/12/26 12:40:28 by yamzil           ###   ########.fr        #
+#    Updated: 2022/12/26 19:39:54 by yamzil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRC =	mandatory_part/cub3d.c\
 		mandatory_part/graphic_part/minimap.c\
 		mandatory_part/graphic_part/texture.c\
 		mandatory_part/graphic_part/player.c\
-		mandatory_part/graphic_part/dda.c\
 		mandatory_part/graphic_part/mlx.c\
 		get_next_line/get_next_line.c\
 		get_next_line/get_next_line_utils.c\
@@ -44,6 +43,7 @@ SRC =	mandatory_part/cub3d.c\
 BNC_SRC =	bonus_part/cub3d_bonus.c\
 			bonus_part/parsing_part/check_map_utils.c\
 			bonus_part/parsing_part/allocate_file.c\
+			bonus_part/parsing_part/free.c\
 			bonus_part/parsing_part/parsing_utils.c\
 			bonus_part/parsing_part/parsing_error.c\
 			bonus_part/parsing_part/parsing_file.c\
@@ -73,7 +73,7 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 all : $(NAME)
 

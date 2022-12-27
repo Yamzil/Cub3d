@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:37:05 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 21:31:57 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 13:29:58 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void    check_valid_util(t_data *lst, int i, int j)
 			|| i < (int)ft_strlen(lst->file[i - 1]))
 		{
 			if (check_char(lst->file[i][j - 1]))
-				map_error(0);
+				map_error(lst, 0);
 			else if (check_char(lst->file[i][j + 1]))
-				map_error(0);
+				map_error(lst, 0);
 			else if (check_char(lst->file[i - 1][j]))
-				map_error(0);
+				map_error(lst, 0);
 			else if (lst->file[i + 1] && check_char(lst->file[i + 1][j]))
-				map_error(0);
+				map_error(lst, 0);
 		}
 	}
 }
@@ -58,5 +58,5 @@ void	check_player_util(t_data *lst, int i)
 		i++;
 	}
 	if (player != 1)
-		map_error(2);
+		map_error(lst, 2);
 }

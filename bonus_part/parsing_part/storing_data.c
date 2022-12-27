@@ -6,7 +6,7 @@
 /*   By: yamzil <yamzil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:34:16 by yamzil            #+#    #+#             */
-/*   Updated: 2022/12/21 21:04:07 by yamzil           ###   ########.fr       */
+/*   Updated: 2022/12/26 13:30:34 by yamzil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	storing_path(t_data *lst, int *j)
 		i++;
 	}
 	if (open(lst->north, O_RDWR) == -1)
-		parsing_error(2);
+		parsing_error(lst, 2);
 	else if (open(lst->south, O_RDWR) == -1)
-		parsing_error(2);
+		parsing_error(lst, 2);
 	else if (open(lst->west, O_RDWR) == -1)
-		parsing_error(2);
+		parsing_error(lst, 2);
 	else if (open(lst->east, O_RDWR) == -1)
-		parsing_error(2);
+		parsing_error(lst, 2);
 	lst->begin = *j;
 	return (i);
 }
@@ -44,7 +44,7 @@ int	storing_path(t_data *lst, int *j)
 void	utils_storing_color_floor(t_data *lst, char **color, int i)
 {
 	if (ft_atoi(color[i]) < 0 || ft_atoi(color[i]) > 255)
-		parsing_error(3);
+		parsing_error(lst, 3);
 	else
 	{
 		lst->floor = (ft_atoi(color[0]) * 256 * 256) + 
@@ -55,7 +55,7 @@ void	utils_storing_color_floor(t_data *lst, char **color, int i)
 void	utils_storing_color_ceilling(t_data *lst, char **color, int i) 
 {
 	if (ft_atoi(color[i]) < 0 || ft_atoi(color[i]) > 255)
-		parsing_error(4);
+		parsing_error(lst, 4);
 	else
 	{
 		lst->ceilling = (ft_atoi(color[0]) * 256 * 256) + 
@@ -79,7 +79,7 @@ int	storing_colors_floor(t_data *lst)
 			if (ft_isdigit(color[i][j]))
 				utils_storing_color_floor(lst, color, i);
 			else
-				parsing_error(3);
+				parsing_error(lst,3);
 			j++;
 		}
 		i++;
@@ -103,7 +103,7 @@ int	storing_colors_ceilling(t_data *lst)
 			if (ft_isdigit(color[i][j]))
 				utils_storing_color_ceilling(lst, color, i);
 			else
-				parsing_error(4);
+				parsing_error(lst, 4);
 			j++;
 		}
 		i++;
